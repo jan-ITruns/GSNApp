@@ -8,8 +8,11 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
+    // Attribute für die Website
     private Website website = new Website();
     private String htmlText;
+
+    // Attribute für den Vertretungsplan
     private String teil1 [];
     private String teil2 [];
     private String datum;
