@@ -1,15 +1,29 @@
 package com.developer.workoutpro.itruns.gsnapp;
 
+import android.content.SharedPreferences;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
+    // Attribute für die Einstellungen
+    private boolean erstesLogin;
+
+    // Attribute für die Anmeldedaten
+    private String benutzername;
+    private String passwort;
+
     // Attribute für die Website
-    private Website website = new Website();
+    private Website website;
     private String htmlText;
 
     // Attribute für den Vertretungsplan
@@ -28,30 +42,109 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
-        website.execute();
+        sharedPreferencesLaden();
 
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                htmlText = website.getLoggedIn();
+        if (erstesLogin) {
+            setContentView(R.layout.activity_login);
 
-                getDatum();
-                getVertretungsstunde();
+            // Deklaration der Views
+            final Button btnAnmelden = findViewById(R.id.btnAnmelden);
+            final EditText etBenutzername = findViewById(R.id.etBenutzername);
+            final EditText etPasswort = findViewById(R.id.etPasswort);
 
-                String ausgabe = datum;
-                for (int index = 1; index < klasse.size(); index++) {
-                    ausgabe = ausgabe + "\n" + klasse.get(index) + stunde.get(index) + vertreter.get(index) + fach.get(index) + raum.get(index) + text.get(index);
-                } // for
+            btnAnmelden.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    login();
+                    btnAnmelden.setFocusable(false);
+                }
+            });
 
-                TextView tv = findViewById(R.id.tv);
-                tv.setText(ausgabe);
-            }
-        }, 10000);
+        } else {
+            setContentView(R.layout.activity_main);
+        } // if
 
     } // Methode onCreate
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        sharedPreferencesSpeichern();
+    } // Methode onPause
+
+    private void sharedPreferencesLaden() {
+        SharedPreferences erstesLoginPref = getSharedPreferences("erstesLogin", 0);
+        erstesLogin = erstesLoginPref.getBoolean("erstesLogin", true);
+    } // Methode sharedPreferencesLaden
+
+    private void sharedPreferencesSpeichern() {
+        SharedPreferences erstesLoginPref = getSharedPreferences("erstesLogin", 0);
+        SharedPreferences.Editor editorErstesLogin = erstesLoginPref.edit();
+        editorErstesLogin.putBoolean("erstesLogin", erstesLogin);
+        editorErstesLogin.commit();
+    } // Methode sharedPreferencesSpeichern
+
+    private void login() {
+        // Deklaration der Views
+        final EditText etBenutzername = findViewById(R.id.etBenutzername);
+        final EditText etPasswort = findViewById(R.id.etPasswort);
+        final ProgressBar progressBar = findViewById(R.id.progressBar);
+        final Button btnAnmelden = findViewById(R.id.btnAnmelden);
+
+        // Überprüfen, ob alle Anmeldedaten eingegeben wurden
+        if (etBenutzername.getText().toString().isEmpty()) {
+            btnAnmelden.setFocusable(true);
+            Toast.makeText(MainActivity.this, "Bitte Benutzernamen eingeben.", Toast.LENGTH_LONG).show();
+        } else if (etPasswort.getText().toString().isEmpty()) {
+            btnAnmelden.setFocusable(true);
+            Toast.makeText(MainActivity.this, "Bitte Passwort eingeben.", Toast.LENGTH_LONG).show();
+        } else {
+            btnAnmelden.setClickable(false);
+            benutzername = etBenutzername.getText().toString();
+            passwort = etPasswort.getText().toString();
+
+            website = new Website(benutzername, passwort);
+            website.execute();
+
+            progressBar.setVisibility(View.VISIBLE);
+
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    htmlText = website.getLoggedIn();
+
+                    if (htmlText.contains("falschen Benutzernamen oder ein falsches Passwort")) {
+                        progressBar.setVisibility(View.INVISIBLE);
+                        btnAnmelden.setFocusable(true);
+                        btnAnmelden.setClickable(true);
+                        Toast.makeText(MainActivity.this, "Ungültiger Benutzername oder falsches Passwort.", Toast.LENGTH_LONG).show();
+                    } else {
+                        getDatum();
+                        getVertretungsstunde();
+
+                        String ausgabe = datum;
+                        for (int index = 1; index < klasse.size(); index++) {
+                            ausgabe = ausgabe + "\n" + klasse.get(index) + stunde.get(index) + vertreter.get(index) + fach.get(index) + raum.get(index) + text.get(index);
+                        } // for
+
+                        progressBar.setVisibility(View.INVISIBLE);
+                        btnAnmelden.setFocusable(true);
+                        btnAnmelden.setClickable(true);
+
+                        setContentView(R.layout.activity_main);
+
+                        TextView tv = findViewById(R.id.tv);
+                        tv.setText(ausgabe);
+
+                        erstesLogin = false;
+                    } // if
+                }
+            }, 5000);
+
+        } // if
+    } // Methode login
 
     private void getDatum() {
         teil1 = htmlText.split("<div class=\"mon_title\">");

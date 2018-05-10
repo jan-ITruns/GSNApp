@@ -8,10 +8,20 @@ import java.io.IOException;
 
 public class Website extends AsyncTask<Void, Void, String>  {
 
+    // Attribute für die Daten
+    private String benutzername;
+    private String passwort;
+
+    // Attribute für die Website
     private String loginURL;
     private String heuteURL;
     private String htmlText;
     private Document doc;
+
+    public Website(String benutzername, String passwort) {
+        this.benutzername = benutzername;
+        this.passwort = passwort;
+    } // Konstruktor Website
 
     @Override
     protected void onPreExecute() {
@@ -29,8 +39,8 @@ public class Website extends AsyncTask<Void, Void, String>  {
                     .execute();
 
             doc = Jsoup.connect(loginURL)
-                    .data("values[login]", "derBenutzername")
-                    .data("values[password]", "dasPasswort")
+                    .data("values[login]", benutzername)
+                    .data("values[password]", passwort)
                     .data("values[req]", "/")
                     .cookies(loginForm.cookies())
                     .post();
