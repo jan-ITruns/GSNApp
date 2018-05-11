@@ -281,6 +281,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void getVertretungsstunde() {
         boolean erstesElement = true;
+        boolean falscheVertretungsstunde = false;
 
         kurs = new ArrayList<>();
         stunde = new ArrayList<>();
@@ -305,30 +306,39 @@ public class MainActivity extends AppCompatActivity {
                         element[0] = "";
                     } // if
 
-                    switch (index) {
-                        case 0:
-                            kurs.add(element[0]);
-                            break;
-                        case 1:
-                            stunde.add(element[0]);
-                            break;
-                        case 2:
-                            vertreter.add(element[0]);
-                            break;
-                        case 3:
-                            fach.add(element[0]);
-                            break;
-                        case 4:
-                            raum.add(element[0]);
-                            break;
-                        case 5:
-                            info.add(element[0]);
-                            break;
-                    } // switch
+                    if (! falscheVertretungsstunde) {
+                        switch (index) {
+                            case 0:
+                                if (element[0].equals("")) {
+                                    falscheVertretungsstunde = true;
+                                } else if (element[0].charAt(0) == '(') {
+                                    falscheVertretungsstunde = true;
+                                } else {
+                                    kurs.add(element[0]);
+                                } // if
+                                break;
+                            case 1:
+                                stunde.add(element[0]);
+                                break;
+                            case 2:
+                                vertreter.add(element[0]);
+                                break;
+                            case 3:
+                                fach.add(element[0]);
+                                break;
+                            case 4:
+                                raum.add(element[0]);
+                                break;
+                            case 5:
+                                info.add(element[0]);
+                                break;
+                        } // switch
+                    } // if
                 } // if
                 entferne2Klammern();
             } // for
             erstesElement = false;
+            falscheVertretungsstunde = false;
             entferne2KlammernEnde();
         } // while
 
