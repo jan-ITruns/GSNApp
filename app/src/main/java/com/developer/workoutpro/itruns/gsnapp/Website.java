@@ -26,7 +26,7 @@ public class Website extends AsyncTask<Void, Void, String>  {
     @Override
     protected void onPreExecute() {
         loginURL = "https://bid.lspb.de/signin/";
-        heuteURL = "https://bid.lspb.de/explorer/ViewDocument/1306999/";
+        heuteURL = "https://bid.lspb.de/explorer/ViewDocument/1306997/";
         htmlText = "";
     }
 

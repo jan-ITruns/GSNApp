@@ -34,4 +34,7 @@ dependencies {
 
     // Jsoup
     implementation 'org.jsoup:jsoup:1.11.3'
+
+    // Gson
+    implementation 'com.google.code.gson:gson:2.8.1'
 }

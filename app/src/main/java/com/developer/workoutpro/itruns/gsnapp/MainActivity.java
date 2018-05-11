@@ -1,5 +1,7 @@
 package com.developer.workoutpro.itruns.gsnapp;
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.SharedPreferences;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -8,11 +10,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.developer.itruns.gsnapp.R;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -34,12 +37,12 @@ public class MainActivity extends AppCompatActivity {
     private String datum;
     private String vertretungen;
     private String element [];
-    private ArrayList<String> kurs = new ArrayList<>();
-    private ArrayList<String> stunde = new ArrayList<>();
-    private ArrayList<String> vertreter = new ArrayList<>();
-    private ArrayList<String> fach = new ArrayList<>();
-    private ArrayList<String> raum = new ArrayList<>();
-    private ArrayList<String> info = new ArrayList<>();
+    private ArrayList<String> kurs;
+    private ArrayList<String> stunde;
+    private ArrayList<String> vertreter;
+    private ArrayList<String> fach;
+    private ArrayList<String> raum;
+    private ArrayList<String> info;
     private String vertretungsplanAusgabe;
 
     @Override
@@ -90,6 +93,40 @@ public class MainActivity extends AppCompatActivity {
         // Vertretungsplanausgabe laden
         SharedPreferences vertretungsplanAusgabePref = getSharedPreferences("vertretungsplanAusgabe", 0);
         vertretungsplanAusgabe = vertretungsplanAusgabePref.getString("vertretungsplanAusgabe", "");
+
+        // Vertretungselemente laden
+        Gson gson = new Gson();
+        Type type = new TypeToken<ArrayList<String>>() {}.getType();
+
+        // Kurs
+        SharedPreferences kursPref = getSharedPreferences("kurs", 0);
+        String kursJson = kursPref.getString("kurs", "");
+        kurs = gson.fromJson(kursJson, type);
+
+        // Stunde
+        SharedPreferences stundePref = getSharedPreferences("stunde", 0);
+        String stundeJson = stundePref.getString("stunde", "");
+        stunde = gson.fromJson(stundeJson, type);
+
+        // Vertreter
+        SharedPreferences vertreterPref = getSharedPreferences("vertreter", 0);
+        String vertreterJson = vertreterPref.getString("vertreter", "");
+        vertreter = gson.fromJson(vertreterJson, type);
+
+        // Fach
+        SharedPreferences fachPref = getSharedPreferences("fach", 0);
+        String fachJson = fachPref.getString("fach", "");
+        fach = gson.fromJson(fachJson, type);
+
+        // Raum
+        SharedPreferences raumPref = getSharedPreferences("raum", 0);
+        String raumJson = raumPref.getString("raum", "");
+        raum = gson.fromJson(raumJson, type);
+
+        // Info
+        SharedPreferences infoPref = getSharedPreferences("info", 0);
+        String infoJson = infoPref.getString("info", "");
+        info = gson.fromJson(infoJson, type);
     } // Methode sharedPreferencesLaden
 
     private void sharedPreferencesSpeichern() {
@@ -115,6 +152,51 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences.Editor editorVertretungsplanAusgabe = vertretungsplanAusgabePref.edit();
         editorVertretungsplanAusgabe.putString("vertretungsplanAusgabe", vertretungsplanAusgabe);
         editorVertretungsplanAusgabe.apply();
+
+        // Vertretungselemente speichern
+        Gson gson = new Gson();
+
+        // Kurs
+        SharedPreferences kursPref = getSharedPreferences("kurs", 0);
+        SharedPreferences.Editor editorKurs = kursPref.edit();
+        String kursJson = gson.toJson(kurs);
+        editorKurs.putString("kurs", kursJson);
+        editorKurs.apply();
+
+        // Stunde
+        SharedPreferences stundePref = getSharedPreferences("stunde", 0);
+        SharedPreferences.Editor editorStunde = stundePref.edit();
+        String stundeJson = gson.toJson(stunde);
+        editorStunde.putString("stunde", stundeJson);
+        editorStunde.apply();
+
+        // Vertreter
+        SharedPreferences vertreterPref = getSharedPreferences("vertreter", 0);
+        SharedPreferences.Editor editorVertreter = vertreterPref.edit();
+        String vertreterJson = gson.toJson(vertreter);
+        editorVertreter.putString("vertreter", vertreterJson);
+        editorVertreter.apply();
+
+        // Fach
+        SharedPreferences fachPref = getSharedPreferences("fach", 0);
+        SharedPreferences.Editor editorFach = fachPref.edit();
+        String fachJson = gson.toJson(fach);
+        editorFach.putString("fach", fachJson);
+        editorFach.apply();
+
+        // Raum
+        SharedPreferences raumPref = getSharedPreferences("raum", 0);
+        SharedPreferences.Editor editorRaum = raumPref.edit();
+        String raumJson = gson.toJson(raum);
+        editorRaum.putString("raum", raumJson);
+        editorRaum.apply();
+
+        // Info
+        SharedPreferences infoPref = getSharedPreferences("info", 0);
+        SharedPreferences.Editor editorInfo = infoPref.edit();
+        String infoJson = gson.toJson(info);
+        editorInfo.putString("info", infoJson);
+        editorInfo.apply();
     } // Methode sharedPreferencesSpeichern
 
     private void login() {
@@ -154,6 +236,13 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, "Ungültiger Benutzername oder falsches Passwort.", Toast.LENGTH_LONG).show();
                     } else {
                         getDatum();
+                        if (datum.equals("")) {
+                            progressBar.setVisibility(View.INVISIBLE);
+                            btnAnmelden.setFocusable(true);
+                            btnAnmelden.setClickable(true);
+                            Toast.makeText(MainActivity.this, "Ein unerwarteter Fehler ist aufgetreten.", Toast.LENGTH_LONG).show();
+                            return;
+                        } // if
                         getVertretungsstunde();
 
                         vertretungsplanAusgabe = datum;
@@ -178,17 +267,29 @@ public class MainActivity extends AppCompatActivity {
     } // Methode login
 
     private void getDatum() {
-        teil1 = htmlText.split("<div class=\"mon_title\">");
-        teil2 = teil1[1].split(",");
-        datum = teil2[0];
+        datum = "";
+        if (htmlText.contains("<div class=\"mon_title\">")) {
+            teil1 = htmlText.split("<div class=\"mon_title\">");
+            teil2 = teil1[1].split(",");
+            datum = teil2[0];
 
-        // Alle Leerstellen vor der ersten Ziffer entfernen
-        while (!((int) datum.charAt(0) > 47 && (int) datum.charAt(0) < 58)) {
-            datum = datum.substring(1);
-        } // while
+            // Alle Leerstellen vor der ersten Ziffer entfernen
+            while (!((int) datum.charAt(0) > 47 && (int) datum.charAt(0) < 58)) {
+                datum = datum.substring(1);
+            } // while
+        } else {
+            return;
+        } // if
     } // Methode getDatum
 
     private void getVertretungsstunde() {
+        kurs = new ArrayList<>();
+        stunde = new ArrayList<>();
+        vertreter = new ArrayList<>();
+        fach = new ArrayList<>();
+        raum = new ArrayList<>();
+        info = new ArrayList<>();
+
         teil1 = htmlText.split("<table class=\"mon_list\">");
         vertretungen = teil1[1];
 
@@ -259,8 +360,36 @@ public class MainActivity extends AppCompatActivity {
     } // Methode enferne1Klammern
 
     private void vertretungsplanAusgeben() {
-        TextView tv = findViewById(R.id.tv);
-        tv.setText(vertretungsplanAusgabe);
+        // Fragment Vertretungsplan erzeugen
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        FrVertretungsplan frVertretungsplan = new FrVertretungsplan();
+
+        // Vertretungselemente weitergeben
+        frVertretungsplan.setVertretungsElemente(kurs, stunde, vertreter, fach, raum, info);
+
+        fragmentTransaction.add(R.id.bereich_fragments, frVertretungsplan, "vertretungsplan");
+        fragmentManager.executePendingTransactions();
+        fragmentTransaction.commit();
     } // Methode vertretungsplanAusgeben
+
+    public void vertretungsplanAktualisieren(View v) {
+        website.execute();
+        htmlText = website.getLoggedIn();
+
+        getDatum();
+        if (datum.equals("")) {
+            Toast.makeText(MainActivity.this, "Ein unerwarteter Fehler ist aufgetreten.", Toast.LENGTH_LONG).show();
+            return;
+        } // if
+        getVertretungsstunde();
+
+        vertretungsplanAusgabe = datum;
+        for (int index = 1; index < kurs.size(); index++) {
+            vertretungsplanAusgabe = vertretungsplanAusgabe + "\n" + kurs.get(index) + stunde.get(index) + vertreter.get(index) + fach.get(index) + raum.get(index) + info.get(index);
+        } // for
+
+        vertretungsplanAusgeben();
+    }
 
 } // Klasse MainActivity
