@@ -81,7 +81,7 @@ public class RecyclerViewVertretungsplan extends RecyclerView.Adapter<RecyclerVi
 
         public ViewHolder(View view) {
             super(view);
-            clVertretungsplanRow = view.findViewById(R.id.clItemHolder);
+            clVertretungsplanRow = view.findViewById(R.id.ConstraintLayout);
             tvKurs = view.findViewById(R.id.tvKurs);
             tvStunde = view.findViewById(R.id.tvStunde);
             tvVertreter = view.findViewById(R.id.tvVertreter);
