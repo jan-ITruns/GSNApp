@@ -38,13 +38,17 @@ public class RecyclerViewVertretungsplan extends RecyclerView.Adapter<RecyclerVi
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int i) {
         if (kurs.get(i).length() > 0) {
-            if (kurs.get(i).charAt(0) == 'E' || kurs.get(i).charAt(0) == 'Q') {
-                viewHolder.tvKurs.setText(fach.get(i));
+            if (kurs.get(i).charAt(0) == 'E') {
+                viewHolder.tvKurs.setText("EF | " + fach.get(i));
+            } else if (kurs.get(i).charAt(0) == 'Q') {
+                if (kurs.get(i).charAt(1) == '1') {
+                    viewHolder.tvKurs.setText("Q1 | " + fach.get(i));
+                } else {
+                    viewHolder.tvKurs.setText("Q2 | " + fach.get(i));
+                } // if
             } else {
                 viewHolder.tvKurs.setText(kurs.get(i) + " | " + fach.get(i));
             } // if
-        } else {
-            viewHolder.tvKurs.setText(kurs.get(i) + " | " + fach.get(i));
         } // if
         viewHolder.tvStunde.setText(stunde.get(i));
         viewHolder.tvVertreter.setText(vertreter.get(i));
