@@ -3,12 +3,18 @@ package com.developer.workoutpro.itruns.gsnapp;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Handler;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -52,6 +58,11 @@ public class MainActivity extends AppCompatActivity {
         sharedPreferencesLaden();
 
     } // Methode onCreate
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    } // Methode onBackPressed
 
     @Override
     protected void onPause() {
@@ -127,6 +138,7 @@ public class MainActivity extends AppCompatActivity {
         } else {
             setContentView(R.layout.activity_main);
             vertretungsplanAusgeben();
+            menueleiste();
         } // if
     } // Methode sharedPreferencesLaden
 
@@ -200,6 +212,55 @@ public class MainActivity extends AppCompatActivity {
         editorInfo.apply();
     } // Methode sharedPreferencesSpeichern
 
+    public void menueleiste() {
+        final DrawerLayout mDrawerLayout;
+        ImageButton menuButton;
+
+        mDrawerLayout = findViewById(R.id.drawerLayout);
+
+        // Hintergrund dunkler machen
+        mDrawerLayout.setScrimColor(Color.parseColor("#33000000"));
+
+        NavigationView navigationView = findViewById(R.id.nav_view);
+
+        navigationView.setNavigationItemSelectedListener(
+                new NavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(MenuItem menuItem) {
+                        // Item markieren
+                        menuItem.setChecked(true);
+
+                        // nach dem Auswählen den Navigator wieder schließen
+                        mDrawerLayout.closeDrawers();
+
+                        getFragmentManager().beginTransaction().remove(getFragmentManager().findFragmentById(R.id.bereich_fragments)).commit();
+                        FragmentManager fragmentManager = getFragmentManager();
+                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+                        switch (menuItem.getItemId()) {
+                            case R.id.vertretungsplan:
+                                FrVertretungsplan frVertretungsplan = new FrVertretungsplan();
+                                frVertretungsplan.setVertretungsElemente(kurs, stunde, vertreter, fach, raum, info);
+                                fragmentTransaction.replace(R.id.bereich_fragments, frVertretungsplan, "vertretungsplan");
+                                break;
+                            case R.id.einstellungen:
+                                FrEinstellungen frEinstellungen = new FrEinstellungen();
+                                fragmentTransaction.replace(R.id.bereich_fragments, frEinstellungen, "einstellungen");
+                                break;
+                        } // switch
+
+                        fragmentTransaction.addToBackStack(null);
+
+                        // Änderung sofort durchführen
+                        fragmentManager.executePendingTransactions();
+                        fragmentTransaction.commit();
+
+                        // return true um das Item zu markieren
+                        return false;
+                    }
+                });
+    } // Methode menueLeiste
+
     private void login() {
         // Deklaration der Views
         final EditText etBenutzername = findViewById(R.id.etBenutzername);
@@ -259,6 +320,7 @@ public class MainActivity extends AppCompatActivity {
                         setContentView(R.layout.activity_main);
 
                         vertretungsplanAusgeben();
+                        menueleiste();
 
                         erstesLogin = false;
                     } // if
@@ -392,6 +454,7 @@ public class MainActivity extends AppCompatActivity {
         frVertretungsplan.setVertretungsElemente(kurs, stunde, vertreter, fach, raum, info);
 
         fragmentTransaction.replace(R.id.bereich_fragments, frVertretungsplan, "vertretungsplan");
+        fragmentTransaction.addToBackStack(null);
         fragmentManager.executePendingTransactions();
         fragmentTransaction.commit();
     } // Methode vertretungsplanAusgeben
