@@ -486,4 +486,8 @@ public class MainActivity extends AppCompatActivity {
         }, 10000);
     } // Methode vertretungsplanAktualisieren
 
+    public void oeffneVertretungInfos(){
+        setContentView(R.layout.activity_main);
+    }
+
 } // Klasse MainActivity

@@ -128,7 +128,7 @@
         android:layout_marginTop="90dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/constraintLayout4">
+        app:layout_constraintTop_toTopOf="@+id/constraintLayout">
 
     </android.support.v7.widget.RecyclerView>
 

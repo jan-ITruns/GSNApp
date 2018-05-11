@@ -17,6 +17,8 @@ public class RecyclerViewVertretungsplan extends RecyclerView.Adapter<RecyclerVi
     private ArrayList<String> raum;
     private ArrayList<String> info;
 
+    private MainActivity mainActivity;
+
     public RecyclerViewVertretungsplan(ArrayList<String> kurs, ArrayList<String> stunde, ArrayList<String> vertreter, ArrayList<String> fach, ArrayList<String> raum, ArrayList<String> info) {
         this.kurs = kurs;
         this.stunde = stunde;
@@ -54,6 +56,12 @@ public class RecyclerViewVertretungsplan extends RecyclerView.Adapter<RecyclerVi
         viewHolder.tvVertreter.setText(vertreter.get(i));
         viewHolder.tvRaum.setText(raum.get(i));
         viewHolder.tvInfo.setText(info.get(i));
+        viewHolder.clVertretungsplanRow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mainActivity.oeffneVertretungInfos();
+            }
+        });
     } // Methode onBindViewHolder
 
     @Override
@@ -84,5 +92,7 @@ public class RecyclerViewVertretungsplan extends RecyclerView.Adapter<RecyclerVi
         } // Konstruktor ViewHolder
 
     } // Klasse ViewHolder
+
+
 
 } // Klasse RecyclerViewVertretungsplan
