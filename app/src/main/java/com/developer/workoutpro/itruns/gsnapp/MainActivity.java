@@ -236,8 +236,11 @@ public class MainActivity extends AppCompatActivity {
                         btnAnmelden.setClickable(true);
                         Toast.makeText(MainActivity.this, "Ungültiger Benutzername oder falsches Passwort.", Toast.LENGTH_LONG).show();
                     } else {
-                        if (! htmlText.contains("<div class=\"mon_title\">")) {
+                        if (! htmlText.contains("mon_title")) {
                             Toast.makeText(MainActivity.this, "Ein unerwarteter Fehler ist aufgetreten.", Toast.LENGTH_LONG).show();
+                            progressBar.setVisibility(View.INVISIBLE);
+                            btnAnmelden.setFocusable(true);
+                            btnAnmelden.setClickable(true);
                             return;
                         } // if
 
@@ -277,6 +280,8 @@ public class MainActivity extends AppCompatActivity {
     } // Methode getDatum
 
     private void getVertretungsstunde() {
+        boolean erstesElement = true;
+
         kurs = new ArrayList<>();
         stunde = new ArrayList<>();
         vertreter = new ArrayList<>();
@@ -292,24 +297,38 @@ public class MainActivity extends AppCompatActivity {
 
         while (! (vertretungen.substring(0,7).equals("</table"))) {
             for (int index = 0; index < 6; index++) {
-                element = vertretungen.split("<");
+                if (! erstesElement) {
+                    element = vertretungen.split("<");
 
-                // angezeigte Leerzeichen entfernen
-                if (element[0].equals("&nbsp;")) {
-                    element[0] = "";
+                    // angezeigte Leerzeichen entfernen
+                    if (element[0].equals("&nbsp;")) {
+                        element[0] = "";
+                    } // if
+
+                    switch (index) {
+                        case 0:
+                            kurs.add(element[0]);
+                            break;
+                        case 1:
+                            stunde.add(element[0]);
+                            break;
+                        case 2:
+                            vertreter.add(element[0]);
+                            break;
+                        case 3:
+                            fach.add(element[0]);
+                            break;
+                        case 4:
+                            raum.add(element[0]);
+                            break;
+                        case 5:
+                            info.add(element[0]);
+                            break;
+                    } // switch
                 } // if
-
-                switch (index) {
-                    case 0: kurs.add(element[0]); break;
-                    case 1: stunde.add(element[0]); break;
-                    case 2: vertreter.add(element[0]); break;
-                    case 3: fach.add(element[0]); break;
-                    case 4: raum.add(element[0]); break;
-                    case 5: info.add(element[0]); break;
-                } // switch
-
                 entferne2Klammern();
             } // for
+            erstesElement = false;
             entferne2KlammernEnde();
         } // while
 
