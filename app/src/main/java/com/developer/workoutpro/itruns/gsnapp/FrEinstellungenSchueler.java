@@ -6,37 +6,38 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class FrVertretungInfos extends Fragment {
+public class FrEinstellungenSchueler extends Fragment {
 
     private View view;
-    private MainActivity mainActivity;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fr_vertretung_infos, container, false);
-        mainActivity = (MainActivity) getActivity();
+        view = inflater.inflate(R.layout.fr_einstellungen_schueler, container, false);
 
         toolbarEinrichten();
 
         return view;
-    } // Methode onCreate View
+    } // Methode onCreateView
 
     private void toolbarEinrichten() {
-        Toolbar toolbar = view.findViewById(R.id.toolbarVertretungsplanInfos);
+        Toolbar toolbar = view.findViewById(R.id.toolbarEinstellungen);
 
-        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
+        toolbar.setNavigationIcon(R.drawable.ic_menu_white_24dp);
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mainActivity.vertretungsplanOeffnen();
+                MainActivity.mDrawerLayout.openDrawer(GravityCompat.START);
             }
         });
 
+        toolbar.setTitle("Einstellungen");
+        toolbar.setTitleTextColor(getResources().getColor(R.color.weiss));
     } // Methode toolbarEinrichten
 
-} // Klasse FrVertretugnInfos
+} // Klasse FrEinstellungenSchueler

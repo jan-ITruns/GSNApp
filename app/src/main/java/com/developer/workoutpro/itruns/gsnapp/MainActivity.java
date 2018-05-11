@@ -1,7 +1,5 @@
 package com.developer.workoutpro.itruns.gsnapp;
 
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.content.SharedPreferences;
@@ -72,7 +70,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         sharedPreferencesLaden();
-
     } // Methode onCreate
 
     @Override
@@ -323,8 +320,8 @@ public class MainActivity extends AppCompatActivity {
                                 getSupportFragmentManager().beginTransaction().remove(getSupportFragmentManager().findFragmentById(R.id.bereich_fragments)).commit();
                                 FragmentManager fragmentManager = getSupportFragmentManager();
                                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                                FrEinstellungen frEinstellungen = new FrEinstellungen();
-                                fragmentTransaction.replace(R.id.bereich_fragments, frEinstellungen, "einstellungen");
+                                FrEinstellungenSchueler frEinstellungenSchueler = new FrEinstellungenSchueler();
+                                fragmentTransaction.replace(R.id.bereich_fragments, frEinstellungenSchueler, "einstellungen");
                                 tvUeberschrift.setText("Einstellungen");
                                 fragmentTransaction.addToBackStack(null);
                                 fragmentManager.executePendingTransactions();
@@ -567,7 +564,7 @@ public class MainActivity extends AppCompatActivity {
         vertretungen = vertretungen.substring(1);
     } // Methode enferne1Klammern
 
-    private void vertretungsplanOeffnen() {
+    public void vertretungsplanOeffnen() {
         // Fragment Vertretungsplan erzeugen
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

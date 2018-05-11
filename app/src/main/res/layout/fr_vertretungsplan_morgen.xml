@@ -77,20 +77,6 @@
 
     </android.support.constraint.ConstraintLayout>
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fabAktualisieren"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginEnd="10dp"
-        android:clickable="true"
-        android:onClick="vertretungsplanAktualisieren"
-        android:src="@drawable/ic_refresh_black_30dp"
-        android:tint="@color/colorPrimary"
-        app:backgroundTint="@color/colorAccent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvVertretungsplan"
         android:layout_width="match_parent"
