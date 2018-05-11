@@ -11,6 +11,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.developer.itruns.gsnapp.R;
+
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -32,12 +34,12 @@ public class MainActivity extends AppCompatActivity {
     private String datum;
     private String vertretungen;
     private String element [];
-    private ArrayList<String> klasse = new ArrayList<>();
+    private ArrayList<String> kurs = new ArrayList<>();
     private ArrayList<String> stunde = new ArrayList<>();
     private ArrayList<String> vertreter = new ArrayList<>();
     private ArrayList<String> fach = new ArrayList<>();
     private ArrayList<String> raum = new ArrayList<>();
-    private ArrayList<String> text = new ArrayList<>();
+    private ArrayList<String> info = new ArrayList<>();
     private String vertretungsplanAusgabe;
 
     @Override
@@ -155,8 +157,8 @@ public class MainActivity extends AppCompatActivity {
                         getVertretungsstunde();
 
                         vertretungsplanAusgabe = datum;
-                        for (int index = 1; index < klasse.size(); index++) {
-                            vertretungsplanAusgabe = vertretungsplanAusgabe + "\n" + klasse.get(index) + stunde.get(index) + vertreter.get(index) + fach.get(index) + raum.get(index) + text.get(index);
+                        for (int index = 1; index < kurs.size(); index++) {
+                            vertretungsplanAusgabe = vertretungsplanAusgabe + "\n" + kurs.get(index) + stunde.get(index) + vertreter.get(index) + fach.get(index) + raum.get(index) + info.get(index);
                         } // for
 
                         progressBar.setVisibility(View.INVISIBLE);
@@ -203,12 +205,12 @@ public class MainActivity extends AppCompatActivity {
                 } // if
 
                 switch (index) {
-                    case 0: klasse.add(element[0]); break;
+                    case 0: kurs.add(element[0]); break;
                     case 1: stunde.add(element[0]); break;
                     case 2: vertreter.add(element[0]); break;
                     case 3: fach.add(element[0]); break;
                     case 4: raum.add(element[0]); break;
-                    case 5: text.add(element[0]); break;
+                    case 5: info.add(element[0]); break;
                 } // switch
 
                 entferne2Klammern();
@@ -261,4 +263,4 @@ public class MainActivity extends AppCompatActivity {
         tv.setText(vertretungsplanAusgabe);
     } // Methode vertretungsplanAusgeben
 
-}
+} // Klasse MainActivity

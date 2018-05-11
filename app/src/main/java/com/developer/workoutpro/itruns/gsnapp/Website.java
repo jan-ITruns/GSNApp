@@ -67,4 +67,4 @@ public class Website extends AsyncTask<Void, Void, String>  {
         return htmlText;
     } // Methode getLoggedIn
 
-}
+} // Klasse Website
