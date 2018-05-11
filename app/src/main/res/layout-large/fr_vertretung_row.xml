@@ -77,18 +77,10 @@
             android:layout_marginTop="5dp"
             android:gravity="center_vertical|center_horizontal"
             android:text="Informationstext"
+            android:textSize="12sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvKurs" />
 
     </android.support.constraint.ConstraintLayout>
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="match_parent"
-        android:layout_height="3dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@color/weiss" />
 
 </android.support.constraint.ConstraintLayout>
