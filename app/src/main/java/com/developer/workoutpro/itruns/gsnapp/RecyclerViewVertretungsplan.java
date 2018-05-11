@@ -54,7 +54,11 @@ public class RecyclerViewVertretungsplan extends RecyclerView.Adapter<RecyclerVi
 
     @Override
     public int getItemCount() {
-        return kurs.size();
+        if (kurs != null) {
+            return kurs.size();
+        } else {
+            return 0;
+        } // if
     } // Methode getItemCount
 
     public class ViewHolder extends RecyclerView.ViewHolder{

@@ -9,6 +9,7 @@ import java.io.IOException;
 public class Website extends AsyncTask<Void, Void, String>  {
 
     // Attribute für die Daten
+    private boolean erstesLogin;
     private String benutzername;
     private String passwort;
 
@@ -18,7 +19,8 @@ public class Website extends AsyncTask<Void, Void, String>  {
     private String htmlText;
     private Document doc;
 
-    public Website(String benutzername, String passwort) {
+    public Website(boolean erstesLogin, String benutzername, String passwort) {
+        this.erstesLogin = erstesLogin;
         this.benutzername = benutzername;
         this.passwort = passwort;
     } // Konstruktor Website
@@ -26,7 +28,7 @@ public class Website extends AsyncTask<Void, Void, String>  {
     @Override
     protected void onPreExecute() {
         loginURL = "https://bid.lspb.de/signin/";
-        heuteURL = "https://bid.lspb.de/explorer/ViewDocument/1306997/";
+        heuteURL = "https://bid.lspb.de/explorer/ViewDocument/1306999/";
         htmlText = "";
     }
 

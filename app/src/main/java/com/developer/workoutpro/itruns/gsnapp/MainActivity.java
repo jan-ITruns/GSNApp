@@ -51,25 +51,6 @@ public class MainActivity extends AppCompatActivity {
 
         sharedPreferencesLaden();
 
-        if (erstesLogin) {
-            setContentView(R.layout.activity_login);
-
-            // Deklaration der Views
-            final Button btnAnmelden = findViewById(R.id.btnAnmelden);
-
-            btnAnmelden.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    login();
-                    btnAnmelden.setFocusable(false);
-                }
-            });
-
-        } else {
-            setContentView(R.layout.activity_main);
-            vertretungsplanAusgeben();
-        } // if
-
     } // Methode onCreate
 
     @Override
@@ -127,6 +108,26 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences infoPref = getSharedPreferences("info", 0);
         String infoJson = infoPref.getString("info", "");
         info = gson.fromJson(infoJson, type);
+
+        // Programm starten
+        if (erstesLogin) {
+            setContentView(R.layout.activity_login);
+
+            // Deklaration der Views
+            final Button btnAnmelden = findViewById(R.id.btnAnmelden);
+
+            btnAnmelden.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    login();
+                    btnAnmelden.setFocusable(false);
+                }
+            });
+
+        } else {
+            setContentView(R.layout.activity_main);
+            vertretungsplanAusgeben();
+        } // if
     } // Methode sharedPreferencesLaden
 
     private void sharedPreferencesSpeichern() {
@@ -218,7 +219,7 @@ public class MainActivity extends AppCompatActivity {
             benutzername = etBenutzername.getText().toString();
             passwort = etPasswort.getText().toString();
 
-            website = new Website(benutzername, passwort);
+            website = new Website(true, benutzername, passwort);
             website.execute();
 
             progressBar.setVisibility(View.VISIBLE);
@@ -235,14 +236,12 @@ public class MainActivity extends AppCompatActivity {
                         btnAnmelden.setClickable(true);
                         Toast.makeText(MainActivity.this, "Ungültiger Benutzername oder falsches Passwort.", Toast.LENGTH_LONG).show();
                     } else {
-                        getDatum();
-                        if (datum.equals("")) {
-                            progressBar.setVisibility(View.INVISIBLE);
-                            btnAnmelden.setFocusable(true);
-                            btnAnmelden.setClickable(true);
+                        if (! htmlText.contains("<div class=\"mon_title\">")) {
                             Toast.makeText(MainActivity.this, "Ein unerwarteter Fehler ist aufgetreten.", Toast.LENGTH_LONG).show();
                             return;
                         } // if
+
+                        getDatum();
                         getVertretungsstunde();
 
                         vertretungsplanAusgabe = datum;
@@ -261,25 +260,20 @@ public class MainActivity extends AppCompatActivity {
                         erstesLogin = false;
                     } // if
                 }
-            }, 5000);
+            }, 10000);
 
         } // if
     } // Methode login
 
     private void getDatum() {
-        datum = "";
-        if (htmlText.contains("<div class=\"mon_title\">")) {
-            teil1 = htmlText.split("<div class=\"mon_title\">");
-            teil2 = teil1[1].split(",");
-            datum = teil2[0];
+        teil1 = htmlText.split("<div class=\"mon_title\">");
+        teil2 = teil1[1].split(",");
+        datum = teil2[0];
 
-            // Alle Leerstellen vor der ersten Ziffer entfernen
-            while (!((int) datum.charAt(0) > 47 && (int) datum.charAt(0) < 58)) {
-                datum = datum.substring(1);
-            } // while
-        } else {
-            return;
-        } // if
+        // Alle Leerstellen vor der ersten Ziffer entfernen
+        while (!((int) datum.charAt(0) > 47 && (int) datum.charAt(0) < 58)) {
+            datum = datum.substring(1);
+        } // while
     } // Methode getDatum
 
     private void getVertretungsstunde() {
@@ -368,28 +362,36 @@ public class MainActivity extends AppCompatActivity {
         // Vertretungselemente weitergeben
         frVertretungsplan.setVertretungsElemente(kurs, stunde, vertreter, fach, raum, info);
 
-        fragmentTransaction.add(R.id.bereich_fragments, frVertretungsplan, "vertretungsplan");
+        fragmentTransaction.replace(R.id.bereich_fragments, frVertretungsplan, "vertretungsplan");
         fragmentManager.executePendingTransactions();
         fragmentTransaction.commit();
     } // Methode vertretungsplanAusgeben
 
     public void vertretungsplanAktualisieren(View v) {
+        website = new Website(false, benutzername, passwort);
         website.execute();
-        htmlText = website.getLoggedIn();
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                htmlText = website.getLoggedIn();
 
-        getDatum();
-        if (datum.equals("")) {
-            Toast.makeText(MainActivity.this, "Ein unerwarteter Fehler ist aufgetreten.", Toast.LENGTH_LONG).show();
-            return;
-        } // if
-        getVertretungsstunde();
+                if (! htmlText.contains("mon_title")) {
+                    Toast.makeText(MainActivity.this, "Ein unerwarteter Fehler ist aufgetreten.", Toast.LENGTH_LONG).show();
+                    return;
+                } // if
 
-        vertretungsplanAusgabe = datum;
-        for (int index = 1; index < kurs.size(); index++) {
-            vertretungsplanAusgabe = vertretungsplanAusgabe + "\n" + kurs.get(index) + stunde.get(index) + vertreter.get(index) + fach.get(index) + raum.get(index) + info.get(index);
-        } // for
+                getDatum();
+                getVertretungsstunde();
 
-        vertretungsplanAusgeben();
-    }
+                vertretungsplanAusgabe = datum;
+                for (int index = 1; index < kurs.size(); index++) {
+                    vertretungsplanAusgabe = vertretungsplanAusgabe + "\n" + kurs.get(index) + stunde.get(index) + vertreter.get(index) + fach.get(index) + raum.get(index) + info.get(index);
+                } // for
+
+                vertretungsplanAusgeben();
+            }
+        }, 10000);
+    } // Methode vertretungsplanAktualisieren
 
 } // Klasse MainActivity
