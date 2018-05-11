@@ -11,16 +11,14 @@
         android:id="@+id/clItemHolder"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
         <TextView
             android:id="@+id/tvKurs"
-            android:layout_width="75dp"
+            android:layout_width="100dp"
             android:layout_height="30dp"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="18dp"
             android:layout_marginTop="25dp"
             android:gravity="center_vertical"
             android:text="Kurs | Fach"
@@ -34,12 +32,15 @@
             android:id="@+id/tvStunde"
             android:layout_width="75dp"
             android:layout_height="30dp"
+            android:layout_marginEnd="7dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="25dp"
             android:gravity="center_vertical"
             android:text="Stunde"
             android:textAlignment="center"
             android:textSize="14sp"
             android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/tvRaum"
             app:layout_constraintStart_toEndOf="@+id/tvKurs"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -47,12 +48,15 @@
             android:id="@+id/tvRaum"
             android:layout_width="75dp"
             android:layout_height="30dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="7dp"
             android:layout_marginTop="25dp"
             android:gravity="center_vertical"
             android:text="Raum"
             android:textAlignment="center"
             android:textSize="14sp"
             android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/tvVertreter"
             app:layout_constraintStart_toEndOf="@+id/tvStunde"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -60,13 +64,14 @@
             android:id="@+id/tvVertreter"
             android:layout_width="75dp"
             android:layout_height="30dp"
+            android:layout_marginEnd="18dp"
             android:layout_marginTop="25dp"
             android:gravity="center_vertical"
             android:text="Vertreter"
             android:textAlignment="center"
             android:textSize="14sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/tvRaum"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
     </android.support.constraint.ConstraintLayout>
