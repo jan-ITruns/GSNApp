@@ -4,10 +4,14 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import java.util.ArrayList;
 
@@ -15,6 +19,7 @@ public class FrVertretungsplan extends Fragment {
 
     private View view;
     private ViewPager viewPager;
+    private MainActivity mainActivity;
 
     // Attribute für den Vertretungsplan Heute
     private String datumHeute;
@@ -38,6 +43,9 @@ public class FrVertretungsplan extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fr_vertretungsplan, container, false);
+        mainActivity = (MainActivity) getActivity();
+
+        toolbarEinrichten();
 
         viewPager = view.findViewById(R.id.container);
         setupViewPager(viewPager);
@@ -47,6 +55,41 @@ public class FrVertretungsplan extends Fragment {
 
         return view;
     } // Methode onCreateView
+
+    private void toolbarEinrichten() {
+        Toolbar toolbar = view.findViewById(R.id.toolbarVertretungsplan);
+
+        toolbar.setNavigationIcon(R.drawable.ic_menu_white_24dp);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity.mDrawerLayout.openDrawer(GravityCompat.START);
+            }
+        });
+
+        toolbar.setTitle("Vertretungsplan");
+        toolbar.setTitleTextColor(getResources().getColor(R.color.weiss));
+
+        toolbar.inflateMenu(R.menu.header_vertretungsplan);
+
+        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.vertretungsplanAktualisieren:
+                        mainActivity.vertretungsplanAktualisieren(view);
+                        return true;
+
+                    case R.id.vertretungsplanInformation:
+                        return true;
+
+                    default:
+                        return false;
+                }
+            }
+        });
+    } // Methode toolbarEinrichten
 
     public void setVertretungsElemente(int tag, String datum, ArrayList<String> kurs, ArrayList<String> stunde, ArrayList<String> vertreter, ArrayList<String> fach, ArrayList<String> raum, ArrayList<String> info) {
         switch (tag) {

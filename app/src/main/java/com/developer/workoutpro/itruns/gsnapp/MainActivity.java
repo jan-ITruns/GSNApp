@@ -1,5 +1,6 @@
 package com.developer.workoutpro.itruns.gsnapp;
 
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -25,6 +26,9 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+
+    // Attribute für das Layout
+    public static DrawerLayout mDrawerLayout;
 
     // Attribute für die Einstellungen
     private boolean erstesLogin;
@@ -293,7 +297,7 @@ public class MainActivity extends AppCompatActivity {
     } // Methode sharedPreferencesSpeichern
 
     public void menueleiste() {
-        final DrawerLayout mDrawerLayout = findViewById(R.id.drawerLayout);
+        mDrawerLayout = findViewById(R.id.drawerLayout);
         final TextView tvUeberschrift = findViewById(R.id.tvUeberschrift);
 
         // Hintergrund dunkler machen

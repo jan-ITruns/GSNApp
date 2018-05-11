@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/vertretungsplanAktualisieren"
+        android:icon="@drawable/ic_refresh_white_24dp"
+        android:title="Aktualisieren"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/vertretungsplanInformation"
+        android:icon="@drawable/ic_info_white_24dp"
+        android:title="Information"
+        app:showAsAction="ifRoom"/>
+
+</menu>

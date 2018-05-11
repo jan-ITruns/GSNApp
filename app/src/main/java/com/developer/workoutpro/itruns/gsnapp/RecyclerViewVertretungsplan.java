@@ -78,7 +78,6 @@ public class RecyclerViewVertretungsplan extends RecyclerView.Adapter<RecyclerVi
         TextView tvStunde;
         TextView tvVertreter;
         TextView tvRaum;
-        TextView tvInfo;
 
         public ViewHolder(View view) {
             super(view);
@@ -87,7 +86,6 @@ public class RecyclerViewVertretungsplan extends RecyclerView.Adapter<RecyclerVi
             tvStunde = view.findViewById(R.id.tvStunde);
             tvVertreter = view.findViewById(R.id.tvVertreter);
             tvRaum = view.findViewById(R.id.tvRaum);
-            tvInfo = view.findViewById(R.id.tvInfo);
         } // Konstruktor ViewHolder
 
     } // Klasse ViewHolder
