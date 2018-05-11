@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<String> fach = new ArrayList<>();
     private ArrayList<String> raum = new ArrayList<>();
     private ArrayList<String> text = new ArrayList<>();
+    private String vertretungsplanAusgabe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,8 +51,6 @@ public class MainActivity extends AppCompatActivity {
 
             // Deklaration der Views
             final Button btnAnmelden = findViewById(R.id.btnAnmelden);
-            final EditText etBenutzername = findViewById(R.id.etBenutzername);
-            final EditText etPasswort = findViewById(R.id.etPasswort);
 
             btnAnmelden.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -63,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
 
         } else {
             setContentView(R.layout.activity_main);
+            vertretungsplanAusgeben();
         } // if
 
     } // Methode onCreate
@@ -74,15 +74,45 @@ public class MainActivity extends AppCompatActivity {
     } // Methode onPause
 
     private void sharedPreferencesLaden() {
+        // Laden, ob sich der Benutzer schon einmal eingeloggt hat
         SharedPreferences erstesLoginPref = getSharedPreferences("erstesLogin", 0);
         erstesLogin = erstesLoginPref.getBoolean("erstesLogin", true);
+
+        // Benutzerdaten laden
+        SharedPreferences benutzernamePref = getSharedPreferences("benutzername", 0);
+        benutzername = benutzernamePref.getString("benutzername", "");
+
+        SharedPreferences passwortPref = getSharedPreferences("passwort", 0);
+        passwort = passwortPref.getString("passwort", "");
+
+        // Vertretungsplanausgabe laden
+        SharedPreferences vertretungsplanAusgabePref = getSharedPreferences("vertretungsplanAusgabe", 0);
+        vertretungsplanAusgabe = vertretungsplanAusgabePref.getString("vertretungsplanAusgabe", "");
     } // Methode sharedPreferencesLaden
 
     private void sharedPreferencesSpeichern() {
+        // Speichern, ob sich der Benutzer schon einmal eingeloggt hat
         SharedPreferences erstesLoginPref = getSharedPreferences("erstesLogin", 0);
         SharedPreferences.Editor editorErstesLogin = erstesLoginPref.edit();
         editorErstesLogin.putBoolean("erstesLogin", erstesLogin);
-        editorErstesLogin.commit();
+        editorErstesLogin.apply();
+
+        // Benutzerdaten speichern
+        SharedPreferences benutzernamePref = getSharedPreferences("benutzername", 0);
+        SharedPreferences.Editor editorBenutzername = benutzernamePref.edit();
+        editorBenutzername.putString("benutzername", benutzername);
+        editorBenutzername.apply();
+
+        SharedPreferences passwortPref = getSharedPreferences("passwort", 0);
+        SharedPreferences.Editor editorPasswort = passwortPref.edit();
+        editorPasswort.putString("passwort", passwort);
+        editorPasswort.apply();
+
+        // Vertretungsplanausgabe speichern
+        SharedPreferences vertretungsplanAusgabePref = getSharedPreferences("vertretungsplanAusgabe", 0);
+        SharedPreferences.Editor editorVertretungsplanAusgabe = vertretungsplanAusgabePref.edit();
+        editorVertretungsplanAusgabe.putString("vertretungsplanAusgabe", vertretungsplanAusgabe);
+        editorVertretungsplanAusgabe.apply();
     } // Methode sharedPreferencesSpeichern
 
     private void login() {
@@ -124,9 +154,9 @@ public class MainActivity extends AppCompatActivity {
                         getDatum();
                         getVertretungsstunde();
 
-                        String ausgabe = datum;
+                        vertretungsplanAusgabe = datum;
                         for (int index = 1; index < klasse.size(); index++) {
-                            ausgabe = ausgabe + "\n" + klasse.get(index) + stunde.get(index) + vertreter.get(index) + fach.get(index) + raum.get(index) + text.get(index);
+                            vertretungsplanAusgabe = vertretungsplanAusgabe + "\n" + klasse.get(index) + stunde.get(index) + vertreter.get(index) + fach.get(index) + raum.get(index) + text.get(index);
                         } // for
 
                         progressBar.setVisibility(View.INVISIBLE);
@@ -135,8 +165,7 @@ public class MainActivity extends AppCompatActivity {
 
                         setContentView(R.layout.activity_main);
 
-                        TextView tv = findViewById(R.id.tv);
-                        tv.setText(ausgabe);
+                        vertretungsplanAusgeben();
 
                         erstesLogin = false;
                     } // if
@@ -226,5 +255,10 @@ public class MainActivity extends AppCompatActivity {
         } // while
         vertretungen = vertretungen.substring(1);
     } // Methode enferne1Klammern
+
+    private void vertretungsplanAusgeben() {
+        TextView tv = findViewById(R.id.tv);
+        tv.setText(vertretungsplanAusgabe);
+    } // Methode vertretungsplanAusgeben
 
 }
