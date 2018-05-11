@@ -44,7 +44,7 @@ public class FrVertretungsplan extends Fragment {
         RecyclerView recyclerView = view.findViewById(R.id.rvVertretungsplan);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        RecyclerViewVertretungsplan adapter = new RecyclerViewVertretungsplan(kurs, stunde, vertreter, fach, raum, info);
+        RecyclerViewVertretungsplan adapter = new RecyclerViewVertretungsplan(getActivity(), kurs, stunde, vertreter, fach, raum, info);
         recyclerView.setAdapter(adapter);
     } // Methode recyclerViewVorbereiten
 

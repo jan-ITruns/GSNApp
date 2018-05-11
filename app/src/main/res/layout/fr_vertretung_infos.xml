@@ -6,13 +6,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
+    <!--<ImageView
         android:id="@+id/imgvGSN"
         android:layout_width="0dp"
         android:layout_height="216dp"
+        android:layout_marginTop="50dp"
         android:contentDescription="@string/app_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/gsn" />
+        app:srcCompat="@drawable/gsn" />-->
+
 </android.support.constraint.ConstraintLayout>

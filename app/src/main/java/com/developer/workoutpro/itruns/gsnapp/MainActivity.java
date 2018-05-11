@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -213,10 +214,8 @@ public class MainActivity extends AppCompatActivity {
     } // Methode sharedPreferencesSpeichern
 
     public void menueleiste() {
-        final DrawerLayout mDrawerLayout;
-        ImageButton menuButton;
-
-        mDrawerLayout = findViewById(R.id.drawerLayout);
+        final DrawerLayout mDrawerLayout = findViewById(R.id.drawerLayout);
+        final TextView tvUeberschrift = findViewById(R.id.tvUeberschrift);
 
         // Hintergrund dunkler machen
         mDrawerLayout.setScrimColor(Color.parseColor("#33000000"));
@@ -242,10 +241,12 @@ public class MainActivity extends AppCompatActivity {
                                 FrVertretungsplan frVertretungsplan = new FrVertretungsplan();
                                 frVertretungsplan.setVertretungsElemente(kurs, stunde, vertreter, fach, raum, info);
                                 fragmentTransaction.replace(R.id.bereich_fragments, frVertretungsplan, "vertretungsplan");
+                                tvUeberschrift.setText("Vertretungsplan");
                                 break;
                             case R.id.einstellungen:
                                 FrEinstellungen frEinstellungen = new FrEinstellungen();
                                 fragmentTransaction.replace(R.id.bereich_fragments, frEinstellungen, "einstellungen");
+                                tvUeberschrift.setText("Einstellungen");
                                 break;
                         } // switch
 
@@ -259,6 +260,15 @@ public class MainActivity extends AppCompatActivity {
                         return false;
                     }
                 });
+
+        ImageButton imgbtnMenueleiste = findViewById(R.id.imgbtnMenueleiste);
+        imgbtnMenueleiste.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mDrawerLayout.openDrawer(GravityCompat.START);
+            }
+        });
+
     } // Methode menueLeiste
 
     private void login() {
@@ -454,6 +464,8 @@ public class MainActivity extends AppCompatActivity {
         frVertretungsplan.setVertretungsElemente(kurs, stunde, vertreter, fach, raum, info);
 
         fragmentTransaction.replace(R.id.bereich_fragments, frVertretungsplan, "vertretungsplan");
+        TextView tvUeberschrift = findViewById(R.id.tvUeberschrift);
+        tvUeberschrift.setText("Vertretungsplan");
         fragmentTransaction.addToBackStack(null);
         fragmentManager.executePendingTransactions();
         fragmentTransaction.commit();
@@ -487,7 +499,17 @@ public class MainActivity extends AppCompatActivity {
     } // Methode vertretungsplanAktualisieren
 
     public void oeffneVertretungInfos(){
-        setContentView(R.layout.activity_main);
-    }
+        // Fragment Vertretungsplan erzeugen
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        FrVertretungInfos frVertretungInfos = new FrVertretungInfos();
+
+        fragmentTransaction.replace(R.id.bereich_fragments, frVertretungInfos, "vertretungInfos");
+        TextView tvUeberschrift = findViewById(R.id.tvUeberschrift);
+        tvUeberschrift.setText("Vertretungs Informationen");
+        fragmentTransaction.addToBackStack(null);
+        fragmentManager.executePendingTransactions();
+        fragmentTransaction.commit();
+    } // Methode oeffneVertretungInfos
 
 } // Klasse MainActivity

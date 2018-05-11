@@ -1,5 +1,6 @@
 package com.developer.workoutpro.itruns.gsnapp;
 
+import android.content.Context;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -16,10 +17,10 @@ public class RecyclerViewVertretungsplan extends RecyclerView.Adapter<RecyclerVi
     private ArrayList<String> fach;
     private ArrayList<String> raum;
     private ArrayList<String> info;
-
     private MainActivity mainActivity;
 
-    public RecyclerViewVertretungsplan(ArrayList<String> kurs, ArrayList<String> stunde, ArrayList<String> vertreter, ArrayList<String> fach, ArrayList<String> raum, ArrayList<String> info) {
+    public RecyclerViewVertretungsplan(Context context, ArrayList<String> kurs, ArrayList<String> stunde, ArrayList<String> vertreter, ArrayList<String> fach, ArrayList<String> raum, ArrayList<String> info) {
+        mainActivity = (MainActivity) context;
         this.kurs = kurs;
         this.stunde = stunde;
         this.vertreter = vertreter;
@@ -55,7 +56,7 @@ public class RecyclerViewVertretungsplan extends RecyclerView.Adapter<RecyclerVi
         viewHolder.tvStunde.setText(stunde.get(i));
         viewHolder.tvVertreter.setText(vertreter.get(i));
         viewHolder.tvRaum.setText(raum.get(i));
-        viewHolder.tvInfo.setText(info.get(i));
+        //viewHolder.tvInfo.setText(info.get(i));
         viewHolder.clVertretungsplanRow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
