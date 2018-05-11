@@ -9,18 +9,18 @@ import java.io.IOException;
 public class Website extends AsyncTask<Void, Void, String>  {
 
     // Attribute für die Daten
-    private boolean erstesLogin;
     private String benutzername;
     private String passwort;
 
     // Attribute für die Website
     private String loginURL;
     private String heuteURL;
-    private String htmlText;
+    private String morgenURL;
+    private String htmlTextHeute;
+    private String htmlTextMorgen;
     private Document doc;
 
-    public Website(boolean erstesLogin, String benutzername, String passwort) {
-        this.erstesLogin = erstesLogin;
+    public Website(String benutzername, String passwort) {
         this.benutzername = benutzername;
         this.passwort = passwort;
     } // Konstruktor Website
@@ -28,9 +28,11 @@ public class Website extends AsyncTask<Void, Void, String>  {
     @Override
     protected void onPreExecute() {
         loginURL = "https://bid.lspb.de/signin/";
-        heuteURL = "https://bid.lspb.de/explorer/ViewDocument/1306999/";
-        htmlText = "";
-    }
+        heuteURL = "https://bid.lspb.de/explorer/ViewDocument/1306997/";
+        morgenURL = "https://bid.lspb.de/explorer/ViewDocument/1306999/";
+        htmlTextHeute = "";
+        htmlTextMorgen = "";
+    } // Methode onPreExecute
 
     @Override
     protected String doInBackground(Void... voids) {
@@ -51,22 +53,31 @@ public class Website extends AsyncTask<Void, Void, String>  {
                     .cookies(loginForm.cookies())
                     .post();
 
-            htmlText = doc.outerHtml();
+            htmlTextHeute = doc.outerHtml();
+
+            doc = Jsoup.connect(morgenURL)
+                    .cookies(loginForm.cookies())
+                    .post();
+
+            htmlTextMorgen = doc.outerHtml();
 
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        return htmlText;
+        return "";
     } // Methode doInBackground
 
     @Override
     protected void onPostExecute(String string) {
-        htmlText = string;
-    }
+    } // Methode onPostExecute
 
-    public String getLoggedIn() {
-        return htmlText;
-    } // Methode getLoggedIn
+    public String getVertretungHeute() {
+        return htmlTextHeute;
+    } // Methode getVertretungHeute
+
+    public String getVertretungMorgen() {
+        return htmlTextMorgen;
+    } // Methode getVertretungMorgen
 
 } // Klasse Website

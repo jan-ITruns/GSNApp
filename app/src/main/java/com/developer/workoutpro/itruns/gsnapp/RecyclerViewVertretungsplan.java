@@ -36,8 +36,6 @@ public class RecyclerViewVertretungsplan extends RecyclerView.Adapter<RecyclerVi
         return new ViewHolder(view);
     } // Konstruktor RecyclerViewVertretungsplan
 
-
-
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int i) {
         if (kurs.get(i).length() > 0) {
