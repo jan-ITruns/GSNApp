@@ -14,7 +14,7 @@ public class FrEinstellungen extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fr_einstellungen_schüler, container, false);
+        view = inflater.inflate(R.layout.fr_einstellungen_schueler, container, false);
 
         return view;
     } // Methode onCreateView
