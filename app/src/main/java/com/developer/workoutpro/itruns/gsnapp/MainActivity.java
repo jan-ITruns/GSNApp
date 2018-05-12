@@ -200,39 +200,20 @@ public class MainActivity extends AppCompatActivity {
 
         // Programm starten
         if (erstesLogin) {
-            setContentView(R.layout.activity_login);
+            setContentView(R.layout.activity_main);
+            loginOeffnen();
 
             // Deklaration der Views
             final Button btnAnmelden = findViewById(R.id.btnAnmelden);
 
-            btnAnmelden.setOnClickListener(new View.OnClickListener() {
+            /*btnAnmelden.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     login();
                     btnAnmelden.setFocusable(false);
                 }
-            });
+            });*/
 
-            // Jahrgangsstufe
-            Spinner spinnerJahrgangsstufe = findViewById(R.id.spinnerJahrgangsstufe);
-            spinnerJahrgangsstufe.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                            switch(position) {
-                                case 0: jahrgangsstufe = 5; break;
-                                case 1: jahrgangsstufe = 6; break;
-                                case 2: jahrgangsstufe = 7; break;
-                                case 3: jahrgangsstufe = 8; break;
-                                case 4: jahrgangsstufe = 9; break;
-                                case 5: jahrgangsstufe = 10; break;
-                                case 6: jahrgangsstufe = 11; break;
-                                case 7: jahrgangsstufe = 12; break;
-                            } // switch
-                        }
-
-                        public void onNothingSelected(AdapterView<?> parent) {
-                            jahrgangsstufe = 5;
-                        }
-                    });
         } else {
             setContentView(R.layout.activity_main);
             vertretungenSortieren();
@@ -432,7 +413,7 @@ public class MainActivity extends AppCompatActivity {
                 });
     } // Methode menueLeiste
 
-    private void login() {
+    public void login() {
         // Deklaration der Views
         final EditText etBenutzername = findViewById(R.id.etBenutzername);
         final EditText etPasswort = findViewById(R.id.etPasswort);
@@ -514,39 +495,7 @@ public class MainActivity extends AppCompatActivity {
         passwort = "";
         jahrgangsstufe = 5;
         erstesLogin = true;
-        setContentView(R.layout.activity_login);
-
-        // Deklaration der Views
-            final Button btnAnmelden = findViewById(R.id.btnAnmelden);
-
-            btnAnmelden.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    login();
-                    btnAnmelden.setFocusable(false);
-                }
-            });
-
-        // Jahrgangsstufe
-        Spinner spinnerJahrgangsstufe = findViewById(R.id.spinnerJahrgangsstufe);
-        spinnerJahrgangsstufe.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                switch(position) {
-                    case 0: jahrgangsstufe = 5; break;
-                    case 1: jahrgangsstufe = 6; break;
-                    case 2: jahrgangsstufe = 7; break;
-                    case 3: jahrgangsstufe = 8; break;
-                    case 4: jahrgangsstufe = 9; break;
-                    case 5: jahrgangsstufe = 10; break;
-                    case 6: jahrgangsstufe = 11; break;
-                    case 7: jahrgangsstufe = 12; break;
-                } // switch
-            }
-
-            public void onNothingSelected(AdapterView<?> parent) {
-                jahrgangsstufe = 5;
-            }
-        });
+        loginOeffnen();
     }
 
     private void getStand() {
@@ -817,6 +766,29 @@ public class MainActivity extends AppCompatActivity {
         } // while
         vertretungen = vertretungen.substring(1);
     } // Methode enferne1Klammern
+
+    public void loginOeffnen(){
+        //Fragment Login erzeugen
+        FragmentManager fragmentManager= getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction= fragmentManager.beginTransaction();
+        FrLogin frLogin = new FrLogin();
+
+        fragmentTransaction.replace(R.id.bereich_fragments, frLogin, "login");
+
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+
+        // Deklaration der Views
+        final Button btnAnmelden = findViewById(R.id.btnAnmelden);
+
+        /*btnAnmelden.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                login();
+                btnAnmelden.setFocusable(false);
+            }
+        });*/
+    }
 
     public void vertretungsplanOeffnen() {
         // Fragment Vertretungsplan erzeugen

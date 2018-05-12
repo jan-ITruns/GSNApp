@@ -10,7 +10,8 @@
         android:id="@+id/etBenutzername"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:layout_marginTop="200dp"
+        android:layout_marginBottom="300dp"
+        android:layout_marginTop="150dp"
         android:background="@color/schwarzTransparent"
         android:hint="Benutzername"
         android:inputType="textPersonName"
@@ -19,6 +20,7 @@
         android:textColor="@color/weiss"
         android:textColorHint="@color/weissTransparent"
         android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -45,38 +47,27 @@
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="145dp"
         android:text="Anmelden"
         android:textAllCaps="false"
         android:textColor="@color/schwarz"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerJahrgangsstufe" />
+        app:layout_constraintTop_toBottomOf="@+id/etPasswort" />
 
     <ProgressBar
         android:id="@+id/progressBar"
         style="?android:attr/progressBarStyle"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
         android:indeterminateBehavior="repeat"
         android:indeterminateTint="@color/schwarz"
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnAnmelden" />
-
-    <Spinner
-        android:id="@+id/spinnerJahrgangsstufe"
-        android:layout_width="300dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="150dp"
-        android:dropDownWidth="260dp"
-        android:entries="@array/jahrgangsstufen"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etPasswort" />
 
     <ImageButton
         android:id="@+id/imgbtnSchuelerversion"
@@ -86,98 +77,40 @@
         app:layout_constraintBottom_toTopOf="@+id/etBenutzername"
         app:layout_constraintEnd_toEndOf="@+id/etBenutzername"
         app:layout_constraintStart_toStartOf="@+id/etBenutzername"
-        app:srcCompat="@drawable/ic_student_24dp" />
+        app:srcCompat="@drawable/ic_teacher_24dp" />
 
     <TextView
-        android:id="@+id/tvSchuelerversion"
+        android:id="@+id/tvLehrerversion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:text="Schüler-Version"
+        android:text="Lehrer-Version"
         app:layout_constraintBottom_toTopOf="@+id/imgbtnSchuelerversion"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
-        android:id="@+id/btnJgs5"
-        android:layout_width="50dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="10dp"
-        android:text="5"
-        app:layout_constraintStart_toStartOf="@+id/etPasswort"
-        app:layout_constraintTop_toBottomOf="@+id/tvJahrgangsstufe" />
-
-    <Button
-        android:id="@+id/btnJgs6"
-        android:layout_width="50dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="20dp"
-        android:text="6"
-        app:layout_constraintStart_toEndOf="@+id/btnJgs5"
-        app:layout_constraintTop_toTopOf="@+id/btnJgs5" />
-
-    <Button
-        android:id="@+id/btnJgs7"
-        android:layout_width="50dp"
-        android:layout_height="40dp"
-        android:layout_marginEnd="20dp"
-        android:text="7"
-        app:layout_constraintEnd_toStartOf="@+id/btnJgs8"
-        app:layout_constraintTop_toTopOf="@+id/btnJgs6" />
-
-    <Button
-        android:id="@+id/btnJgs8"
-        android:layout_width="50dp"
-        android:layout_height="40dp"
-        android:layout_marginEnd="20dp"
-        android:text="8"
-        app:layout_constraintEnd_toEndOf="@+id/etPasswort"
-        app:layout_constraintTop_toTopOf="@+id/btnJgs7" />
-
-    <Button
-        android:id="@+id/btnJgs9"
-        android:layout_width="50dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="5dp"
-        android:text="9"
-        app:layout_constraintStart_toStartOf="@+id/btnJgs5"
-        app:layout_constraintTop_toBottomOf="@+id/btnJgs5" />
-
-    <Button
-        android:id="@+id/btnJgs10"
-        android:layout_width="50dp"
-        android:layout_height="40dp"
-        android:text="10"
-        app:layout_constraintStart_toStartOf="@+id/btnJgs6"
-        app:layout_constraintTop_toTopOf="@+id/btnJgs9" />
-
-    <Button
-        android:id="@+id/btnJgs11"
-        android:layout_width="50dp"
-        android:layout_height="40dp"
-        android:text="11"
-        app:layout_constraintStart_toStartOf="@+id/btnJgs7"
-        app:layout_constraintTop_toTopOf="@+id/btnJgs10" />
-
-    <Button
-        android:id="@+id/btnJgs12"
-        android:layout_width="50dp"
-        android:layout_height="40dp"
-        android:text="12"
-        app:layout_constraintStart_toStartOf="@+id/btnJgs8"
-        app:layout_constraintTop_toTopOf="@+id/btnJgs11" />
-
     <TextView
-        android:id="@+id/tvJahrgangsstufe"
+        android:id="@+id/tvLehrerkuerzel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="20dp"
-        android:text="Jahrgangsstufe auswählen"
+        android:text="Lehrerkürzel eingeben"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etPasswort" />
+
+    <EditText
+        android:id="@+id/etLehrerkuerzel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="@+id/tvLehrerkuerzel"
+        app:layout_constraintStart_toStartOf="@+id/tvLehrerkuerzel"
+        app:layout_constraintTop_toBottomOf="@+id/tvLehrerkuerzel" />
 
 </android.support.constraint.ConstraintLayout>
