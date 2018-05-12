@@ -10,12 +10,15 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Layout;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.google.gson.Gson;
@@ -29,7 +32,13 @@ public class MainActivity extends AppCompatActivity {
     public static DrawerLayout mDrawerLayout;
 
     // Attribute für die Einstellungen
-    private boolean erstesLogin;
+    public boolean erstesLogin;
+
+    //Attribute für die Benachrichtigungseinstellungen
+    public boolean benachrichtigungVertretung;
+    public boolean benachrichtigungAktuelles;
+    public boolean benachrichtigungTermine;
+    public boolean benachrichtigungBewertung;
 
     // Attribute für die Anmeldedaten
     private String benutzername;
@@ -159,6 +168,23 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences infoMorgenPref = getSharedPreferences("infoMorgen", 0);
         String infoMorgenJson = infoMorgenPref.getString("infoMorgen", "");
         infoMorgen = gson.fromJson(infoMorgenJson, type);
+
+        // Benachrichtigungseinstellungen laden
+        //Vertretung
+        SharedPreferences benachrichtigungVertretungPref = getSharedPreferences("benachrichtigungVertretung", 0);
+        benachrichtigungVertretung = benachrichtigungVertretungPref.getBoolean("benachrichtigungVertretung", true);
+
+        //Aktuelles
+        SharedPreferences benachrichtigungAktuellesPref = getSharedPreferences("benachrichtigungAktuelles", 0);
+        benachrichtigungAktuelles = benachrichtigungAktuellesPref.getBoolean("benachrichtigungAktuelles", true);
+
+        //Termine
+        SharedPreferences benachrichtigungTerminePref = getSharedPreferences("benachrichtigungTermine", 0);
+        benachrichtigungTermine = benachrichtigungTerminePref.getBoolean("benachrichtigungTermine", true);
+
+        //Bewertung
+        SharedPreferences benachrichtigungBewertungPref = getSharedPreferences("benachrichtigungBewertung", 0);
+        benachrichtigungBewertung = benachrichtigungBewertungPref.getBoolean("benachrichtigungBewertung", true);
 
         // Programm starten
         if (erstesLogin) {
@@ -291,6 +317,32 @@ public class MainActivity extends AppCompatActivity {
         String infoMorgenJson = gson.toJson(infoMorgen);
         editorInfoMorgen.putString("infoMorgen", infoMorgenJson);
         editorInfoMorgen.apply();
+
+        //Benachrichtigungseinstellungen speichern
+        //Vertretung
+        SharedPreferences benachrichtigungVertretungPref = getSharedPreferences("benachrichtigungVertretung", 0);
+        SharedPreferences.Editor editorBenachrichtigungVertretung = benachrichtigungVertretungPref.edit();
+        editorBenachrichtigungVertretung.putBoolean("benachrichtigungVertretung", benachrichtigungVertretung);
+        editorBenachrichtigungVertretung.apply();
+
+        //Aktuelles
+        SharedPreferences benachrichtigungAktuellesPref = getSharedPreferences("benachrichtigungAktuelles", 0);
+        SharedPreferences.Editor editorBenachrichtigungAktuelles = benachrichtigungAktuellesPref.edit();
+        editorBenachrichtigungAktuelles.putBoolean("benachrichtigungAktuelles", benachrichtigungAktuelles);
+        editorBenachrichtigungAktuelles.apply();
+
+        //Termine
+        SharedPreferences benachrichtigungTerminePref = getSharedPreferences("benachrichtigungTermine", 0);
+        SharedPreferences.Editor editorBenachrichtigungTermine = benachrichtigungTerminePref.edit();
+        editorBenachrichtigungTermine.putBoolean("benachrichtigungTermine", benachrichtigungTermine);
+        editorBenachrichtigungTermine.apply();
+
+        //Bewertung
+        SharedPreferences benachrichtigungBewertungPref = getSharedPreferences("benachrichtigungBewertung", 0);
+        SharedPreferences.Editor editorBenachrichtigungBewertung = benachrichtigungBewertungPref.edit();
+        editorBenachrichtigungBewertung.putBoolean("benachrichtigungBewertung", benachrichtigungBewertung);
+        editorBenachrichtigungBewertung.apply();
+
     } // Methode sharedPreferencesSpeichern
 
     public void menueleiste() {
@@ -419,6 +471,63 @@ public class MainActivity extends AppCompatActivity {
 
         } // if
     } // Methode login
+
+    public void logout(View view){
+        erstesLogin = true;
+        setContentView(R.layout.activity_login);
+    }
+
+    public void benachrichtigungen(View view){
+        Switch switchVertretung = findViewById(R.id.switchBenachrichtigungenVertretung);
+        Switch switchAktuelles = findViewById(R.id.switchBenachrichtigungAktuelles);
+        Switch switchTermine = findViewById(R.id.switchBenachrichtigungTermine);
+        Switch switchBewertung = findViewById(R.id.switchBenachrichtigungBewertung);
+
+        switchVertretung.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    Toast.makeText(MainActivity.this, "Benachrichtigungen über Vertretungen erhalten.", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    Toast.makeText(MainActivity.this, "Keine Benachrichtigungen über Vertretungen erhalten.", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+        switchAktuelles.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    Toast.makeText(MainActivity.this, "Benachrichtigungen über Aktuelles erhalten.", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    Toast.makeText(MainActivity.this, "Keine Benachrichtigungen über Aktuelles erhalten.", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+        switchTermine.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    Toast.makeText(MainActivity.this, "Benachrichtigungen über Termine erhalten.", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    Toast.makeText(MainActivity.this, "Keine Benachrichtigungen über Termine erhalten.", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+        switchBewertung.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    Toast.makeText(MainActivity.this, "Benachrichtigungen über Bewertungen erhalten.", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    Toast.makeText(MainActivity.this, "Keine Benachrichtigungen über Bewertungen erhalten.", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+    }
 
     private void getDatum(int tag) {
         String hilfsDatum;
