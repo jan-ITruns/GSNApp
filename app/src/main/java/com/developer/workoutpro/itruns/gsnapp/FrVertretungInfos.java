@@ -2,6 +2,8 @@ package com.developer.workoutpro.itruns.gsnapp;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.widget.Toolbar;
@@ -18,13 +20,10 @@ public class FrVertretungInfos extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fr_vertretung_infos, container, false);
+        view = inflater.inflate(R.layout.fr_vertretung_infos_test, container, false);
         mainActivity = (MainActivity) getActivity();
 
         toolbarEinrichten();
-
-        ImageView imgvGSN = view.findViewById(R.id.imgvGSN);
-        imgvGSN.setImageResource(R.drawable.gsn_klein);
 
         return view;
     } // Methode onCreate View

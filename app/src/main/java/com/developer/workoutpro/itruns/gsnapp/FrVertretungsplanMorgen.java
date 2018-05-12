@@ -16,7 +16,6 @@ import java.util.ArrayList;
 public class FrVertretungsplanMorgen extends Fragment {
 
     private View view;
-    public SwipeRefreshLayout swipeRefreshLayout;
     private MainActivity mainActivity;
 
     private ArrayList<String> kurs;
@@ -58,9 +57,9 @@ public class FrVertretungsplanMorgen extends Fragment {
     } // Methode recyclerViewVorbereiten
 
     private void swipeToRefresh() {
-        swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout2);
+        final SwipeRefreshLayout swipeRefreshLayout2 = view.findViewById(R.id.swipeRefreshLayout2);
 
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        swipeRefreshLayout2.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 mainActivity.vertretungsplanAktualisieren(view);
@@ -69,14 +68,14 @@ public class FrVertretungsplanMorgen extends Fragment {
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        swipeRefreshLayout.setRefreshing(false);
+                        swipeRefreshLayout2.setRefreshing(false);
                     }
                 }, 10000);
             }
 
         });
 
-        swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent, R.color.colorPrimary);
+        swipeRefreshLayout2.setColorSchemeResources(R.color.colorAccent, R.color.colorPrimary);
     } // Methode swipeToRefresh
 
 } // Klasse FrVertretungsplanMorgen
