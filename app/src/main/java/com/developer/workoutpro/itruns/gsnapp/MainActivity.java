@@ -16,6 +16,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -394,6 +396,9 @@ public class MainActivity extends AppCompatActivity {
         mDrawerLayout.setScrimColor(Color.parseColor("#33000000"));
 
         NavigationView navigationView = findViewById(R.id.nav_view);
+
+        LinearLayout linearLayout = navigationView.getHeaderView(0).findViewById(R.id.layoutNavHeader);
+        linearLayout.setBackgroundResource(R.drawable.gsn_klein);
 
         navigationView.getMenu().getItem(0).setChecked(true);
 
