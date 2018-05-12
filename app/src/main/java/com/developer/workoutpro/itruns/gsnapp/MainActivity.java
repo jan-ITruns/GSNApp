@@ -1,12 +1,14 @@
 package com.developer.workoutpro.itruns.gsnapp;
 
 import android.content.Intent;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Handler;
 import android.support.design.widget.NavigationView;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -29,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
 
     // Attribute für die Einstellungen
     public boolean erstesLogin;
+    private View view;
+    private ViewPager viewPager;
 
     //Attribute für die Benachrichtigungseinstellungen
     public boolean benachrichtigungVertretung;
@@ -135,7 +139,7 @@ public class MainActivity extends AppCompatActivity {
         passwort = passwortPref.getString("passwort", "");
 
         SharedPreferences jahrgangsstufePref = getSharedPreferences("jahrgangsstufe", 0);
-        jahrgangsstufe = jahrgangsstufePref.getInt("jahrgangsstufe", 5);
+        jahrgangsstufe = jahrgangsstufePref.getInt("jahrgangsstufe", 0);
 
         // Vertretungselemente laden
         Gson gson = new Gson();
@@ -226,20 +230,8 @@ public class MainActivity extends AppCompatActivity {
 
         // Programm starten
         if (erstesLogin) {
-            setContentView(R.layout.activity_main);
+            setContentView(R.layout.activity_login);
             loginOeffnen();
-
-            // Deklaration der Views
-            final Button btnAnmelden = findViewById(R.id.btnAnmelden);
-
-            /*btnAnmelden.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    login();
-                    btnAnmelden.setFocusable(false);
-                }
-            });*/
-
         } else {
             setContentView(R.layout.activity_main);
             vertretungenSortieren();
@@ -653,7 +645,7 @@ public class MainActivity extends AppCompatActivity {
     public void logout(View view){
         benutzername = "";
         passwort = "";
-        jahrgangsstufe = 5;
+        jahrgangsstufe = 0;
         erstesLogin = true;
         loginOeffnen();
     }
@@ -1009,26 +1001,39 @@ public class MainActivity extends AppCompatActivity {
 
     public void loginOeffnen(){
         //Fragment Login erzeugen
+
+        setContentView(R.layout.activity_login);
+
         FragmentManager fragmentManager= getSupportFragmentManager();
         FragmentTransaction fragmentTransaction= fragmentManager.beginTransaction();
-        FrLogin frLogin = new FrLogin();
 
-        fragmentTransaction.replace(R.id.bereich_fragments, frLogin, "login");
+        /*FrLogin frLogin = new FrLogin();
+
+        fragmentTransaction.replace(R.id.bereich_fragments, frLogin, "login");*/
 
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
 
-        // Deklaration der Views
-        final Button btnAnmelden = findViewById(R.id.btnAnmelden);
+        viewPager = findViewById(R.id.containerLogin);
+        setupViewPager(viewPager);
 
-        /*btnAnmelden.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                login();
-                btnAnmelden.setFocusable(false);
-            }
-        });*/
+        TabLayout tabLayout = findViewById(R.id.tabsLogin);
+        tabLayout.setupWithViewPager(viewPager);
     }
+
+    private void setupViewPager(ViewPager pViewPager) {
+
+        TabViewLogin adapter = new TabViewLogin(getSupportFragmentManager());
+        // Schueler-Login hinzufügen
+        FrLoginSchueler frLoginSchueler = new FrLoginSchueler();
+        adapter.addFragment(frLoginSchueler, "Schüler");
+
+        // Lehrer-Login hinzufügen
+        FrLoginLehrer frLoginLehrer = new FrLoginLehrer();
+        adapter.addFragment(frLoginLehrer, "Lehrer");
+
+        pViewPager.setAdapter(adapter);
+    } // Methode setupViewPager
 
     public void vertretungsplanOeffnen() {
         // Fragment Vertretungsplan erzeugen

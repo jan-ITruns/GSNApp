@@ -18,7 +18,7 @@ public class FrLogin extends Fragment{
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fr_login, container, false);
+        view = inflater.inflate(R.layout.activity_login, container, false);
         mainActivity = (MainActivity) getActivity();
 
         viewPager = view.findViewById(R.id.containerLogin);
