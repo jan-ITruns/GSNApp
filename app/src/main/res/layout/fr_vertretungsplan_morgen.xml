@@ -96,12 +96,9 @@
             android:id="@+id/imageView"
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="5dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvKurs"
             app:srcCompat="@color/colorPrimary" />
 
     </android.support.constraint.ConstraintLayout>
