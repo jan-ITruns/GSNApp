@@ -169,11 +169,10 @@
                     android:layout_marginTop="50dp"
                     android:checked="true"
                     android:splitTrack="false"
-                    android:text="Benachrichtigungen über Vertretung"
+                    android:text="Benachrichtigungen über Vertretungen"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:checked="true" />
+                    app:layout_constraintTop_toTopOf="parent"/>
 
                 <Switch
                     android:id="@+id/switchBenachrichtigungAktuelles"
@@ -183,11 +182,10 @@
                     android:layout_marginStart="15dp"
                     android:layout_marginTop="10dp"
                     android:checked="true"
-                    android:text="Aktuelle Benachrichtigungen erhalten"
+                    android:text="Benachrichtigungen über Aktuelles"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/switchBenachrichtigungenVertretung"
-                    tools:checked="true" />
+                    app:layout_constraintTop_toBottomOf="@+id/switchBenachrichtigungenVertretung"/>
 
                 <Switch
                     android:id="@+id/switchBenachrichtigungTermine"
@@ -197,11 +195,10 @@
                     android:layout_marginStart="15dp"
                     android:layout_marginTop="10dp"
                     android:checked="true"
-                    android:text="Terminbenachrichtigungen erhalten"
+                    android:text="Terminbenachrichtigungen"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/switchBenachrichtigungAktuelles"
-                    tools:checked="true" />
+                    app:layout_constraintTop_toBottomOf="@+id/switchBenachrichtigungAktuelles"/>
 
                 <Switch
                     android:id="@+id/switchBenachrichtigungBewertung"
@@ -211,11 +208,10 @@
                     android:layout_marginStart="15dp"
                     android:layout_marginTop="10dp"
                     android:checked="true"
-                    android:text="Bewertungsbenachrichtigungen erhalten"
+                    android:text="Bewertungsbenachrichtigungen"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/switchBenachrichtigungTermine"
-                    tools:checked="true" />
+                    app:layout_constraintTop_toBottomOf="@+id/switchBenachrichtigungTermine"/>
 
             </android.support.constraint.ConstraintLayout>
 

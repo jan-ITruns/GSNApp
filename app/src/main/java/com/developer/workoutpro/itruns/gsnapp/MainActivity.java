@@ -36,13 +36,14 @@ public class MainActivity extends AppCompatActivity {
     public boolean benachrichtigungBewertung;
 
     // Attribute für die Anmeldedaten
-    private String benutzername;
-    private String passwort;
+    public String benutzername;
+    public String passwort;
 
     // Attribute für die Website
     private Website website;
 
     // Attribute für den Vertretungsplan
+    private boolean aktualisierungLaeuft = false;
     private String teil1 [];
     private String teil2 [];
     private String element [];
@@ -658,56 +659,60 @@ public class MainActivity extends AppCompatActivity {
     } // Methode vertretungsplanAusgeben
 
     public void vertretungsplanAktualisieren(View v) {
-        website = new Website(benutzername, passwort);
-        website.execute();
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                htmlTextHeute = website.getVertretungHeute();
-                htmlTextMorgen = website.getVertretungMorgen();
+        if (! aktualisierungLaeuft) {
+            aktualisierungLaeuft = true;
+            website = new Website(benutzername, passwort);
+            website.execute();
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    htmlTextHeute = website.getVertretungHeute();
+                    htmlTextMorgen = website.getVertretungMorgen();
 
-                if (! htmlTextHeute.contains("mon_title")) {
-                    Toast.makeText(MainActivity.this, "Ein unerwarteter Fehler ist aufgetreten.", Toast.LENGTH_LONG).show();
-                    return;
-                } // if
+                    if (!htmlTextHeute.contains("mon_title")) {
+                        Toast.makeText(MainActivity.this, "Ein unerwarteter Fehler ist aufgetreten.", Toast.LENGTH_LONG).show();
+                        return;
+                    } // if
 
-                if (! htmlTextMorgen.contains("mon_title")) {
-                    Toast.makeText(MainActivity.this, "Ein unerwarteter Fehler ist aufgetreten.", Toast.LENGTH_LONG).show();
-                    return;
-                } // if
+                    if (!htmlTextMorgen.contains("mon_title")) {
+                        Toast.makeText(MainActivity.this, "Ein unerwarteter Fehler ist aufgetreten.", Toast.LENGTH_LONG).show();
+                        return;
+                    } // if
 
-                ArrayList<String> kursHeuteKopie, stundeHeuteKopie, vertreterHeuteKopie, fachHeuteKopie, raumHeuteKopie, infoHeuteKopie;
-                ArrayList<String> kursMorgenKopie, stundeMorgenKopie, vertreterMorgenKopie, fachMorgenKopie, raumMorgenKopie, infoMorgenKopie;
+                    ArrayList<String> kursHeuteKopie, stundeHeuteKopie, vertreterHeuteKopie, fachHeuteKopie, raumHeuteKopie, infoHeuteKopie;
+                    ArrayList<String> kursMorgenKopie, stundeMorgenKopie, vertreterMorgenKopie, fachMorgenKopie, raumMorgenKopie, infoMorgenKopie;
 
-                kursHeuteKopie = kursHeute;
-                stundeHeuteKopie = stundeHeute;
-                vertreterHeuteKopie = vertreterHeute;
-                fachHeuteKopie = fachHeute;
-                raumHeuteKopie = raumHeute;
-                infoHeuteKopie = infoHeute;
+                    kursHeuteKopie = kursHeute;
+                    stundeHeuteKopie = stundeHeute;
+                    vertreterHeuteKopie = vertreterHeute;
+                    fachHeuteKopie = fachHeute;
+                    raumHeuteKopie = raumHeute;
+                    infoHeuteKopie = infoHeute;
 
-                kursMorgenKopie = kursMorgen;
-                stundeMorgenKopie = stundeMorgen;
-                vertreterMorgenKopie = vertreterMorgen;
-                fachMorgenKopie = fachMorgen;
-                raumMorgenKopie = raumMorgen;
-                infoMorgenKopie = infoMorgen;
+                    kursMorgenKopie = kursMorgen;
+                    stundeMorgenKopie = stundeMorgen;
+                    vertreterMorgenKopie = vertreterMorgen;
+                    fachMorgenKopie = fachMorgen;
+                    raumMorgenKopie = raumMorgen;
+                    infoMorgenKopie = infoMorgen;
 
-                getStand();
-                getDatum(0);
-                getDatum(1);
-                getVertretungsstunde(0);
-                getVertretungsstunde(1);
+                    getStand();
+                    getDatum(0);
+                    getDatum(1);
+                    getVertretungsstunde(0);
+                    getVertretungsstunde(1);
 
-                // Überprüfen, ob es Änderungen gab
-                if ( !(kursHeuteKopie.equals(kursHeute) && stundeHeuteKopie.equals(stundeHeute) && vertreterHeuteKopie.equals(vertreterHeute) && fachHeuteKopie.equals(fachHeute) && raumHeuteKopie.equals(raumHeute) && infoHeuteKopie.equals(infoHeute)
-                        && kursMorgenKopie.equals(kursMorgen) && stundeMorgenKopie.equals(stundeMorgen) && vertreterMorgenKopie.equals(vertreterMorgen) && fachMorgenKopie.equals(fachMorgen) && raumMorgenKopie.equals(raumMorgen) && infoMorgenKopie.equals(infoMorgen))) {
-                    vertretungsplanOeffnen();
-                } // if
-                Toast.makeText(MainActivity.this, stand, Toast.LENGTH_LONG).show();
-            }
-        }, 10000);
+                    // Überprüfen, ob es Änderungen gab
+                    if (!(kursHeuteKopie.equals(kursHeute) && stundeHeuteKopie.equals(stundeHeute) && vertreterHeuteKopie.equals(vertreterHeute) && fachHeuteKopie.equals(fachHeute) && raumHeuteKopie.equals(raumHeute) && infoHeuteKopie.equals(infoHeute)
+                            && kursMorgenKopie.equals(kursMorgen) && stundeMorgenKopie.equals(stundeMorgen) && vertreterMorgenKopie.equals(vertreterMorgen) && fachMorgenKopie.equals(fachMorgen) && raumMorgenKopie.equals(raumMorgen) && infoMorgenKopie.equals(infoMorgen))) {
+                        vertretungsplanOeffnen();
+                    } // if
+                    Toast.makeText(MainActivity.this, stand, Toast.LENGTH_LONG).show();
+                    aktualisierungLaeuft = false;
+                }
+            }, 10000);
+        } // if
     } // Methode vertretungsplanAktualisieren
 
     public void oeffneVertretungInfos(){

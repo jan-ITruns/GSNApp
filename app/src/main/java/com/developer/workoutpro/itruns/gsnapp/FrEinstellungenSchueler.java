@@ -6,12 +6,14 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 public class FrEinstellungenSchueler extends Fragment {
 
@@ -25,10 +27,22 @@ public class FrEinstellungenSchueler extends Fragment {
         mainActivity = (MainActivity)getActivity();
         toolbarEinrichten();
 
+        aktuelleDaten();
+
         benachrichtigungen();
 
         return view;
     } // Methode onCreateView
+
+    private void aktuelleDaten() {
+        TextView tvAktuellerBenutzer = view.findViewById(R.id.tvAktuellerBenutzer);
+        TextView tvAktuellesPasswort = view.findViewById(R.id.tvAktuellesPasswort);
+        TextView tvAktuelleJahrgangsstufe = view.findViewById(R.id.tvAktuelleJahrgangsstufe);
+
+        tvAktuellerBenutzer.setText(mainActivity.benutzername);
+        tvAktuellesPasswort.setText(mainActivity.passwort);
+        tvAktuelleJahrgangsstufe.setText("EF");
+    } // Methode aktuelleDaten
 
     private void benachrichtigungen(){
         //Benachrichtigungseinstellugen swiches deklarieren
@@ -96,7 +110,7 @@ public class FrEinstellungenSchueler extends Fragment {
             }
         });
 
-    }
+    } // Methode benachrichtigungen
 
     private void toolbarEinrichten() {
         Toolbar toolbar = view.findViewById(R.id.toolbarEinstellungen);
