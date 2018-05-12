@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -36,14 +35,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:layout_gravity="bottom"
-                android:background="@drawable/text_hintergrund"/>
+                android:background="@drawable/text_hintergrund" />
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbarVertretungsplanInfo"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
         </android.support.design.widget.CollapsingToolbarLayout>
 
@@ -53,149 +52,202 @@
         android:id="@+id/scrollViewVertretungsplanInfo"
         android:layout_width="match_parent"
         android:layout_height="500dp"
+        android:background="@color/hintergrundDunkel"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <android.support.constraint.ConstraintLayout
+            android:id="@+id/constraintLayout1"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/tvKursLabel"
-                android:layout_width="70dp"
-                android:layout_height="20dp"
-                android:layout_marginStart="50dp"
-                android:layout_marginTop="50dp"
-                android:text="Kurs:"
-                android:textSize="14sp"
-                android:textStyle="bold"
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/constraintLayout2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"
+                android:background="@color/weiss"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/tvKurs"
-                android:layout_width="100dp"
-                android:layout_height="20dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="50dp"
-                android:text="10IFG3"
-                android:textSize="14sp"
-                app:layout_constraintStart_toEndOf="@+id/tvKursLabel"
-                app:layout_constraintTop_toTopOf="parent" />
+                <TextView
+                    android:id="@+id/tvUebersichtLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginTop="15dp"
+                    android:text="Übersicht"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/tvFachLabel"
-                android:layout_width="70dp"
-                android:layout_height="20dp"
-                android:layout_marginStart="50dp"
-                android:layout_marginTop="5dp"
-                android:text="Fach:"
-                android:textSize="14sp"
-                android:textStyle="bold"
+                <TextView
+                    android:id="@+id/tvKursLabel"
+                    android:layout_width="70dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginTop="50dp"
+                    android:text="Kurs:"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvKurs"
+                    android:layout_width="125dp"
+                    android:layout_height="20dp"
+                    android:layout_marginEnd="50dp"
+                    android:text="10IFG3"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/tvKursLabel" />
+
+                <TextView
+                    android:id="@+id/tvFachLabel"
+                    android:layout_width="70dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginTop="5dp"
+                    android:text="Fach:"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvKursLabel" />
+
+                <TextView
+                    android:id="@+id/tvFach"
+                    android:layout_width="125dp"
+                    android:layout_height="20dp"
+                    android:text="Informatik"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="@+id/tvKurs"
+                    app:layout_constraintTop_toTopOf="@+id/tvFachLabel" />
+
+                <TextView
+                    android:id="@+id/tvStundeLabel"
+                    android:layout_width="70dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginTop="5dp"
+                    android:text="Stunde:"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvFachLabel" />
+
+                <TextView
+                    android:id="@+id/tvStunde"
+                    android:layout_width="125dp"
+                    android:layout_height="20dp"
+                    android:text="3 - 4"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="@+id/tvFach"
+                    app:layout_constraintTop_toTopOf="@+id/tvStundeLabel" />
+
+                <TextView
+                    android:id="@+id/tvRaumLabel"
+                    android:layout_width="70dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginTop="5dp"
+                    android:text="Raum:"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvStundeLabel" />
+
+                <TextView
+                    android:id="@+id/tvRaum"
+                    android:layout_width="125dp"
+                    android:layout_height="20dp"
+                    android:text="C1.35"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="@+id/tvStunde"
+                    app:layout_constraintTop_toTopOf="@+id/tvRaumLabel" />
+
+                <TextView
+                    android:id="@+id/tvVertreterLabel"
+                    android:layout_width="70dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginTop="5dp"
+                    android:text="Vertreter:"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvRaumLabel" />
+
+                <TextView
+                    android:id="@+id/tvVertreter"
+                    android:layout_width="125dp"
+                    android:layout_height="20dp"
+                    android:text="TA"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="@+id/tvRaum"
+                    app:layout_constraintTop_toTopOf="@+id/tvVertreterLabel" />
+
+                <TextView
+                    android:id="@+id/tvVertreter2"
+                    android:layout_width="125dp"
+                    android:layout_height="20dp"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginTop="5dp"
+                    android:text="Gerhard Taake"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/tvRaum"
+                    app:layout_constraintTop_toBottomOf="@+id/tvVertreter" />
+
+            </android.support.constraint.ConstraintLayout>
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/constraintLayout3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"
+                android:background="@color/weiss"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvKursLabel" />
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
 
-            <TextView
-                android:id="@+id/tvFach"
-                android:layout_width="100dp"
-                android:layout_height="20dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="5dp"
-                android:text="Informatik"
-                android:textSize="14sp"
-                app:layout_constraintStart_toEndOf="@+id/tvFachLabel"
-                app:layout_constraintTop_toBottomOf="@+id/tvKurs" />
+                <TextView
+                    android:id="@+id/tvInfoLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginTop="15dp"
+                    android:text="Weitere Informationen"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/tvStundeLabel"
-                android:layout_width="70dp"
-                android:layout_height="20dp"
-                android:layout_marginStart="50dp"
-                android:layout_marginTop="5dp"
-                android:text="Stunde:"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvFachLabel" />
-
-            <TextView
-                android:id="@+id/tvStunde"
-                android:layout_width="100dp"
-                android:layout_height="20dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="5dp"
-                android:text="3 - 4"
-                android:textSize="14sp"
-                app:layout_constraintStart_toEndOf="@+id/tvStundeLabel"
-                app:layout_constraintTop_toBottomOf="@+id/tvFach" />
-
-            <TextView
-                android:id="@+id/tvRaumLabel"
-                android:layout_width="70dp"
-                android:layout_height="20dp"
-                android:layout_marginStart="50dp"
-                android:layout_marginTop="5dp"
-                android:text="Raum:"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvStundeLabel" />
-
-            <TextView
-                android:id="@+id/tvRaum"
-                android:layout_width="100dp"
-                android:layout_height="20dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="5dp"
-                android:text="C1.35"
-                android:textSize="14sp"
-                app:layout_constraintStart_toEndOf="@+id/tvRaumLabel"
-                app:layout_constraintTop_toBottomOf="@+id/tvStunde" />
-
-            <TextView
-                android:id="@+id/tvVertreterLabel"
-                android:layout_width="70dp"
-                android:layout_height="20dp"
-                android:layout_marginStart="50dp"
-                android:layout_marginTop="5dp"
-                android:text="Vertreter:"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvRaumLabel" />
-
-            <TextView
-                android:id="@+id/tvVertreter"
-                android:layout_width="100dp"
-                android:layout_height="20dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="5dp"
-                android:text="Herr Taake"
-                android:textSize="14sp"
-                app:layout_constraintStart_toEndOf="@+id/tvVertreterLabel"
-                app:layout_constraintTop_toBottomOf="@+id/tvRaum" />
-
-            <TextView
-                android:id="@+id/tvInfoLabel"
-                android:layout_width="70dp"
-                android:layout_height="20dp"
-                android:layout_marginStart="50dp"
-                android:layout_marginTop="5dp"
-                android:text="Info:"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvVertreterLabel" />
-
-            <TextView
-                android:id="@+id/tvInfo"
-                android:layout_width="200dp"
-                android:layout_height="100dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="5dp"
-                android:text="entfällt"
-                android:textSize="14sp"
-                app:layout_constraintStart_toEndOf="@+id/tvInfoLabel"
-                app:layout_constraintTop_toBottomOf="@+id/tvVertreter" />
+                <TextView
+                    android:id="@+id/tvInfo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginEnd="50dp"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginTop="15dp"
+                    android:text="entfällt"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvInfoLabel" />
+            </android.support.constraint.ConstraintLayout>
 
         </android.support.constraint.ConstraintLayout>
 
@@ -211,6 +263,6 @@
         app:backgroundTint="#279AF1"
         app:fabSize="normal"
         app:layout_anchor="@+id/appBarLayout"
-        app:layout_anchorGravity="bottom|right|end"/>
+        app:layout_anchorGravity="bottom|right|end" />
 
 </android.support.design.widget.CoordinatorLayout>

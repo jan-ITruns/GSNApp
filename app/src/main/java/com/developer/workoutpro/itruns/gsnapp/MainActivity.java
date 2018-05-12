@@ -423,7 +423,7 @@ public class MainActivity extends AppCompatActivity {
         linearLayout.setBackgroundResource(R.drawable.gsn_klein);
 
         ImageView imgv = navigationView.getHeaderView(0).findViewById(R.id.imgvBenutzerbild);
-        imgv.setImageResource(R.drawable.ic_menu_camera);
+        imgv.setImageResource(R.drawable.ic_teacher_24dp);
 
         TextView tvBenutzername = navigationView.getHeaderView(0).findViewById(R.id.tvBenutzername);
         tvBenutzername.setText(benutzername);
