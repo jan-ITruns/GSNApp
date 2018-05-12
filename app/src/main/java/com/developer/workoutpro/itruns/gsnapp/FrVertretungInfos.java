@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 public class FrVertretungInfos extends Fragment {
 
@@ -21,6 +22,9 @@ public class FrVertretungInfos extends Fragment {
         mainActivity = (MainActivity) getActivity();
 
         toolbarEinrichten();
+
+        ImageView imgvGSN = view.findViewById(R.id.imgvGSN);
+        imgvGSN.setImageResource(R.drawable.gsn_klein);
 
         return view;
     } // Methode onCreate View
