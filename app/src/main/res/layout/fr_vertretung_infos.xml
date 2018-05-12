@@ -52,7 +52,7 @@
     <android.support.v4.widget.NestedScrollView
         android:id="@+id/scrollViewVertretungsplanInfo"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="500dp"
         android:background="@color/hintergrundDunkel"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
@@ -167,48 +167,111 @@
                     android:id="@+id/tvRaum"
                     android:layout_width="125dp"
                     android:layout_height="20dp"
+                    android:layout_marginBottom="15dp"
                     android:text="C1.35"
                     android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/tvStunde"
                     app:layout_constraintTop_toTopOf="@+id/tvRaumLabel" />
-
-                <TextView
-                    android:id="@+id/tvVertreterLabel"
-                    android:layout_width="70dp"
-                    android:layout_height="20dp"
-                    android:layout_marginStart="50dp"
-                    android:layout_marginTop="5dp"
-                    android:text="Vertreter:"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvRaumLabel" />
-
-                <TextView
-                    android:id="@+id/tvVertreter"
-                    android:layout_width="125dp"
-                    android:layout_height="20dp"
-                    android:text="TA"
-                    android:textSize="14sp"
-                    app:layout_constraintEnd_toEndOf="@+id/tvRaum"
-                    app:layout_constraintTop_toTopOf="@+id/tvVertreterLabel" />
-
-                <TextView
-                    android:id="@+id/tvVertreter2"
-                    android:layout_width="125dp"
-                    android:layout_height="20dp"
-                    android:layout_marginBottom="15dp"
-                    android:layout_marginTop="5dp"
-                    android:text="Gerhard Taake"
-                    android:textSize="14sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@+id/tvRaum"
-                    app:layout_constraintTop_toBottomOf="@+id/tvVertreter" />
 
             </android.support.constraint.ConstraintLayout>
 
             <android.support.constraint.ConstraintLayout
                 android:id="@+id/constraintLayout3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="15dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"
+                android:background="@color/weiss"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
+
+                <TextView
+                    android:id="@+id/tvVertreterLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginTop="15dp"
+                    android:text="Vertreter Informationen"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvVertreterNameLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginTop="5dp"
+                    android:text="Name:"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvVertreterKuerzelLabel" />
+
+                <TextView
+                    android:id="@+id/tvVertreterKuerzelLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginTop="50dp"
+                    android:text="Kürzel:"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvVertreterFaecherLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginTop="5dp"
+                    android:text="Fächer:"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvVertreterNameLabel" />
+
+                <TextView
+                    android:id="@+id/tvVertreter"
+                    android:layout_width="125dp"
+                    android:layout_height="20dp"
+                    android:layout_marginEnd="50dp"
+                    android:text="TA"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/tvVertreterKuerzelLabel" />
+
+                <TextView
+                    android:id="@+id/tvVertreterName"
+                    android:layout_width="125dp"
+                    android:layout_height="20dp"
+                    android:layout_marginEnd="50dp"
+                    android:text="Gerhard Taake"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/tvVertreterNameLabel" />
+
+                <TextView
+                    android:id="@+id/tvVertreterFaecher"
+                    android:layout_width="125dp"
+                    android:layout_height="20dp"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginEnd="50dp"
+                    android:text="MA | PH | IF"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/tvVertreterFaecherLabel" />
+            </android.support.constraint.ConstraintLayout>
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/constraintLayout4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="15dp"
@@ -218,8 +281,10 @@
                 android:background="@color/weiss"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout3"
+                app:layout_constraintVertical_bias="0.0">
 
                 <TextView
                     android:id="@+id/tvInfoLabel"
