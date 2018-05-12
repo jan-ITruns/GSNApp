@@ -105,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
         passwort = passwortPref.getString("passwort", "");
 
         SharedPreferences jahrgangsstufePref = getSharedPreferences("jahrgangsstufe", 0);
-        jahrgangsstufe = passwortPref.getInt("jahrgangsstufe", 5);
+        jahrgangsstufe = jahrgangsstufePref.getInt("jahrgangsstufe", 5);
 
         // Vertretungselemente laden
         Gson gson = new Gson();
@@ -714,14 +714,14 @@ public class MainActivity extends AppCompatActivity {
         gefunden = 0;
         for (int index = 0; index < kursMorgen.size(); index++) {
             if (kursMorgen.get(index).contains(gesucht)) {
-                kursMorgen.add(kursMorgen.get(kursMorgen.size()));
-                fachMorgen.add(fachMorgen.get(fachMorgen.size()));
-                stundeMorgen.add(stundeMorgen.get(stundeMorgen.size()));
-                raumMorgen.add(raumMorgen.get(raumMorgen.size()));
-                vertreterMorgen.add(vertreterMorgen.get(vertreterMorgen.size()));
-                infoMorgen.add(infoMorgen.get(infoMorgen.size()));
+                kursMorgen.add(kursMorgen.get(kursMorgen.size() - 1));
+                fachMorgen.add(fachMorgen.get(fachMorgen.size() - 1));
+                stundeMorgen.add(stundeMorgen.get(stundeMorgen.size() - 1));
+                raumMorgen.add(raumMorgen.get(raumMorgen.size() - 1));
+                vertreterMorgen.add(vertreterMorgen.get(vertreterMorgen.size() - 1));
+                infoMorgen.add(infoMorgen.get(infoMorgen.size() - 1));
 
-                for (int index1 = kursMorgen.size() - 2; index1 >= gefunden; index1++) {
+                for (int index1 = kursMorgen.size() - 2; index1 >= gefunden; index1--) {
                     kursMorgen.set(index1 + 1, kursMorgen.get(index1));
                     fachMorgen.set(index1 + 1, fachMorgen.get(index1));
                     stundeMorgen.set(index1 + 1, stundeMorgen.get(index1));
