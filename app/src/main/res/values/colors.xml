@@ -8,5 +8,6 @@
     <color name="schwarz">#000000</color>
     <color name="schwarzTransparent">#8c000000</color>
     <color name="hintergrund">#e9e9e9</color>
+    <color name="hintergrundDunkel">#cecece</color>
     <color name="transparent">#00ffffff</color>
 </resources>

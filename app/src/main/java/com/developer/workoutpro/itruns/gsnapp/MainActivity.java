@@ -6,25 +6,20 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Handler;
 import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Layout;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ProgressBar;
-import android.widget.Switch;
-import android.widget.TextView;
 import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import android.support.design.widget.FloatingActionButton;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -357,7 +352,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void menueleiste() {
         mDrawerLayout = findViewById(R.id.drawerLayout);
-        final TextView tvUeberschrift = findViewById(R.id.tvUeberschrift);
 
         // Hintergrund dunkler machen
         mDrawerLayout.setScrimColor(Color.parseColor("#33000000"));
@@ -381,12 +375,10 @@ public class MainActivity extends AppCompatActivity {
                                 vertretungsplanOeffnen();
                                 break;
                             case R.id.einstellungen:
-                                getSupportFragmentManager().beginTransaction().remove(getSupportFragmentManager().findFragmentById(R.id.bereich_fragments)).commit();
                                 FragmentManager fragmentManager = getSupportFragmentManager();
                                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                                 FrEinstellungenSchueler frEinstellungenSchueler = new FrEinstellungenSchueler();
                                 fragmentTransaction.replace(R.id.bereich_fragments, frEinstellungenSchueler, "einstellungen");
-                                tvUeberschrift.setText("Einstellungen");
                                 fragmentTransaction.addToBackStack(null);
                                 fragmentManager.executePendingTransactions();
                                 fragmentTransaction.commit();
@@ -396,15 +388,6 @@ public class MainActivity extends AppCompatActivity {
                         return true;
                     }
                 });
-
-        ImageButton imgbtnMenueleiste = findViewById(R.id.imgbtnMenueleiste);
-        imgbtnMenueleiste.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mDrawerLayout.openDrawer(GravityCompat.START);
-            }
-        });
-
     } // Methode menueLeiste
 
     private void login() {
@@ -486,6 +469,17 @@ public class MainActivity extends AppCompatActivity {
     public void logout(View view){
         erstesLogin = true;
         setContentView(R.layout.activity_login);
+
+        // Deklaration der Views
+            final Button btnAnmelden = findViewById(R.id.btnAnmelden);
+
+            btnAnmelden.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    login();
+                    btnAnmelden.setFocusable(false);
+                }
+            });
     }
 
     private void getStand() {
@@ -659,8 +653,6 @@ public class MainActivity extends AppCompatActivity {
 
         fragmentTransaction.replace(R.id.bereich_fragments, frVertretungsplan, "vertretungsplan");
 
-        TextView tvUeberschrift = findViewById(R.id.tvUeberschrift);
-        tvUeberschrift.setText("Vertretungsplan");
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     } // Methode vertretungsplanAusgeben
@@ -709,12 +701,11 @@ public class MainActivity extends AppCompatActivity {
                 getVertretungsstunde(1);
 
                 // Überprüfen, ob es Änderungen gab
-                if (kursHeuteKopie.equals(kursHeute) && stundeHeuteKopie.equals(stundeHeute) && vertreterHeuteKopie.equals(vertreterHeute) && fachHeuteKopie.equals(fachHeute) && raumHeuteKopie.equals(raumHeute) && infoHeuteKopie.equals(infoHeute)
-                        && kursMorgenKopie.equals(kursMorgen) && stundeMorgenKopie.equals(stundeMorgen) && vertreterMorgenKopie.equals(vertreterMorgen) && fachMorgenKopie.equals(fachMorgen) && raumMorgenKopie.equals(raumMorgen) && infoMorgenKopie.equals(infoMorgen)) {
-                    return;
-                } else {
+                if ( !(kursHeuteKopie.equals(kursHeute) && stundeHeuteKopie.equals(stundeHeute) && vertreterHeuteKopie.equals(vertreterHeute) && fachHeuteKopie.equals(fachHeute) && raumHeuteKopie.equals(raumHeute) && infoHeuteKopie.equals(infoHeute)
+                        && kursMorgenKopie.equals(kursMorgen) && stundeMorgenKopie.equals(stundeMorgen) && vertreterMorgenKopie.equals(vertreterMorgen) && fachMorgenKopie.equals(fachMorgen) && raumMorgenKopie.equals(raumMorgen) && infoMorgenKopie.equals(infoMorgen))) {
                     vertretungsplanOeffnen();
                 } // if
+                Toast.makeText(MainActivity.this, stand, Toast.LENGTH_LONG).show();
             }
         }, 10000);
     } // Methode vertretungsplanAktualisieren
@@ -726,8 +717,6 @@ public class MainActivity extends AppCompatActivity {
         FrVertretungInfos frVertretungInfos = new FrVertretungInfos();
 
         fragmentTransaction.replace(R.id.bereich_fragments, frVertretungInfos, "vertretungInfos");
-        TextView tvUeberschrift = findViewById(R.id.tvUeberschrift);
-        tvUeberschrift.setText("Vertretungs Informationen");
         fragmentTransaction.addToBackStack(null);
         fragmentManager.executePendingTransactions();
         fragmentTransaction.commit();
