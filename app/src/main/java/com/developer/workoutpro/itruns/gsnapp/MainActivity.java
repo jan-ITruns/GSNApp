@@ -477,66 +477,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
     }
 
-    public void benachrichtigungen(View view){
-        Switch switchVertretung = findViewById(R.id.switchBenachrichtigungenVertretung);
-        Switch switchAktuelles = findViewById(R.id.switchBenachrichtigungAktuelles);
-        Switch switchTermine = findViewById(R.id.switchBenachrichtigungTermine);
-        Switch switchBewertung = findViewById(R.id.switchBenachrichtigungBewertung);
-
-        switchVertretung.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){
-                    benachrichtigungVertretung=true;
-                    Toast.makeText(MainActivity.this, "Benachrichtigungen über Vertretungen erhalten.", Toast.LENGTH_LONG).show();
-                }
-                else{
-                    benachrichtigungVertretung=false;
-                    Toast.makeText(MainActivity.this, "Keine Benachrichtigungen über Vertretungen erhalten.", Toast.LENGTH_LONG).show();
-                }
-            }
-        });
-
-        switchAktuelles.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){
-                    benachrichtigungAktuelles=true;
-                    Toast.makeText(MainActivity.this, "Benachrichtigungen über Aktuelles erhalten.", Toast.LENGTH_LONG).show();
-                }
-                else{
-                    benachrichtigungAktuelles=false;
-                    Toast.makeText(MainActivity.this, "Keine Benachrichtigungen über Aktuelles erhalten.", Toast.LENGTH_LONG).show();
-                }
-            }
-        });
-
-        switchTermine.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){
-                    benachrichtigungTermine=true;
-                    Toast.makeText(MainActivity.this, "Benachrichtigungen über Termine erhalten.", Toast.LENGTH_LONG).show();
-                }
-                else{
-                    benachrichtigungTermine=false;
-                    Toast.makeText(MainActivity.this, "Keine Benachrichtigungen über Termine erhalten.", Toast.LENGTH_LONG).show();
-                }
-            }
-        });
-
-        switchBewertung.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){
-                    benachrichtigungBewertung=true;
-                    Toast.makeText(MainActivity.this, "Benachrichtigungen über Bewertungen erhalten.", Toast.LENGTH_LONG).show();
-                }
-                else{
-                    benachrichtigungBewertung=false;
-                    Toast.makeText(MainActivity.this, "Keine Benachrichtigungen über Bewertungen erhalten.", Toast.LENGTH_LONG).show();
-                }
-            }
-        });
-
-    }
-
     private void getDatum(int tag) {
         String hilfsDatum;
 
