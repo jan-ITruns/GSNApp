@@ -135,7 +135,6 @@
         android:layout_marginBottom="15dp"
         android:layout_marginEnd="15dp"
         android:clickable="true"
-        android:onClick="vertretungsplanAktualisieren"
         android:src="@drawable/ic_refresh_blue_40dp"
         android:tint="@color/weiss"
         app:backgroundTint="@color/colorAccent"

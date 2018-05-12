@@ -1,11 +1,14 @@
 package com.developer.workoutpro.itruns.gsnapp;
 
+import android.os.Handler;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -82,6 +85,16 @@ public class FrVertretungsplan extends Fragment {
                 switch (item.getItemId()) {
                     case R.id.vertretungsplanAktualisieren:
                         mainActivity.vertretungsplanAktualisieren(view);
+                        final SwipeRefreshLayout swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
+                        swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent, R.color.colorPrimary);
+                        swipeRefreshLayout.setRefreshing(true);
+                        Handler handler = new Handler();
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                swipeRefreshLayout.setRefreshing(false);
+                            }
+                        }, 10000);
                         return true;
 
                     case R.id.vertretungsplanInformation:
@@ -91,6 +104,24 @@ public class FrVertretungsplan extends Fragment {
                     default:
                         return false;
                 }
+            }
+        });
+
+        FloatingActionButton fabAktualisieren = view.findViewById(R.id.fabAktualisieren);
+        fabAktualisieren.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mainActivity.vertretungsplanAktualisieren(view);
+                final SwipeRefreshLayout swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
+                swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent, R.color.colorPrimary);
+                swipeRefreshLayout.setRefreshing(true);
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        swipeRefreshLayout.setRefreshing(false);
+                    }
+                }, 10000);
             }
         });
     } // Methode toolbarEinrichten
