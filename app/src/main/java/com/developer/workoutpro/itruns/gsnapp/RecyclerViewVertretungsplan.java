@@ -64,6 +64,8 @@ public class RecyclerViewVertretungsplan extends RecyclerView.Adapter<RecyclerVi
         });
         if (ausgewaehlt.get(i)) {
             viewHolder.clVertretungsplanRow.setBackgroundResource(R.color.orangeTransparent);
+        } else {
+            viewHolder.clVertretungsplanRow.setBackgroundResource(R.color.transparent);
         } // if
     } // Methode onBindViewHolder
 

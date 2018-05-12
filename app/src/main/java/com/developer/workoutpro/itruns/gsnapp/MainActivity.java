@@ -654,11 +654,11 @@ public class MainActivity extends AppCompatActivity {
                                         ausgewaehltHeute.add(false);
                                     } // if
                                     break;
-                                case 1: stundeHeute.add(element[0]); ausgewaehltHeute.add(false); break;
-                                case 2: vertreterHeute.add(element[0]); ausgewaehltHeute.add(false); break;
-                                case 3: fachHeute.add(element[0]); ausgewaehltHeute.add(false); break;
-                                case 4: raumHeute.add(element[0]); ausgewaehltHeute.add(false); break;
-                                case 5: infoHeute.add(element[0]); ausgewaehltHeute.add(false); break;
+                                case 1: stundeHeute.add(element[0]); break;
+                                case 2: vertreterHeute.add(element[0]); break;
+                                case 3: fachHeute.add(element[0]); break;
+                                case 4: raumHeute.add(element[0]); break;
+                                case 5: infoHeute.add(element[0]); break;
                             } // switch
                         } else {
                                 switch (index) {
@@ -672,11 +672,11 @@ public class MainActivity extends AppCompatActivity {
                                             ausgewaehltMorgen.add(false);
                                         } // if
                                         break;
-                                    case 1: stundeMorgen.add(element[0]); ausgewaehltMorgen.add(false); break;
-                                    case 2: vertreterMorgen.add(element[0]); ausgewaehltMorgen.add(false); break;
-                                    case 3: fachMorgen.add(element[0]); ausgewaehltMorgen.add(false); break;
-                                    case 4: raumMorgen.add(element[0]); ausgewaehltMorgen.add(false); break;
-                                    case 5: infoMorgen.add(element[0]); ausgewaehltMorgen.add(false); break;
+                                    case 1: stundeMorgen.add(element[0]); break;
+                                    case 2: vertreterMorgen.add(element[0]); break;
+                                    case 3: fachMorgen.add(element[0]); break;
+                                    case 4: raumMorgen.add(element[0]); break;
+                                    case 5: infoMorgen.add(element[0]); break;
                                 } // switch
                         } // if
                     } // if
