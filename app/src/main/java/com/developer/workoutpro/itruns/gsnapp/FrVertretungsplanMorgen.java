@@ -25,6 +25,7 @@ public class FrVertretungsplanMorgen extends Fragment {
     private ArrayList<String> fach;
     private ArrayList<String> raum;
     private ArrayList<String> info;
+    private ArrayList<Boolean> ausgewaehlt;
 
     @Nullable
     @Override
@@ -38,20 +39,21 @@ public class FrVertretungsplanMorgen extends Fragment {
         return view;
     } // Methode onCreateView
 
-    public void setVertretungsElemente(ArrayList<String> kurs, ArrayList<String> stunde, ArrayList<String> vertreter, ArrayList<String> fach, ArrayList<String> raum, ArrayList<String> info) {
+    public void setVertretungsElemente(ArrayList<String> kurs, ArrayList<String> stunde, ArrayList<String> vertreter, ArrayList<String> fach, ArrayList<String> raum, ArrayList<String> info, ArrayList<Boolean> ausgewaehlt) {
         this.kurs = kurs;
         this.stunde = stunde;
         this.vertreter = vertreter;
         this.fach = fach;
         this.raum = raum;
         this.info = info;
+        this.ausgewaehlt = ausgewaehlt;
     } // Methode getVertretungsElemente
 
     private void recyclerViewVorbereiten() {
         RecyclerView recyclerView = view.findViewById(R.id.rvVertretungsplan);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        RecyclerViewVertretungsplan adapter = new RecyclerViewVertretungsplan(getActivity(), kurs, stunde, vertreter, fach, raum, info);
+        RecyclerViewVertretungsplan adapter = new RecyclerViewVertretungsplan(getActivity(), kurs, stunde, vertreter, fach, raum, info, ausgewaehlt);
         recyclerView.setAdapter(adapter);
     } // Methode recyclerViewVorbereiten
 

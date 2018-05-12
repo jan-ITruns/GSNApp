@@ -63,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<String> fachHeute;
     private ArrayList<String> raumHeute;
     private ArrayList<String> infoHeute;
+    private ArrayList<Boolean> ausgewaehltHeute;
 
     // Attribute für den Vertretungsplan Morgen
     private String htmlTextMorgen;
@@ -73,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<String> fachMorgen;
     private ArrayList<String> raumMorgen;
     private ArrayList<String> infoMorgen;
+    private ArrayList<Boolean> ausgewaehltMorgen;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,7 +111,8 @@ public class MainActivity extends AppCompatActivity {
 
         // Vertretungselemente laden
         Gson gson = new Gson();
-        Type type = new TypeToken<ArrayList<String>>() {}.getType();
+        Type typeString = new TypeToken<ArrayList<String>>() {}.getType();
+        Type typeBoolean = new TypeToken<ArrayList<Boolean>>() {}.getType();
 
         // Datum
         SharedPreferences datumHeutePref = getSharedPreferences("datumHeute", 0);
@@ -125,56 +128,65 @@ public class MainActivity extends AppCompatActivity {
         // Kurs
         SharedPreferences kursHeutePref = getSharedPreferences("kursHeute", 0);
         String kursHeuteJson = kursHeutePref.getString("kursHeute", "");
-        kursHeute = gson.fromJson(kursHeuteJson, type);
+        kursHeute = gson.fromJson(kursHeuteJson, typeString);
 
         SharedPreferences kursMorgenPref = getSharedPreferences("kursMorgen", 0);
         String kursMorgenJson = kursMorgenPref.getString("kursMorgen", "");
-        kursMorgen = gson.fromJson(kursMorgenJson, type);
+        kursMorgen = gson.fromJson(kursMorgenJson, typeString);
 
         // Stunde
         SharedPreferences stundeHeutePref = getSharedPreferences("stundeHeute", 0);
         String stundeHeuteJson = stundeHeutePref.getString("stundeHeute", "");
-        stundeHeute = gson.fromJson(stundeHeuteJson, type);
+        stundeHeute = gson.fromJson(stundeHeuteJson, typeString);
 
         SharedPreferences stundeMorgenPref = getSharedPreferences("stundeMorgen", 0);
         String stundeMorgenJson = stundeMorgenPref.getString("stundeMorgen", "");
-        stundeMorgen = gson.fromJson(stundeMorgenJson, type);
+        stundeMorgen = gson.fromJson(stundeMorgenJson, typeString);
 
         // Vertreter
         SharedPreferences vertreterHeutePref = getSharedPreferences("vertreterHeute", 0);
         String vertreterHeuteJson = vertreterHeutePref.getString("vertreterHeute", "");
-        vertreterHeute = gson.fromJson(vertreterHeuteJson, type);
+        vertreterHeute = gson.fromJson(vertreterHeuteJson, typeString);
 
         SharedPreferences vertreterMorgenPref = getSharedPreferences("vertreterMorgen", 0);
         String vertreterMorgenJson = vertreterMorgenPref.getString("vertreterMorgen", "");
-        vertreterMorgen = gson.fromJson(vertreterMorgenJson, type);
+        vertreterMorgen = gson.fromJson(vertreterMorgenJson, typeString);
 
         // Fach
         SharedPreferences fachHeutePref = getSharedPreferences("fachHeute", 0);
         String fachHeuteJson = fachHeutePref.getString("fachHeute", "");
-        fachHeute = gson.fromJson(fachHeuteJson, type);
+        fachHeute = gson.fromJson(fachHeuteJson, typeString);
 
         SharedPreferences fachMorgenPref = getSharedPreferences("fachMorgen", 0);
         String fachMorgenJson = fachMorgenPref.getString("fachMorgen", "");
-        fachMorgen = gson.fromJson(fachMorgenJson, type);
+        fachMorgen = gson.fromJson(fachMorgenJson, typeString);
 
         // Raum
         SharedPreferences raumHeutePref = getSharedPreferences("raumHeute", 0);
         String raumHeuteJson = raumHeutePref.getString("raumHeute", "");
-        raumHeute = gson.fromJson(raumHeuteJson, type);
+        raumHeute = gson.fromJson(raumHeuteJson, typeString);
 
         SharedPreferences raumMorgenPref = getSharedPreferences("raumMorgen", 0);
         String raumMorgenJson = raumMorgenPref.getString("raumMorgen", "");
-        raumMorgen= gson.fromJson(raumMorgenJson, type);
+        raumMorgen= gson.fromJson(raumMorgenJson, typeString);
 
         // Info
         SharedPreferences infoHeutePref = getSharedPreferences("infoHeute", 0);
         String infoHeuteJson = infoHeutePref.getString("infoHeute", "");
-        infoHeute = gson.fromJson(infoHeuteJson, type);
+        infoHeute = gson.fromJson(infoHeuteJson, typeString);
 
         SharedPreferences infoMorgenPref = getSharedPreferences("infoMorgen", 0);
         String infoMorgenJson = infoMorgenPref.getString("infoMorgen", "");
-        infoMorgen = gson.fromJson(infoMorgenJson, type);
+        infoMorgen = gson.fromJson(infoMorgenJson, typeString);
+
+        // Ausgewählt
+        SharedPreferences ausgewaehltHeutePref = getSharedPreferences("ausgewaehltHeute", 0);
+        String ausgewaehltHeuteJson = ausgewaehltHeutePref.getString("ausgewaehltHeute", "");
+        ausgewaehltHeute = gson.fromJson(ausgewaehltHeuteJson, typeBoolean);
+
+        SharedPreferences ausgewaehltMorgenPref = getSharedPreferences("ausgewaehltMorgen", 0);
+        String ausgewaehltMorgenJson = ausgewaehltMorgenPref.getString("ausgewaehltMorgen", "");
+        ausgewaehltMorgen = gson.fromJson(ausgewaehltMorgenJson, typeBoolean);
 
         // Benachrichtigungseinstellungen laden
         //Vertretung
@@ -355,6 +367,19 @@ public class MainActivity extends AppCompatActivity {
         String infoMorgenJson = gson.toJson(infoMorgen);
         editorInfoMorgen.putString("infoMorgen", infoMorgenJson);
         editorInfoMorgen.apply();
+
+        // Ausgewählt
+        SharedPreferences ausgewaehltHeutePref = getSharedPreferences("ausgewaehltHeute", 0);
+        SharedPreferences.Editor editorAusgewaehltHeute = infoHeutePref.edit();
+        String ausgewaehltHeuteJson = gson.toJson(ausgewaehltHeute);
+        editorAusgewaehltHeute.putString("ausgewaehltHeute", ausgewaehltHeuteJson);
+        editorAusgewaehltHeute.apply();
+
+        SharedPreferences ausgewaehltMorgenPref = getSharedPreferences("ausgewaehltMorgen", 0);
+        SharedPreferences.Editor editorAusgewaehltMorgen = ausgewaehltMorgenPref.edit();
+        String ausgewaehltMorgenJson = gson.toJson(ausgewaehltMorgen);
+        editorAusgewaehltMorgen.putString("ausgewaehltMorgen", ausgewaehltMorgenJson);
+        editorAusgewaehltMorgen.apply();
 
         //Benachrichtigungseinstellungen speichern
         //Vertretung
@@ -587,6 +612,7 @@ public class MainActivity extends AppCompatActivity {
                 fachHeute = new ArrayList<>();
                 raumHeute = new ArrayList<>();
                 infoHeute = new ArrayList<>();
+                ausgewaehltHeute = new ArrayList<>();
                 break;
             case 1:
                 teil1 = htmlTextMorgen.split("<table class=\"mon_list\">");
@@ -596,6 +622,7 @@ public class MainActivity extends AppCompatActivity {
                 fachMorgen = new ArrayList<>();
                 raumMorgen = new ArrayList<>();
                 infoMorgen = new ArrayList<>();
+                ausgewaehltMorgen = new ArrayList<>();
                 break;
         } // switch
 
@@ -624,13 +651,14 @@ public class MainActivity extends AppCompatActivity {
                                         falscheVertretungsstunde = true;
                                     } else {
                                         kursHeute.add(element[0]);
+                                        ausgewaehltHeute.add(false);
                                     } // if
                                     break;
-                                case 1: stundeHeute.add(element[0]); break;
-                                case 2: vertreterHeute.add(element[0]); break;
-                                case 3: fachHeute.add(element[0]); break;
-                                case 4: raumHeute.add(element[0]); break;
-                                case 5: infoHeute.add(element[0]); break;
+                                case 1: stundeHeute.add(element[0]); ausgewaehltHeute.add(false); break;
+                                case 2: vertreterHeute.add(element[0]); ausgewaehltHeute.add(false); break;
+                                case 3: fachHeute.add(element[0]); ausgewaehltHeute.add(false); break;
+                                case 4: raumHeute.add(element[0]); ausgewaehltHeute.add(false); break;
+                                case 5: infoHeute.add(element[0]); ausgewaehltHeute.add(false); break;
                             } // switch
                         } else {
                                 switch (index) {
@@ -641,13 +669,14 @@ public class MainActivity extends AppCompatActivity {
                                             falscheVertretungsstunde = true;
                                         } else {
                                             kursMorgen.add(element[0]);
+                                            ausgewaehltMorgen.add(false);
                                         } // if
                                         break;
-                                    case 1: stundeMorgen.add(element[0]); break;
-                                    case 2: vertreterMorgen.add(element[0]); break;
-                                    case 3: fachMorgen.add(element[0]); break;
-                                    case 4: raumMorgen.add(element[0]); break;
-                                    case 5: infoMorgen.add(element[0]); break;
+                                    case 1: stundeMorgen.add(element[0]); ausgewaehltMorgen.add(false); break;
+                                    case 2: vertreterMorgen.add(element[0]); ausgewaehltMorgen.add(false); break;
+                                    case 3: fachMorgen.add(element[0]); ausgewaehltMorgen.add(false); break;
+                                    case 4: raumMorgen.add(element[0]); ausgewaehltMorgen.add(false); break;
+                                    case 5: infoMorgen.add(element[0]); ausgewaehltMorgen.add(false); break;
                                 } // switch
                         } // if
                     } // if
@@ -683,6 +712,7 @@ public class MainActivity extends AppCompatActivity {
                 raumHeute.add(raumHeute.get(raumHeute.size() - 1));
                 vertreterHeute.add(vertreterHeute.get(vertreterHeute.size() - 1));
                 infoHeute.add(infoHeute.get(infoHeute.size() - 1));
+                ausgewaehltHeute.add(ausgewaehltHeute.get(ausgewaehltHeute.size() - 1));
 
                 for (int index1 = kursHeute.size() - 2; index1 >= gefunden; index1--) {
                     kursHeute.set(index1 + 1, kursHeute.get(index1));
@@ -691,6 +721,7 @@ public class MainActivity extends AppCompatActivity {
                     raumHeute.set(index1 + 1, raumHeute.get(index1));
                     vertreterHeute.set(index1 + 1, vertreterHeute.get(index1));
                     infoHeute.set(index1 + 1, infoHeute.get(index1));
+                    ausgewaehltHeute.set(index1 + 1, ausgewaehltHeute.get(index1));
                 } // for
 
                 kursHeute.set(gefunden, kursHeute.get(index + 1));
@@ -699,6 +730,7 @@ public class MainActivity extends AppCompatActivity {
                 raumHeute.set(gefunden, raumHeute.get(index + 1));
                 vertreterHeute.set(gefunden, vertreterHeute.get(index + 1));
                 infoHeute.set(gefunden, infoHeute.get(index + 1));
+                ausgewaehltHeute.set(gefunden, true);
 
                 kursHeute.remove(index + 1);
                 fachHeute.remove(index + 1);
@@ -706,6 +738,7 @@ public class MainActivity extends AppCompatActivity {
                 raumHeute.remove(index + 1);
                 vertreterHeute.remove(index + 1);
                 infoHeute.remove(index + 1);
+                ausgewaehltHeute.remove(index + 1);
 
                 gefunden++;
             } // if
@@ -720,6 +753,7 @@ public class MainActivity extends AppCompatActivity {
                 raumMorgen.add(raumMorgen.get(raumMorgen.size() - 1));
                 vertreterMorgen.add(vertreterMorgen.get(vertreterMorgen.size() - 1));
                 infoMorgen.add(infoMorgen.get(infoMorgen.size() - 1));
+                ausgewaehltMorgen.add(ausgewaehltMorgen.get(ausgewaehltMorgen.size() - 1));
 
                 for (int index1 = kursMorgen.size() - 2; index1 >= gefunden; index1--) {
                     kursMorgen.set(index1 + 1, kursMorgen.get(index1));
@@ -728,6 +762,7 @@ public class MainActivity extends AppCompatActivity {
                     raumMorgen.set(index1 + 1, raumMorgen.get(index1));
                     vertreterMorgen.set(index1 + 1, vertreterMorgen.get(index1));
                     infoMorgen.set(index1 + 1, infoMorgen.get(index1));
+                    ausgewaehltMorgen.set(index1 + 1, ausgewaehltMorgen.get(index1));
                 } // for
 
                 kursMorgen.set(gefunden, kursMorgen.get(index + 1));
@@ -736,6 +771,7 @@ public class MainActivity extends AppCompatActivity {
                 raumMorgen.set(gefunden, raumMorgen.get(index + 1));
                 vertreterMorgen.set(gefunden, vertreterMorgen.get(index + 1));
                 infoMorgen.set(gefunden, infoMorgen.get(index + 1));
+                ausgewaehltMorgen.set(gefunden, true);
 
                 kursMorgen.remove(index + 1);
                 fachMorgen.remove(index + 1);
@@ -743,6 +779,7 @@ public class MainActivity extends AppCompatActivity {
                 raumMorgen.remove(index + 1);
                 vertreterMorgen.remove(index + 1);
                 infoMorgen.remove(index + 1);
+                ausgewaehltMorgen.remove(index + 1);
 
                 gefunden++;
             } // if
@@ -794,8 +831,8 @@ public class MainActivity extends AppCompatActivity {
         FrVertretungsplan frVertretungsplan = new FrVertretungsplan();
 
         // Vertretungselemente weitergeben
-        frVertretungsplan.setVertretungsElemente(0, datumHeute, kursHeute, stundeHeute, vertreterHeute, fachHeute, raumHeute, infoHeute);
-        frVertretungsplan.setVertretungsElemente(1, datumMorgen, kursMorgen, stundeMorgen, vertreterMorgen, fachMorgen, raumMorgen, infoMorgen);
+        frVertretungsplan.setVertretungsElemente(0, datumHeute, kursHeute, stundeHeute, vertreterHeute, fachHeute, raumHeute, infoHeute, ausgewaehltHeute);
+        frVertretungsplan.setVertretungsElemente(1, datumMorgen, kursMorgen, stundeMorgen, vertreterMorgen, fachMorgen, raumMorgen, infoMorgen, ausgewaehltMorgen);
 
         fragmentTransaction.replace(R.id.bereich_fragments, frVertretungsplan, "vertretungsplan");
 

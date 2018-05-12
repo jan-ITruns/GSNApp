@@ -17,9 +17,10 @@ public class RecyclerViewVertretungsplan extends RecyclerView.Adapter<RecyclerVi
     private ArrayList<String> fach;
     private ArrayList<String> raum;
     private ArrayList<String> info;
+    private ArrayList<Boolean> ausgewaehlt;
     private MainActivity mainActivity;
 
-    public RecyclerViewVertretungsplan(Context context, ArrayList<String> kurs, ArrayList<String> stunde, ArrayList<String> vertreter, ArrayList<String> fach, ArrayList<String> raum, ArrayList<String> info) {
+    public RecyclerViewVertretungsplan(Context context, ArrayList<String> kurs, ArrayList<String> stunde, ArrayList<String> vertreter, ArrayList<String> fach, ArrayList<String> raum, ArrayList<String> info, ArrayList<Boolean> ausgewaehlt) {
         mainActivity = (MainActivity) context;
         this.kurs = kurs;
         this.stunde = stunde;
@@ -27,6 +28,7 @@ public class RecyclerViewVertretungsplan extends RecyclerView.Adapter<RecyclerVi
         this.fach = fach;
         this.raum = raum;
         this.info = info;
+        this.ausgewaehlt = ausgewaehlt;
     } // Konstruktor RecyclerViewVertretungsplan
 
     @Override
@@ -60,6 +62,9 @@ public class RecyclerViewVertretungsplan extends RecyclerView.Adapter<RecyclerVi
                 mainActivity.oeffneVertretungInfos();
             }
         });
+        if (ausgewaehlt.get(i)) {
+            viewHolder.clVertretungsplanRow.setBackgroundResource(R.color.orangeTransparent);
+        } // if
     } // Methode onBindViewHolder
 
     @Override

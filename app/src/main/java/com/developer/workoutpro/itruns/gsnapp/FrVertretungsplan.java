@@ -30,6 +30,7 @@ public class FrVertretungsplan extends Fragment {
     private ArrayList<String> fachHeute;
     private ArrayList<String> raumHeute;
     private ArrayList<String> infoHeute;
+    private ArrayList<Boolean> ausgewaehltHeute;
 
     // Attribute für den Vertretungsplan Morgen
     private String datumMorgen;
@@ -39,6 +40,7 @@ public class FrVertretungsplan extends Fragment {
     private ArrayList<String> fachMorgen;
     private ArrayList<String> raumMorgen;
     private ArrayList<String> infoMorgen;
+    private ArrayList<Boolean> ausgewaehltMorgen;
 
     @Nullable
     @Override
@@ -93,7 +95,7 @@ public class FrVertretungsplan extends Fragment {
         });
     } // Methode toolbarEinrichten
 
-    public void setVertretungsElemente(int tag, String datum, ArrayList<String> kurs, ArrayList<String> stunde, ArrayList<String> vertreter, ArrayList<String> fach, ArrayList<String> raum, ArrayList<String> info) {
+    public void setVertretungsElemente(int tag, String datum, ArrayList<String> kurs, ArrayList<String> stunde, ArrayList<String> vertreter, ArrayList<String> fach, ArrayList<String> raum, ArrayList<String> info, ArrayList<Boolean> ausgewaehlt) {
         switch (tag) {
             case 0:
                 datumHeute = datum;
@@ -103,6 +105,7 @@ public class FrVertretungsplan extends Fragment {
                 fachHeute = fach;
                 raumHeute = raum;
                 infoHeute = info;
+                ausgewaehltHeute = ausgewaehlt;
                 break;
             case 1:
                 datumMorgen = datum;
@@ -112,6 +115,7 @@ public class FrVertretungsplan extends Fragment {
                 fachMorgen = fach;
                 raumMorgen = raum;
                 infoMorgen = info;
+                ausgewaehltMorgen = ausgewaehlt;
                 break;
         } // switch
     } // Methode getVertretungsElemente
@@ -121,12 +125,12 @@ public class FrVertretungsplan extends Fragment {
 
         // Vertretungsplan Heute hinzufügen
         FrVertretungsplanHeute frVertretungsplanHeute = new FrVertretungsplanHeute();
-        frVertretungsplanHeute.setVertretungsElemente(kursHeute, stundeHeute, vertreterHeute, fachHeute, raumHeute, infoHeute);
+        frVertretungsplanHeute.setVertretungsElemente(kursHeute, stundeHeute, vertreterHeute, fachHeute, raumHeute, infoHeute, ausgewaehltHeute);
         adapter.addFragment(frVertretungsplanHeute, datumHeute);
 
         // Vertretungsplan Morgen hinzufügen
         FrVertretungsplanMorgen frVertretungsplanMorgen = new FrVertretungsplanMorgen();
-        frVertretungsplanMorgen.setVertretungsElemente(kursMorgen, stundeMorgen, vertreterMorgen, fachMorgen, raumMorgen, infoMorgen);
+        frVertretungsplanMorgen.setVertretungsElemente(kursMorgen, stundeMorgen, vertreterMorgen, fachMorgen, raumMorgen, infoMorgen, ausgewaehltMorgen);
         adapter.addFragment(frVertretungsplanMorgen, datumMorgen);
 
         pViewPager.setAdapter(adapter);
