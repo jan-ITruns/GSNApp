@@ -5,22 +5,22 @@
 
     <group android:checkableBehavior="single"
         android:id="@+id/group1">
-        <item android:title="Anwendungen">
                 <item
                 android:id="@+id/nav_vertretungsplan"
                 android:icon="@drawable/ic_apps_blau_24dp"
                 android:title="Vertretungsplan" />
-        </item>
+            <item
+                android:id="@+id/nav_homepage"
+                android:icon="@drawable/ic_laptop_blau_24dp"
+                android:title="Homepage" />
     </group>
     <group
         android:id="@+id/group2"
         android:checkableBehavior="single">
-        <item android:title="Weiteres">
                 <item
                     android:id="@+id/nav_einstellungen"
                     android:icon="@drawable/ic_settings_blau_24dp"
                     android:title="Einstellungen" />
-        </item>
     </group>
 
 </menu>

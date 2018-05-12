@@ -117,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("passwort", passwort);
         intent.putExtra("jahrgangsstufe", jahrgangsstufe);
 
-        startActivity(intent);
+        startService(intent);
         finish();
     } // Methode onStop
 
@@ -412,13 +412,24 @@ public class MainActivity extends AppCompatActivity {
                         // nach dem Auswählen den Navigator wieder schließen
                         mDrawerLayout.closeDrawers();
 
+                        FragmentManager fragmentManager;
+                        FragmentTransaction fragmentTransaction;
                         switch (menuItem.getItemId()) {
                             case R.id.nav_vertretungsplan:
                                 vertretungsplanOeffnen();
                                 break;
+                            case R.id.nav_homepage:
+                                fragmentManager = getSupportFragmentManager();
+                                fragmentTransaction = fragmentManager.beginTransaction();
+                                FrHomepage frHomepage = new FrHomepage();
+                                fragmentTransaction.replace(R.id.bereich_fragments, frHomepage, "homepage");
+                                fragmentTransaction.addToBackStack(null);
+                                fragmentManager.executePendingTransactions();
+                                fragmentTransaction.commit();
+                                break;
                             case R.id.nav_einstellungen:
-                                FragmentManager fragmentManager = getSupportFragmentManager();
-                                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                                fragmentManager = getSupportFragmentManager();
+                                fragmentTransaction = fragmentManager.beginTransaction();
                                 FrEinstellungenSchueler frEinstellungenSchueler = new FrEinstellungenSchueler();
                                 fragmentTransaction.replace(R.id.bereich_fragments, frEinstellungenSchueler, "einstellungen");
                                 fragmentTransaction.addToBackStack(null);
