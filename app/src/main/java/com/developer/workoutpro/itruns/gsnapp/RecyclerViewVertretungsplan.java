@@ -11,6 +11,8 @@ import java.util.ArrayList;
 
 public class RecyclerViewVertretungsplan extends RecyclerView.Adapter<RecyclerViewVertretungsplan.ViewHolder> {
 
+    private MainActivity mainActivity;
+    private int tag;
     private ArrayList<String> kurs;
     private ArrayList<String> stunde;
     private ArrayList<String> vertreter;
@@ -18,10 +20,10 @@ public class RecyclerViewVertretungsplan extends RecyclerView.Adapter<RecyclerVi
     private ArrayList<String> raum;
     private ArrayList<String> info;
     private ArrayList<Boolean> ausgewaehlt;
-    private MainActivity mainActivity;
 
-    public RecyclerViewVertretungsplan(Context context, ArrayList<String> kurs, ArrayList<String> stunde, ArrayList<String> vertreter, ArrayList<String> fach, ArrayList<String> raum, ArrayList<String> info, ArrayList<Boolean> ausgewaehlt) {
+    public RecyclerViewVertretungsplan(Context context, int tag, ArrayList<String> kurs, ArrayList<String> stunde, ArrayList<String> vertreter, ArrayList<String> fach, ArrayList<String> raum, ArrayList<String> info, ArrayList<Boolean> ausgewaehlt) {
         mainActivity = (MainActivity) context;
+        this.tag = tag;
         this.kurs = kurs;
         this.stunde = stunde;
         this.vertreter = vertreter;
@@ -39,7 +41,7 @@ public class RecyclerViewVertretungsplan extends RecyclerView.Adapter<RecyclerVi
     } // Konstruktor RecyclerViewVertretungsplan
 
     @Override
-    public void onBindViewHolder(ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(ViewHolder viewHolder, final int i) {
         if (kurs.get(i).charAt(0) == 'E') {
             viewHolder.tvKurs.setText("EF");
         } else if (kurs.get(i).charAt(0) == 'Q') {
@@ -59,7 +61,7 @@ public class RecyclerViewVertretungsplan extends RecyclerView.Adapter<RecyclerVi
         viewHolder.clVertretungsplanRow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mainActivity.oeffneVertretungInfos();
+                mainActivity.oeffneVertretungInfos(tag, i);
             }
         });
         if (ausgewaehlt.get(i)) {

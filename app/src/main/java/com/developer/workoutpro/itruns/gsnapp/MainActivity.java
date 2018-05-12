@@ -864,11 +864,16 @@ public class MainActivity extends AppCompatActivity {
         } // if
     } // Methode vertretungsplanAktualisieren
 
-    public void oeffneVertretungInfos(){
+    public void oeffneVertretungInfos(int tag, int index){
         // Fragment Vertretungsplan erzeugen
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         FrVertretungInfos frVertretungInfos = new FrVertretungInfos();
+
+        switch (tag) {
+            case 0: frVertretungInfos.setzeVertretungsInformationen(kursHeute.get(index), stundeHeute.get(index), vertreterHeute.get(index), fachHeute.get(index), raumHeute.get(index), infoHeute.get(index)); break;
+            case 1: frVertretungInfos.setzeVertretungsInformationen(kursMorgen.get(index), stundeMorgen.get(index), vertreterMorgen.get(index), fachMorgen.get(index), raumMorgen.get(index), infoMorgen.get(index)); break;
+        } // switch
 
         fragmentTransaction.replace(R.id.bereich_fragments, frVertretungInfos, "vertretungInfos");
         fragmentTransaction.addToBackStack(null);
