@@ -2,10 +2,12 @@ package com.developer.workoutpro.itruns.gsnapp;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +26,15 @@ public class FrEinstellungenLehrer extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fr_einstellungen_lehrer, container, false);
         mainActivity = (MainActivity)getActivity();
+
+        NavigationView navigation = getActivity().findViewById(R.id.nav_view);
+        Menu drawer_menu = navigation.getMenu();
+        MenuItem menuItem;
+        menuItem = drawer_menu.findItem(R.id.nav_einstellungen);
+        if(! menuItem.isChecked()) {
+            menuItem.setChecked(true);
+        } // if
+
         toolbarEinrichten();
 
         aktuelleDaten();

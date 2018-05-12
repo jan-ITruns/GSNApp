@@ -26,10 +26,9 @@ public class FrHomepage extends Fragment {
         Menu drawer_menu = navigation.getMenu();
         MenuItem menuItem;
         menuItem = drawer_menu.findItem(R.id.nav_homepage);
-        if(!menuItem.isChecked())
-        {
+        if(! menuItem.isChecked()) {
             menuItem.setChecked(true);
-        }
+        } // if
 
         webView = view.findViewById(R.id.webView);
         webView.getSettings().setJavaScriptEnabled(true);

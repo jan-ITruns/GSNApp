@@ -2,6 +2,7 @@ package com.developer.workoutpro.itruns.gsnapp;
 
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,6 +52,14 @@ public class FrVertretungsplan extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fr_vertretungsplan, container, false);
         mainActivity = (MainActivity) getActivity();
+
+        NavigationView navigation = getActivity().findViewById(R.id.nav_view);
+        Menu drawer_menu = navigation.getMenu();
+        MenuItem menuItem;
+        menuItem = drawer_menu.findItem(R.id.nav_vertretungsplan);
+        if(! menuItem.isChecked()) {
+            menuItem.setChecked(true);
+        } // if
 
         toolbarEinrichten();
 
