@@ -18,8 +18,11 @@ import android.view.View;
 import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -418,6 +421,19 @@ public class MainActivity extends AppCompatActivity {
 
         LinearLayout linearLayout = navigationView.getHeaderView(0).findViewById(R.id.layoutNavHeader);
         linearLayout.setBackgroundResource(R.drawable.gsn_klein);
+
+        ImageView imgv = navigationView.getHeaderView(0).findViewById(R.id.imgvBenutzerbild);
+        imgv.setImageResource(R.drawable.ic_menu_camera);
+
+        TextView tvBenutzername = navigationView.getHeaderView(0).findViewById(R.id.tvBenutzername);
+        tvBenutzername.setText(benutzername);
+
+        TextView tvBenutzerinfo = navigationView.getHeaderView(0).findViewById(R.id.tvBenutzerinfo);
+        if (lehrerKuerzel.isEmpty()){
+            tvBenutzerinfo.setText("Jahrgangsstufe " + Integer.toString(jahrgangsstufe));
+        } else {
+            tvBenutzerinfo.setText(lehrerKuerzel);
+        }//if
 
         navigationView.getMenu().getItem(0).setChecked(true);
 
