@@ -38,19 +38,18 @@ public class RecyclerViewVertretungsplan extends RecyclerView.Adapter<RecyclerVi
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int i) {
-        if (kurs.get(i).length() > 0) {
-            if (kurs.get(i).charAt(0) == 'E') {
-                viewHolder.tvKurs.setText("EF | " + fach.get(i));
-            } else if (kurs.get(i).charAt(0) == 'Q') {
-                if (kurs.get(i).charAt(1) == '1') {
-                    viewHolder.tvKurs.setText("Q1 | " + fach.get(i));
-                } else {
-                    viewHolder.tvKurs.setText("Q2 | " + fach.get(i));
-                } // if
+        if (kurs.get(i).charAt(0) == 'E') {
+            viewHolder.tvKurs.setText("EF");
+        } else if (kurs.get(i).charAt(0) == 'Q') {
+            if (kurs.get(i).charAt(1) == '1') {
+                viewHolder.tvKurs.setText("Q1");
             } else {
-                viewHolder.tvKurs.setText(kurs.get(i) + " | " + fach.get(i));
+                viewHolder.tvKurs.setText("Q2");
             } // if
+        } else {
+            viewHolder.tvKurs.setText(kurs.get(i));
         } // if
+        viewHolder.tvFach.setText(fach.get(i));
         viewHolder.tvStunde.setText(stunde.get(i));
         viewHolder.tvVertreter.setText(vertreter.get(i));
         viewHolder.tvRaum.setText(raum.get(i));
@@ -75,6 +74,7 @@ public class RecyclerViewVertretungsplan extends RecyclerView.Adapter<RecyclerVi
     public class ViewHolder extends RecyclerView.ViewHolder{
         ConstraintLayout clVertretungsplanRow;
         TextView tvKurs;
+        TextView tvFach;
         TextView tvStunde;
         TextView tvVertreter;
         TextView tvRaum;
@@ -83,6 +83,7 @@ public class RecyclerViewVertretungsplan extends RecyclerView.Adapter<RecyclerVi
             super(view);
             clVertretungsplanRow = view.findViewById(R.id.ConstraintLayout);
             tvKurs = view.findViewById(R.id.tvKurs);
+            tvFach = view.findViewById(R.id.tvFach);
             tvStunde = view.findViewById(R.id.tvStunde);
             tvVertreter = view.findViewById(R.id.tvVertreter);
             tvRaum = view.findViewById(R.id.tvRaum);
