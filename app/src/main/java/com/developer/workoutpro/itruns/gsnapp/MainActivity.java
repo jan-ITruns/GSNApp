@@ -1,5 +1,6 @@
 package com.developer.workoutpro.itruns.gsnapp;
 
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentManager;
@@ -116,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("passwort", passwort);
         intent.putExtra("jahrgangsstufe", jahrgangsstufe);
 
-        startService(intent);
+        startActivity(intent);
         finish();
     } // Methode onStop
 

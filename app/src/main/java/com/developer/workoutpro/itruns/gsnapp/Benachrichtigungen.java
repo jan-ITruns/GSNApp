@@ -37,7 +37,7 @@ public class Benachrichtigungen extends Service {
 
     // Attribute für die Benachrichtigungen
     private NotificationCompat.Builder mBuilder;
-    private int notificationId;
+    private int notificationId = 1;
 
     private ArrayList<String> kursHeute;
     private ArrayList<String> stundeHeute;
@@ -468,6 +468,8 @@ public class Benachrichtigungen extends Service {
         } // while
         vertretungen = vertretungen.substring(1);
     } // Methode enferne1Klammern
+
+    private int test = 0;
 
     private void vertretungsplanAktualisieren() {
         website = new Website(benutzername, passwort);
