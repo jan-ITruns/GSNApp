@@ -661,12 +661,35 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 } // if
 
+                ArrayList<String> kursHeuteKopie, stundeHeuteKopie, vertreterHeuteKopie, fachHeuteKopie, raumHeuteKopie, infoHeuteKopie;
+                ArrayList<String> kursMorgenKopie, stundeMorgenKopie, vertreterMorgenKopie, fachMorgenKopie, raumMorgenKopie, infoMorgenKopie;
+
+                kursHeuteKopie = kursHeute;
+                stundeHeuteKopie = stundeHeute;
+                vertreterHeuteKopie = vertreterHeute;
+                fachHeuteKopie = fachHeute;
+                raumHeuteKopie = raumHeute;
+                infoHeuteKopie = infoHeute;
+
+                kursMorgenKopie = kursMorgen;
+                stundeMorgenKopie = stundeMorgen;
+                vertreterMorgenKopie = vertreterMorgen;
+                fachMorgenKopie = fachMorgen;
+                raumMorgenKopie = raumMorgen;
+                infoMorgenKopie = infoMorgen;
+
                 getDatum(0);
                 getDatum(1);
                 getVertretungsstunde(0);
                 getVertretungsstunde(1);
 
-                vertretungsplanOeffnen();
+                // Überprüfen, ob es Änderungen gab
+                if (kursHeuteKopie.equals(kursHeute) && stundeHeuteKopie.equals(stundeHeute) && vertreterHeuteKopie.equals(vertreterHeute) && fachHeuteKopie.equals(fachHeute) && raumHeuteKopie.equals(raumHeute) && infoHeuteKopie.equals(infoHeute)
+                        && kursMorgenKopie.equals(kursMorgen) && stundeMorgenKopie.equals(stundeMorgen) && vertreterMorgenKopie.equals(vertreterMorgen) && fachMorgenKopie.equals(fachMorgen) && raumMorgenKopie.equals(raumMorgen) && infoMorgenKopie.equals(infoMorgen)) {
+                    return;
+                } else {
+                    vertretungsplanOeffnen();
+                } // if
             }
         }, 10000);
     } // Methode vertretungsplanAktualisieren
