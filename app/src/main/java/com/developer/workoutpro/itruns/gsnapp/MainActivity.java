@@ -11,9 +11,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -38,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
     // Attribute für die Anmeldedaten
     public String benutzername;
     public String passwort;
+    public int jahrgangsstufe;
 
     // Attribute für die Website
     private Website website;
@@ -99,6 +103,9 @@ public class MainActivity extends AppCompatActivity {
 
         SharedPreferences passwortPref = getSharedPreferences("passwort", 0);
         passwort = passwortPref.getString("passwort", "");
+
+        SharedPreferences jahrgangsstufePref = getSharedPreferences("jahrgangsstufe", 0);
+        jahrgangsstufe = passwortPref.getInt("jahrgangsstufe", 5);
 
         // Vertretungselemente laden
         Gson gson = new Gson();
@@ -201,6 +208,26 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
 
+            // Jahrgangsstufe
+            Spinner spinnerJahrgangsstufe = findViewById(R.id.spinnerJahrgangsstufe);
+            spinnerJahrgangsstufe.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                            switch(position) {
+                                case 0: jahrgangsstufe = 5; break;
+                                case 1: jahrgangsstufe = 6; break;
+                                case 2: jahrgangsstufe = 7; break;
+                                case 3: jahrgangsstufe = 8; break;
+                                case 4: jahrgangsstufe = 9; break;
+                                case 5: jahrgangsstufe = 10; break;
+                                case 6: jahrgangsstufe = 11; break;
+                                case 7: jahrgangsstufe = 12; break;
+                            } // switch
+                        }
+
+                        public void onNothingSelected(AdapterView<?> parent) {
+                            jahrgangsstufe = 5;
+                        }
+                    });
         } else {
             setContentView(R.layout.activity_main);
             vertretungsplanOeffnen();
@@ -225,6 +252,11 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences.Editor editorPasswort = passwortPref.edit();
         editorPasswort.putString("passwort", passwort);
         editorPasswort.apply();
+
+        SharedPreferences jahrgangsstufePref = getSharedPreferences("jahrgangsstufe", 0);
+        SharedPreferences.Editor editorJahrgangsstufe = jahrgangsstufePref.edit();
+        editorJahrgangsstufe.putInt("jahrgangsstufe", jahrgangsstufe);
+        editorJahrgangsstufe.apply();
 
         // Vertretungselemente speichern
         Gson gson = new Gson();
@@ -468,6 +500,9 @@ public class MainActivity extends AppCompatActivity {
     } // Methode login
 
     public void logout(View view){
+        benutzername = "";
+        passwort = "";
+        jahrgangsstufe = 5;
         erstesLogin = true;
         setContentView(R.layout.activity_login);
 
@@ -481,6 +516,27 @@ public class MainActivity extends AppCompatActivity {
                     btnAnmelden.setFocusable(false);
                 }
             });
+
+        // Jahrgangsstufe
+        Spinner spinnerJahrgangsstufe = findViewById(R.id.spinnerJahrgangsstufe);
+        spinnerJahrgangsstufe.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                switch(position) {
+                    case 0: jahrgangsstufe = 5; break;
+                    case 1: jahrgangsstufe = 6; break;
+                    case 2: jahrgangsstufe = 7; break;
+                    case 3: jahrgangsstufe = 8; break;
+                    case 4: jahrgangsstufe = 9; break;
+                    case 5: jahrgangsstufe = 10; break;
+                    case 6: jahrgangsstufe = 11; break;
+                    case 7: jahrgangsstufe = 12; break;
+                } // switch
+            }
+
+            public void onNothingSelected(AdapterView<?> parent) {
+                jahrgangsstufe = 5;
+            }
+        });
     }
 
     private void getStand() {

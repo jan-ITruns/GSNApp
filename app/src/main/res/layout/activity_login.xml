@@ -52,7 +52,7 @@
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etPasswort" />
+        app:layout_constraintTop_toBottomOf="@+id/spinnerJahrgangsstufe" />
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -66,5 +66,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnAnmelden" />
+
+    <Spinner
+        android:id="@+id/spinnerJahrgangsstufe"
+        android:layout_width="300dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="20dp"
+        android:dropDownWidth="260dp"
+        android:entries="@array/jahrgangsstufen"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etPasswort" />
 
 </android.support.constraint.ConstraintLayout>

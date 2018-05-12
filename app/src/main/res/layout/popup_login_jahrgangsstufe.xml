@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/btnJahrgangsstufe5"
+        android:layout_width="300dp"
+        android:layout_height="25dp"
+        android:background="@android:color/transparent"
+        android:text="Jahrgangsstufe 5"
+        android:textAlignment="textStart"
+        android:textAllCaps="false"
+        android:textSize="14sp"
+        android:paddingStart="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnJahrgangsstufe6"
+        android:layout_width="300dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="25dp"
+        android:background="@android:color/transparent"
+        android:text="Jahrgangsstufe 6"
+        android:textAlignment="textStart"
+        android:textAllCaps="false"
+        android:textSize="14sp"
+        android:paddingStart="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnJahrgangsstufe7"
+        android:layout_width="300dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="50dp"
+        android:background="@android:color/transparent"
+        android:text="Jahrgangsstufe 7"
+        android:textAlignment="textStart"
+        android:textAllCaps="false"
+        android:textSize="14sp"
+        android:paddingStart="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnJahrgangsstufe8"
+        android:layout_width="300dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="75dp"
+        android:background="@android:color/transparent"
+        android:text="Jahrgangsstufe 8"
+        android:textAlignment="textStart"
+        android:textAllCaps="false"
+        android:textSize="14sp"
+        android:paddingStart="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnJahrgangsstufe9"
+        android:layout_width="300dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="100dp"
+        android:background="@android:color/transparent"
+        android:text="Jahrgangsstufe 9"
+        android:textAlignment="textStart"
+        android:textAllCaps="false"
+        android:textSize="14sp"
+        android:paddingStart="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnJahrgangsstufe10"
+        android:layout_width="300dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="125dp"
+        android:background="@android:color/transparent"
+        android:text="Jahrgangsstufe 10"
+        android:textAlignment="textStart"
+        android:textAllCaps="false"
+        android:textSize="14sp"
+        android:paddingStart="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnJahrgangsstufe11"
+        android:layout_width="300dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="150dp"
+        android:background="@android:color/transparent"
+        android:text="Jahrgangsstufe 11"
+        android:textAlignment="textStart"
+        android:textAllCaps="false"
+        android:textSize="14sp"
+        android:paddingStart="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnJahrgangsstufe12"
+        android:layout_width="300dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="175dp"
+        android:background="@android:color/transparent"
+        android:text="Jahrgangsstufe 12"
+        android:textAlignment="textStart"
+        android:textAllCaps="false"
+        android:textSize="14sp"
+        android:paddingStart="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</android.support.constraint.ConstraintLayout>

@@ -41,7 +41,7 @@ public class FrEinstellungenSchueler extends Fragment {
 
         tvAktuellerBenutzer.setText(mainActivity.benutzername);
         tvAktuellesPasswort.setText(mainActivity.passwort);
-        tvAktuelleJahrgangsstufe.setText("EF");
+        tvAktuelleJahrgangsstufe.setText(Integer.toString(mainActivity.jahrgangsstufe));
     } // Methode aktuelleDaten
 
     private void benachrichtigungen(){

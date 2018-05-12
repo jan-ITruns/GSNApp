@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">GSN App</string>
+
+    <string-array name="jahrgangsstufen">
+        <item>Jahrgangsstufe 5</item>
+        <item>Jahrgangsstufe 6</item>
+        <item>Jahrgangsstufe 7</item>
+        <item>Jahrgangsstufe 8</item>
+        <item>Jahrgangsstufe 9</item>
+        <item>Jahrgangsstufe 10</item>
+        <item>Jahrgangsstufe 11</item>
+        <item>Jahrgangsstufe 12</item>
+    </string-array>
 </resources>
