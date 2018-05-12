@@ -11,8 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-
 public class FrVertretungInfos extends Fragment {
 
     private View view;
@@ -30,7 +28,7 @@ public class FrVertretungInfos extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fr_vertretung_infos_test, container, false);
+        view = inflater.inflate(R.layout.fr_vertretung_infos, container, false);
         mainActivity = (MainActivity) getActivity();
 
         toolbarEinrichten();

@@ -585,6 +585,16 @@ public class MainActivity extends AppCompatActivity {
                                     } else {
                                         kursHeute.add(element[0]);
                                         ausgewaehltHeute.add(false);
+
+                                        if (kursHeute.get(kursHeute.size() - 1).contains("EF")) {
+                                            kursHeute.set(kursHeute.size() - 1, "EF");
+                                        } else if (kursHeute.get(kursHeute.size() - 1).contains("Q")) {
+                                            if (kursHeute.get(kursHeute.size() - 1).contains("1")) {
+                                                kursHeute.set(kursHeute.size() - 1, "Q1");
+                                            } else {
+                                                kursHeute.set(kursHeute.size() - 1, "Q2");
+                                            } // if
+                                        } // if
                                     } // if
                                     break;
                                 case 1: stundeHeute.add(element[0]); break;
@@ -603,6 +613,16 @@ public class MainActivity extends AppCompatActivity {
                                         } else {
                                             kursMorgen.add(element[0]);
                                             ausgewaehltMorgen.add(false);
+
+                                            if (kursMorgen.get(kursMorgen.size() - 1).contains("EF")) {
+                                                kursMorgen.set(kursMorgen.size() - 1, "EF");
+                                            } else if (kursMorgen.get(kursMorgen.size() - 1).contains("Q")) {
+                                                if (kursMorgen.get(kursMorgen.size() - 1).contains("1")) {
+                                                    kursMorgen.set(kursMorgen.size() - 1, "Q1");
+                                                } else {
+                                                    kursMorgen.set(kursMorgen.size() - 1, "Q2");
+                                                } // if
+                                            } // if
                                         } // if
                                         break;
                                     case 1: stundeMorgen.add(element[0]); break;

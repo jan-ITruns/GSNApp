@@ -2,45 +2,215 @@
 <android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
 
     <android.support.design.widget.AppBarLayout
-        android:id="@+id/app_bar_layout"
+        android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
-        android:layout_height="1000dp"
-        android:background="@color/transparent"
-        android:theme="@style/AppTheme.PopupOverlay">
+        android:layout_height="200dp"
+        android:fitsSystemWindows="true"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
         <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/collapsingToolbarLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
             app:contentScrim="?attr/colorPrimary"
-            app:expandedTitleMarginStart="48dp"
-            app:expandedTitleMarginEnd="64dp">
+            app:expandedTitleMarginStart="10dp"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
             <ImageView
+                android:id="@+id/imgvHeader"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@drawable/gsn_klein"
+                android:fitsSystemWindows="true"
                 android:scaleType="centerCrop"
-                android:src="@drawable/gsn_klein"
                 app:layout_collapseMode="parallax" />
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_gravity="bottom"
+                android:background="@drawable/text_hintergrund"/>
+
             <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbarVertretungsplanInfos"
+                android:id="@+id/toolbarVertretungsplanInfo"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:background="@color/transparent"
-                android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-                app:layout_scrollFlags="scroll|enterAlways"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-                app:layout_collapseMode="pin"/>
+                app:layout_collapseMode="pin"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
         </android.support.design.widget.CollapsingToolbarLayout>
 
     </android.support.design.widget.AppBarLayout>
 
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/scrollViewVertretungsplanInfo"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tvKursLabel"
+                android:layout_width="70dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="50dp"
+                android:text="Kurs:"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvKurs"
+                android:layout_width="100dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="50dp"
+                android:text="10IFG3"
+                android:textSize="14sp"
+                app:layout_constraintStart_toEndOf="@+id/tvKursLabel"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvFachLabel"
+                android:layout_width="70dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="5dp"
+                android:text="Fach:"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvKursLabel" />
+
+            <TextView
+                android:id="@+id/tvFach"
+                android:layout_width="100dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:text="Informatik"
+                android:textSize="14sp"
+                app:layout_constraintStart_toEndOf="@+id/tvFachLabel"
+                app:layout_constraintTop_toBottomOf="@+id/tvKurs" />
+
+            <TextView
+                android:id="@+id/tvStundeLabel"
+                android:layout_width="70dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="5dp"
+                android:text="Stunde:"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvFachLabel" />
+
+            <TextView
+                android:id="@+id/tvStunde"
+                android:layout_width="100dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:text="3 - 4"
+                android:textSize="14sp"
+                app:layout_constraintStart_toEndOf="@+id/tvStundeLabel"
+                app:layout_constraintTop_toBottomOf="@+id/tvFach" />
+
+            <TextView
+                android:id="@+id/tvRaumLabel"
+                android:layout_width="70dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="5dp"
+                android:text="Raum:"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvStundeLabel" />
+
+            <TextView
+                android:id="@+id/tvRaum"
+                android:layout_width="100dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:text="C1.35"
+                android:textSize="14sp"
+                app:layout_constraintStart_toEndOf="@+id/tvRaumLabel"
+                app:layout_constraintTop_toBottomOf="@+id/tvStunde" />
+
+            <TextView
+                android:id="@+id/tvVertreterLabel"
+                android:layout_width="70dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="5dp"
+                android:text="Vertreter:"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvRaumLabel" />
+
+            <TextView
+                android:id="@+id/tvVertreter"
+                android:layout_width="100dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:text="Herr Taake"
+                android:textSize="14sp"
+                app:layout_constraintStart_toEndOf="@+id/tvVertreterLabel"
+                app:layout_constraintTop_toBottomOf="@+id/tvRaum" />
+
+            <TextView
+                android:id="@+id/tvInfoLabel"
+                android:layout_width="70dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="5dp"
+                android:text="Info:"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvVertreterLabel" />
+
+            <TextView
+                android:id="@+id/tvInfo"
+                android:layout_width="200dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:text="entfällt"
+                android:textSize="14sp"
+                app:layout_constraintStart_toEndOf="@+id/tvInfoLabel"
+                app:layout_constraintTop_toBottomOf="@+id/tvVertreter" />
+
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_margin="15dp"
+        android:clickable="true"
+        android:src="@drawable/ic_menu_share"
+        android:tint="@color/weiss"
+        app:backgroundTint="#279AF1"
+        app:fabSize="normal"
+        app:layout_anchor="@+id/appBarLayout"
+        app:layout_anchorGravity="bottom|right|end"/>
 
 </android.support.design.widget.CoordinatorLayout>
