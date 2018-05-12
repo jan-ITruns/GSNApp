@@ -1,25 +1,20 @@
 package com.developer.workoutpro.itruns.gsnapp;
 
-import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Handler;
 import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.Spinner;
 import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -43,7 +38,8 @@ public class MainActivity extends AppCompatActivity {
     // Attribute für die Anmeldedaten
     public String benutzername;
     public String passwort;
-    public int jahrgangsstufe;
+    public String lehrerKuerzel;
+    public int jahrgangsstufe=0;
 
     // Attribute für die Website
     private Website website;
@@ -413,11 +409,12 @@ public class MainActivity extends AppCompatActivity {
                 });
     } // Methode menueLeiste
 
-    public void login() {
+    public void loginLehrer() {
         // Deklaration der Views
-        final EditText etBenutzername = findViewById(R.id.etBenutzername);
-        final EditText etPasswort = findViewById(R.id.etPasswort);
-        final ProgressBar progressBar = findViewById(R.id.progressBar);
+        final EditText etBenutzername = findViewById(R.id.etBenutzernameLehrer);
+        final EditText etPasswort = findViewById(R.id.etPasswortLehrer);
+        final EditText etLehrerkuerzel = findViewById(R.id.etLehrerkuerzel);
+        final ProgressBar progressBarLehrer = findViewById(R.id.progressBarLehrer);
         final Button btnAnmelden = findViewById(R.id.btnAnmelden);
 
         // Überprüfen, ob alle Anmeldedaten eingegeben wurden
@@ -427,15 +424,19 @@ public class MainActivity extends AppCompatActivity {
         } else if (etPasswort.getText().toString().isEmpty()) {
             btnAnmelden.setFocusable(true);
             Toast.makeText(MainActivity.this, "Bitte Passwort eingeben.", Toast.LENGTH_LONG).show();
+        } else if (etLehrerkuerzel.getText().toString().isEmpty()){
+            btnAnmelden.setFocusable(true);
+            Toast.makeText(MainActivity.this, "Bitte Lehrerkürzel eingeben.", Toast.LENGTH_LONG).show();
         } else {
             btnAnmelden.setClickable(false);
             benutzername = etBenutzername.getText().toString();
             passwort = etPasswort.getText().toString();
+            lehrerKuerzel = etLehrerkuerzel.getText().toString();
 
             website = new Website(benutzername, passwort);
             website.execute();
 
-            progressBar.setVisibility(View.VISIBLE);
+            progressBarLehrer.setVisibility(View.VISIBLE);
 
             Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
@@ -445,14 +446,14 @@ public class MainActivity extends AppCompatActivity {
                     htmlTextMorgen = website.getVertretungMorgen();
 
                     if (htmlTextHeute.contains("falschen Benutzernamen oder ein falsches Passwort")) {
-                        progressBar.setVisibility(View.INVISIBLE);
+                        progressBarLehrer.setVisibility(View.INVISIBLE);
                         btnAnmelden.setFocusable(true);
                         btnAnmelden.setClickable(true);
                         Toast.makeText(MainActivity.this, "Ungültiger Benutzername oder falsches Passwort.", Toast.LENGTH_LONG).show();
                     } else {
                         if (! htmlTextHeute.contains("mon_title")) {
                             Toast.makeText(MainActivity.this, "Ein unerwarteter Fehler ist aufgetreten.", Toast.LENGTH_LONG).show();
-                            progressBar.setVisibility(View.INVISIBLE);
+                            progressBarLehrer.setVisibility(View.INVISIBLE);
                             btnAnmelden.setFocusable(true);
                             btnAnmelden.setClickable(true);
                             return;
@@ -460,7 +461,7 @@ public class MainActivity extends AppCompatActivity {
 
                         if (! htmlTextMorgen.contains("mon_title")) {
                             Toast.makeText(MainActivity.this, "Ein unerwarteter Fehler ist aufgetreten.", Toast.LENGTH_LONG).show();
-                            progressBar.setVisibility(View.INVISIBLE);
+                            progressBarLehrer.setVisibility(View.INVISIBLE);
                             btnAnmelden.setFocusable(true);
                             btnAnmelden.setClickable(true);
                             return;
@@ -473,7 +474,7 @@ public class MainActivity extends AppCompatActivity {
                         getVertretungsstunde(1);
                         vertretungenSortieren();
 
-                        progressBar.setVisibility(View.INVISIBLE);
+                        progressBarLehrer.setVisibility(View.INVISIBLE);
                         btnAnmelden.setFocusable(true);
                         btnAnmelden.setClickable(true);
 
@@ -489,6 +490,135 @@ public class MainActivity extends AppCompatActivity {
 
         } // if
     } // Methode login
+
+    public void loginSchueler() {
+        // Deklaration der Views
+        final EditText etBenutzername = findViewById(R.id.etBenutzernameSchueler);
+        final EditText etPasswort = findViewById(R.id.etPasswortSchueler);
+        final ProgressBar progressBarSchueler = findViewById(R.id.progressBarSchueler);
+        final Button btnAnmelden = findViewById(R.id.btnAnmelden);
+
+        // Überprüfen, ob alle Anmeldedaten eingegeben wurden
+        if (etBenutzername.getText().toString().isEmpty()) {
+            btnAnmelden.setFocusable(true);
+            Toast.makeText(MainActivity.this, "Bitte Benutzernamen eingeben.", Toast.LENGTH_LONG).show();
+        } else if (etPasswort.getText().toString().isEmpty()) {
+            btnAnmelden.setFocusable(true);
+            Toast.makeText(MainActivity.this, "Bitte Passwort eingeben.", Toast.LENGTH_LONG).show();
+        } else if (jahrgangsstufe == 0){
+            btnAnmelden.setFocusable(true);
+            Toast.makeText(MainActivity.this, "Bitte Jahrgangsstufe auswählen.", Toast.LENGTH_LONG).show();
+        } else {
+            btnAnmelden.setClickable(false);
+            benutzername = etBenutzername.getText().toString();
+            passwort = etPasswort.getText().toString();
+
+            website = new Website(benutzername, passwort);
+            website.execute();
+
+            progressBarSchueler.setVisibility(View.VISIBLE);
+
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    htmlTextHeute = website.getVertretungHeute();
+                    htmlTextMorgen = website.getVertretungMorgen();
+
+                    if (htmlTextHeute.contains("falschen Benutzernamen oder ein falsches Passwort")) {
+                        progressBarSchueler.setVisibility(View.INVISIBLE);
+                        btnAnmelden.setFocusable(true);
+                        btnAnmelden.setClickable(true);
+                        Toast.makeText(MainActivity.this, "Ungültiger Benutzername oder falsches Passwort.", Toast.LENGTH_LONG).show();
+                    } else {
+                        if (! htmlTextHeute.contains("mon_title")) {
+                            Toast.makeText(MainActivity.this, "Ein unerwarteter Fehler ist aufgetreten.", Toast.LENGTH_LONG).show();
+                            progressBarSchueler.setVisibility(View.INVISIBLE);
+                            btnAnmelden.setFocusable(true);
+                            btnAnmelden.setClickable(true);
+                            return;
+                        } // if
+
+                        if (! htmlTextMorgen.contains("mon_title")) {
+                            Toast.makeText(MainActivity.this, "Ein unerwarteter Fehler ist aufgetreten.", Toast.LENGTH_LONG).show();
+                            progressBarSchueler.setVisibility(View.INVISIBLE);
+                            btnAnmelden.setFocusable(true);
+                            btnAnmelden.setClickable(true);
+                            return;
+                        } // if
+
+                        getStand();
+                        getDatum(0);
+                        getDatum(1);
+                        getVertretungsstunde(0);
+                        getVertretungsstunde(1);
+                        vertretungenSortieren();
+
+                        progressBarSchueler.setVisibility(View.INVISIBLE);
+                        btnAnmelden.setFocusable(true);
+                        btnAnmelden.setClickable(true);
+
+                        setContentView(R.layout.activity_main);
+
+                        vertretungsplanOeffnen();
+                        menueleiste();
+
+                        erstesLogin = false;
+                    } // if
+                }
+            }, 10000);
+
+        } // if
+    } // Methode login
+
+    public void setBackgroundColor(int btn){
+        //Deklaration
+        final Button btnJgst5 = findViewById(R.id.btnJgs5);
+        final Button btnJgst6 = findViewById(R.id.btnJgs6);
+        final Button btnJgst7 = findViewById(R.id.btnJgs7);
+        final Button btnJgst8 = findViewById(R.id.btnJgs8);
+        final Button btnJgst9 = findViewById(R.id.btnJgs9);
+        final Button btnJgst10 = findViewById(R.id.btnJgs10);
+        final Button btnJgst11 = findViewById(R.id.btnJgs11);
+        final Button btnJgst12 = findViewById(R.id.btnJgs12);
+
+        //Hintergrund prüfen
+        btnJgst5.setBackgroundColor(0xFFCECECE);
+        btnJgst6.setBackgroundColor(0xFFCECECE);
+        btnJgst7.setBackgroundColor(0xFFCECECE);
+        btnJgst8.setBackgroundColor(0xFFCECECE);
+        btnJgst9.setBackgroundColor(0xFFCECECE);
+        btnJgst10.setBackgroundColor(0xFFCECECE);
+        btnJgst11.setBackgroundColor(0xFFCECECE);
+        btnJgst12.setBackgroundColor(0xFFCECECE);
+
+        switch (btn){
+            case 5:
+                btnJgst5.setBackgroundColor(0xCCFF9E37);
+                break;
+            case 6:
+                btnJgst6.setBackgroundColor(0xCCFF9E37);
+                break;
+            case 7:
+                btnJgst7.setBackgroundColor(0xCCFF9E37);
+                break;
+            case 8:
+                btnJgst8.setBackgroundColor(0xCCFF9E37);
+                break;
+            case 9:
+                btnJgst9.setBackgroundColor(0xCCFF9E37);
+                break;
+            case 10:
+                btnJgst10.setBackgroundColor(0xCCFF9E37);
+                break;
+            case 11:
+                btnJgst11.setBackgroundColor(0xCCFF9E37);
+                break;
+            case 12:
+                btnJgst12.setBackgroundColor(0xCCFF9E37);
+                break;
+        }
+    }
 
     public void logout(View view){
         benutzername = "";

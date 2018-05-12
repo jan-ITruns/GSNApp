@@ -7,11 +7,11 @@
     tools:context=".Ladebildschirm">
 
     <EditText
-        android:id="@+id/etBenutzername"
+        android:id="@+id/etBenutzernameSchueler"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_marginBottom="300dp"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="130dp"
         android:background="@color/schwarzTransparent"
         android:hint="Benutzername"
         android:inputType="textPersonName"
@@ -26,7 +26,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/etPasswort"
+        android:id="@+id/etPasswortSchueler"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_marginTop="15dp"
@@ -40,7 +40,7 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etBenutzername" />
+        app:layout_constraintTop_toBottomOf="@+id/etBenutzernameSchueler" />
 
     <Button
         android:id="@+id/btnAnmelden"
@@ -54,17 +54,19 @@
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etPasswort" />
+        app:layout_constraintTop_toBottomOf="@+id/etPasswortSchueler" />
 
     <ProgressBar
-        android:id="@+id/progressBar"
+        android:id="@+id/progressBarSchueler"
         style="?android:attr/progressBarStyle"
         android:layout_width="40dp"
         android:layout_height="40dp"
+        android:layout_marginBottom="20dp"
         android:layout_marginTop="15dp"
         android:indeterminateBehavior="repeat"
         android:indeterminateTint="@color/schwarz"
         android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnAnmelden" />
@@ -74,9 +76,9 @@
         android:layout_width="100dp"
         android:layout_height="75dp"
         android:layout_marginBottom="15dp"
-        app:layout_constraintBottom_toTopOf="@+id/etBenutzername"
-        app:layout_constraintEnd_toEndOf="@+id/etBenutzername"
-        app:layout_constraintStart_toStartOf="@+id/etBenutzername"
+        app:layout_constraintBottom_toTopOf="@+id/etBenutzernameSchueler"
+        app:layout_constraintEnd_toEndOf="@+id/etBenutzernameSchueler"
+        app:layout_constraintStart_toStartOf="@+id/etBenutzernameSchueler"
         app:srcCompat="@drawable/ic_student_24dp" />
 
     <TextView
@@ -91,70 +93,78 @@
 
     <Button
         android:id="@+id/btnJgs5"
-        android:layout_width="50dp"
+        android:layout_width="60dp"
         android:layout_height="40dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/hintergrundDunkel"
         android:text="5"
-        app:layout_constraintStart_toStartOf="@+id/etPasswort"
+        app:layout_constraintStart_toStartOf="@+id/etPasswortSchueler"
         app:layout_constraintTop_toBottomOf="@+id/tvJahrgangsstufe" />
 
     <Button
         android:id="@+id/btnJgs6"
-        android:layout_width="50dp"
+        android:layout_width="60dp"
         android:layout_height="40dp"
-        android:layout_marginStart="20dp"
+        android:layout_marginStart="10dp"
+        android:background="@color/hintergrundDunkel"
         android:text="6"
         app:layout_constraintStart_toEndOf="@+id/btnJgs5"
         app:layout_constraintTop_toTopOf="@+id/btnJgs5" />
 
     <Button
         android:id="@+id/btnJgs7"
-        android:layout_width="50dp"
+        android:layout_width="60dp"
         android:layout_height="40dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginEnd="10dp"
+        android:background="@color/hintergrundDunkel"
         android:text="7"
         app:layout_constraintEnd_toStartOf="@+id/btnJgs8"
         app:layout_constraintTop_toTopOf="@+id/btnJgs6" />
 
     <Button
         android:id="@+id/btnJgs8"
-        android:layout_width="50dp"
+        android:layout_width="60dp"
         android:layout_height="40dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginEnd="15dp"
+        android:background="@color/hintergrundDunkel"
         android:text="8"
-        app:layout_constraintEnd_toEndOf="@+id/etPasswort"
+        app:layout_constraintEnd_toEndOf="@+id/etPasswortSchueler"
         app:layout_constraintTop_toTopOf="@+id/btnJgs7" />
 
     <Button
         android:id="@+id/btnJgs9"
-        android:layout_width="50dp"
+        android:layout_width="60dp"
         android:layout_height="40dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/hintergrundDunkel"
         android:text="9"
         app:layout_constraintStart_toStartOf="@+id/btnJgs5"
         app:layout_constraintTop_toBottomOf="@+id/btnJgs5" />
 
     <Button
         android:id="@+id/btnJgs10"
-        android:layout_width="50dp"
+        android:layout_width="60dp"
         android:layout_height="40dp"
+        android:background="@color/hintergrundDunkel"
         android:text="10"
         app:layout_constraintStart_toStartOf="@+id/btnJgs6"
         app:layout_constraintTop_toTopOf="@+id/btnJgs9" />
 
     <Button
         android:id="@+id/btnJgs11"
-        android:layout_width="50dp"
+        android:layout_width="60dp"
         android:layout_height="40dp"
+        android:background="@color/hintergrundDunkel"
         android:text="11"
         app:layout_constraintStart_toStartOf="@+id/btnJgs7"
         app:layout_constraintTop_toTopOf="@+id/btnJgs10" />
 
     <Button
         android:id="@+id/btnJgs12"
-        android:layout_width="50dp"
+        android:layout_width="60dp"
         android:layout_height="40dp"
+        android:background="@color/hintergrundDunkel"
         android:text="12"
         app:layout_constraintStart_toStartOf="@+id/btnJgs8"
         app:layout_constraintTop_toTopOf="@+id/btnJgs11" />
@@ -165,10 +175,10 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
         android:text="Jahrgangsstufe auswählen"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etPasswort" />
+        app:layout_constraintTop_toBottomOf="@+id/etPasswortSchueler" />
 
 </android.support.constraint.ConstraintLayout>

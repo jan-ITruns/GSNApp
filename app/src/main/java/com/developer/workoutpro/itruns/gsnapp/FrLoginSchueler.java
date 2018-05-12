@@ -23,15 +23,96 @@ public class FrLoginSchueler extends Fragment{
 
         // Deklaration der Views
         final Button btnAnmelden = view.findViewById(R.id.btnAnmelden);
+        final Button btnJgst5 = view.findViewById(R.id.btnJgs5);
+        final Button btnJgst6 = view.findViewById(R.id.btnJgs6);
+        final Button btnJgst7 = view.findViewById(R.id.btnJgs7);
+        final Button btnJgst8 = view.findViewById(R.id.btnJgs8);
+        final Button btnJgst9 = view.findViewById(R.id.btnJgs9);
+        final Button btnJgst10 = view.findViewById(R.id.btnJgs10);
+        final Button btnJgst11 = view.findViewById(R.id.btnJgs11);
+        final Button btnJgst12 = view.findViewById(R.id.btnJgs12);
+
+        btnJgst5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                btnJgst5.setFocusable(true);
+                mainActivity.setBackgroundColor(5);
+                mainActivity.jahrgangsstufe = 5;
+            }
+        });
+
+        btnJgst6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                btnJgst6.setFocusable(true);
+                mainActivity.setBackgroundColor(6);
+                mainActivity.jahrgangsstufe = 6;
+            }
+        });
+
+        btnJgst7.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                btnJgst7.setFocusable(true);
+                mainActivity.setBackgroundColor(7);
+                mainActivity.jahrgangsstufe = 7;
+            }
+        });
+
+        btnJgst8.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                btnJgst8.setFocusable(true);
+                mainActivity.setBackgroundColor(8);
+                mainActivity.jahrgangsstufe = 8;
+            }
+        });
+
+        btnJgst9.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                btnJgst9.setFocusable(true);
+                mainActivity.setBackgroundColor(9);
+                mainActivity.jahrgangsstufe = 9;
+            }
+        });
+
+        btnJgst10.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                btnJgst10.setFocusable(true);
+                mainActivity.setBackgroundColor(10);
+                mainActivity.jahrgangsstufe = 10;
+            }
+        });
+
+        btnJgst11.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                btnJgst11.setFocusable(true);
+                mainActivity.setBackgroundColor(11);
+                mainActivity.jahrgangsstufe = 11;
+            }
+        });
+
+        btnJgst12.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                btnJgst12.setFocusable(true);
+                mainActivity.setBackgroundColor(12);
+                mainActivity.jahrgangsstufe = 12;
+            }
+        });
 
         btnAnmelden.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mainActivity.login();
+                mainActivity.loginSchueler();
                 btnAnmelden.setFocusable(false);
             }
         });
 
         return view;
     } // Methode onCreateView
+
 }

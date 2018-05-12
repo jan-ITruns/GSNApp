@@ -7,11 +7,11 @@
     tools:context=".Ladebildschirm">
 
     <EditText
-        android:id="@+id/etBenutzername"
+        android:id="@+id/etBenutzernameLehrer"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_marginBottom="300dp"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="130dp"
         android:background="@color/schwarzTransparent"
         android:hint="Benutzername"
         android:inputType="textPersonName"
@@ -26,7 +26,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/etPasswort"
+        android:id="@+id/etPasswortLehrer"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_marginTop="15dp"
@@ -40,7 +40,7 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etBenutzername" />
+        app:layout_constraintTop_toBottomOf="@+id/etBenutzernameLehrer" />
 
     <Button
         android:id="@+id/btnAnmelden"
@@ -54,29 +54,31 @@
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etPasswort" />
+        app:layout_constraintTop_toBottomOf="@+id/etPasswortLehrer" />
 
     <ProgressBar
-        android:id="@+id/progressBar"
+        android:id="@+id/progressBarLehrer"
         style="?android:attr/progressBarStyle"
         android:layout_width="40dp"
         android:layout_height="40dp"
+        android:layout_marginBottom="20dp"
         android:layout_marginTop="15dp"
         android:indeterminateBehavior="repeat"
         android:indeterminateTint="@color/schwarz"
         android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnAnmelden" />
 
     <ImageButton
-        android:id="@+id/imgbtnSchuelerversion"
+        android:id="@+id/imgbtnLehrerversion"
         android:layout_width="100dp"
         android:layout_height="75dp"
         android:layout_marginBottom="15dp"
-        app:layout_constraintBottom_toTopOf="@+id/etBenutzername"
-        app:layout_constraintEnd_toEndOf="@+id/etBenutzername"
-        app:layout_constraintStart_toStartOf="@+id/etBenutzername"
+        app:layout_constraintBottom_toTopOf="@+id/etBenutzernameLehrer"
+        app:layout_constraintEnd_toEndOf="@+id/etBenutzernameLehrer"
+        app:layout_constraintStart_toStartOf="@+id/etBenutzernameLehrer"
         app:srcCompat="@drawable/ic_teacher_24dp" />
 
     <TextView
@@ -85,7 +87,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:text="Lehrer-Version"
-        app:layout_constraintBottom_toTopOf="@+id/imgbtnSchuelerversion"
+        app:layout_constraintBottom_toTopOf="@+id/imgbtnLehrerversion"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -95,11 +97,11 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="40dp"
         android:text="Lehrerkürzel eingeben"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etPasswort" />
+        app:layout_constraintTop_toBottomOf="@+id/etPasswortLehrer" />
 
     <EditText
         android:id="@+id/etLehrerkuerzel"

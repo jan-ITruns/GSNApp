@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 
 public class FrLoginLehrer extends Fragment {
 
@@ -21,11 +22,12 @@ public class FrLoginLehrer extends Fragment {
 
         // Deklaration der Views
         final Button btnAnmelden = view.findViewById(R.id.btnAnmelden);
+        final EditText etLehrerKuerzel = view.findViewById(R.id.etLehrerkuerzel);
 
         btnAnmelden.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mainActivity.login();
+                mainActivity.loginLehrer();
                 btnAnmelden.setFocusable(false);
             }
         });
