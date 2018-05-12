@@ -3,6 +3,7 @@ package com.developer.workoutpro.itruns.gsnapp;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.content.SharedPreferences;
@@ -44,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
     // Attribute für die Anmeldedaten
     public String benutzername;
     public String passwort;
-    public String lehrerKuerzel;
+    public String lehrerKuerzel="";
     public int jahrgangsstufe=0;
 
     // Attribute für die Website
@@ -879,7 +880,11 @@ public class MainActivity extends AppCompatActivity {
             gesucht = "Q2";
         } else {
             gesucht = "0" + Integer.toString(jahrgangsstufe);
-        } // if
+        } //if
+
+        if (!lehrerKuerzel.isEmpty()) {
+            gesucht = lehrerKuerzel;
+        }//if
 
         ausgewaehltHeute = new ArrayList<>();
         ausgewaehltMorgen = new ArrayList<>();
@@ -891,86 +896,170 @@ public class MainActivity extends AppCompatActivity {
             ausgewaehltMorgen.add(0);
         } // for
 
-        for (int index = 0; index < kursHeute.size(); index++) {
-            if (kursHeute.get(index).contains(gesucht)) {
-                kursHeute.add(kursHeute.get(kursHeute.size() - 1));
-                fachHeute.add(fachHeute.get(fachHeute.size() - 1));
-                stundeHeute.add(stundeHeute.get(stundeHeute.size() - 1));
-                raumHeute.add(raumHeute.get(raumHeute.size() - 1));
-                vertreterHeute.add(vertreterHeute.get(vertreterHeute.size() - 1));
-                infoHeute.add(infoHeute.get(infoHeute.size() - 1));
-                ausgewaehltHeute.add(ausgewaehltHeute.get(ausgewaehltHeute.size() - 1));
+        if (lehrerKuerzel.isEmpty()) {
+            for (int index = 0; index < kursHeute.size(); index++) {
+                if (kursHeute.get(index).contains(gesucht)) {
+                    kursHeute.add(kursHeute.get(kursHeute.size() - 1));
+                    fachHeute.add(fachHeute.get(fachHeute.size() - 1));
+                    stundeHeute.add(stundeHeute.get(stundeHeute.size() - 1));
+                    raumHeute.add(raumHeute.get(raumHeute.size() - 1));
+                    vertreterHeute.add(vertreterHeute.get(vertreterHeute.size() - 1));
+                    infoHeute.add(infoHeute.get(infoHeute.size() - 1));
+                    ausgewaehltHeute.add(ausgewaehltHeute.get(ausgewaehltHeute.size() - 1));
 
-                for (int index1 = kursHeute.size() - 2; index1 >= gefunden; index1--) {
-                    kursHeute.set(index1 + 1, kursHeute.get(index1));
-                    fachHeute.set(index1 + 1, fachHeute.get(index1));
-                    stundeHeute.set(index1 + 1, stundeHeute.get(index1));
-                    raumHeute.set(index1 + 1, raumHeute.get(index1));
-                    vertreterHeute.set(index1 + 1, vertreterHeute.get(index1));
-                    infoHeute.set(index1 + 1, infoHeute.get(index1));
-                    ausgewaehltHeute.set(index1 + 1, ausgewaehltHeute.get(index1));
-                } // for
+                    for (int index1 = kursHeute.size() - 2; index1 >= gefunden; index1--) {
+                        kursHeute.set(index1 + 1, kursHeute.get(index1));
+                        fachHeute.set(index1 + 1, fachHeute.get(index1));
+                        stundeHeute.set(index1 + 1, stundeHeute.get(index1));
+                        raumHeute.set(index1 + 1, raumHeute.get(index1));
+                        vertreterHeute.set(index1 + 1, vertreterHeute.get(index1));
+                        infoHeute.set(index1 + 1, infoHeute.get(index1));
+                        ausgewaehltHeute.set(index1 + 1, ausgewaehltHeute.get(index1));
+                    } // for
 
-                kursHeute.set(gefunden, kursHeute.get(index + 1));
-                fachHeute.set(gefunden, fachHeute.get(index + 1));
-                stundeHeute.set(gefunden, stundeHeute.get(index + 1));
-                raumHeute.set(gefunden, raumHeute.get(index + 1));
-                vertreterHeute.set(gefunden, vertreterHeute.get(index + 1));
-                infoHeute.set(gefunden, infoHeute.get(index + 1));
-                ausgewaehltHeute.set(gefunden, 1);
+                    kursHeute.set(gefunden, kursHeute.get(index + 1));
+                    fachHeute.set(gefunden, fachHeute.get(index + 1));
+                    stundeHeute.set(gefunden, stundeHeute.get(index + 1));
+                    raumHeute.set(gefunden, raumHeute.get(index + 1));
+                    vertreterHeute.set(gefunden, vertreterHeute.get(index + 1));
+                    infoHeute.set(gefunden, infoHeute.get(index + 1));
+                    ausgewaehltHeute.set(gefunden, 1);
 
-                kursHeute.remove(index + 1);
-                fachHeute.remove(index + 1);
-                stundeHeute.remove(index + 1);
-                raumHeute.remove(index + 1);
-                vertreterHeute.remove(index + 1);
-                infoHeute.remove(index + 1);
-                ausgewaehltHeute.remove(index + 1);
+                    kursHeute.remove(index + 1);
+                    fachHeute.remove(index + 1);
+                    stundeHeute.remove(index + 1);
+                    raumHeute.remove(index + 1);
+                    vertreterHeute.remove(index + 1);
+                    infoHeute.remove(index + 1);
+                    ausgewaehltHeute.remove(index + 1);
 
-                gefunden++;
-            } // if
-        } // for
+                    gefunden++;
+                } // if
+            } // for
+        } else {
+            for (int index = 0; index < kursHeute.size(); index++) {
+                if (vertreterHeute.get(index).contains(gesucht)) {
+                    kursHeute.add(kursHeute.get(kursHeute.size() - 1));
+                    fachHeute.add(fachHeute.get(fachHeute.size() - 1));
+                    stundeHeute.add(stundeHeute.get(stundeHeute.size() - 1));
+                    raumHeute.add(raumHeute.get(raumHeute.size() - 1));
+                    vertreterHeute.add(vertreterHeute.get(vertreterHeute.size() - 1));
+                    infoHeute.add(infoHeute.get(infoHeute.size() - 1));
+                    ausgewaehltHeute.add(ausgewaehltHeute.get(ausgewaehltHeute.size() - 1));
+
+                    for (int index1 = kursHeute.size() - 2; index1 >= gefunden; index1--) {
+                        kursHeute.set(index1 + 1, kursHeute.get(index1));
+                        fachHeute.set(index1 + 1, fachHeute.get(index1));
+                        stundeHeute.set(index1 + 1, stundeHeute.get(index1));
+                        raumHeute.set(index1 + 1, raumHeute.get(index1));
+                        vertreterHeute.set(index1 + 1, vertreterHeute.get(index1));
+                        infoHeute.set(index1 + 1, infoHeute.get(index1));
+                        ausgewaehltHeute.set(index1 + 1, ausgewaehltHeute.get(index1));
+                    } // for
+
+                    kursHeute.set(gefunden, kursHeute.get(index + 1));
+                    fachHeute.set(gefunden, fachHeute.get(index + 1));
+                    stundeHeute.set(gefunden, stundeHeute.get(index + 1));
+                    raumHeute.set(gefunden, raumHeute.get(index + 1));
+                    vertreterHeute.set(gefunden, vertreterHeute.get(index + 1));
+                    infoHeute.set(gefunden, infoHeute.get(index + 1));
+                    ausgewaehltHeute.set(gefunden, 1);
+
+                    kursHeute.remove(index + 1);
+                    fachHeute.remove(index + 1);
+                    stundeHeute.remove(index + 1);
+                    raumHeute.remove(index + 1);
+                    vertreterHeute.remove(index + 1);
+                    infoHeute.remove(index + 1);
+                    ausgewaehltHeute.remove(index + 1);
+
+                    gefunden++;
+                } // if
+            } // for
+        }
 
         gefunden = 0;
-        for (int index = 0; index < kursMorgen.size(); index++) {
-            if (kursMorgen.get(index).contains(gesucht)) {
-                kursMorgen.add(kursMorgen.get(kursMorgen.size() - 1));
-                fachMorgen.add(fachMorgen.get(fachMorgen.size() - 1));
-                stundeMorgen.add(stundeMorgen.get(stundeMorgen.size() - 1));
-                raumMorgen.add(raumMorgen.get(raumMorgen.size() - 1));
-                vertreterMorgen.add(vertreterMorgen.get(vertreterMorgen.size() - 1));
-                infoMorgen.add(infoMorgen.get(infoMorgen.size() - 1));
-                ausgewaehltMorgen.add(ausgewaehltMorgen.get(ausgewaehltMorgen.size() - 1));
+        if (lehrerKuerzel.isEmpty()) {
+            for (int index = 0; index < kursMorgen.size(); index++) {
+                if (kursMorgen.get(index).contains(gesucht)) {
+                    kursMorgen.add(kursMorgen.get(kursMorgen.size() - 1));
+                    fachMorgen.add(fachMorgen.get(fachMorgen.size() - 1));
+                    stundeMorgen.add(stundeMorgen.get(stundeMorgen.size() - 1));
+                    raumMorgen.add(raumMorgen.get(raumMorgen.size() - 1));
+                    vertreterMorgen.add(vertreterMorgen.get(vertreterMorgen.size() - 1));
+                    infoMorgen.add(infoMorgen.get(infoMorgen.size() - 1));
+                    ausgewaehltMorgen.add(ausgewaehltMorgen.get(ausgewaehltMorgen.size() - 1));
 
-                for (int index1 = kursMorgen.size() - 2; index1 >= gefunden; index1--) {
-                    kursMorgen.set(index1 + 1, kursMorgen.get(index1));
-                    fachMorgen.set(index1 + 1, fachMorgen.get(index1));
-                    stundeMorgen.set(index1 + 1, stundeMorgen.get(index1));
-                    raumMorgen.set(index1 + 1, raumMorgen.get(index1));
-                    vertreterMorgen.set(index1 + 1, vertreterMorgen.get(index1));
-                    infoMorgen.set(index1 + 1, infoMorgen.get(index1));
-                    ausgewaehltMorgen.set(index1 + 1, ausgewaehltMorgen.get(index1));
-                } // for
+                    for (int index1 = kursMorgen.size() - 2; index1 >= gefunden; index1--) {
+                        kursMorgen.set(index1 + 1, kursMorgen.get(index1));
+                        fachMorgen.set(index1 + 1, fachMorgen.get(index1));
+                        stundeMorgen.set(index1 + 1, stundeMorgen.get(index1));
+                        raumMorgen.set(index1 + 1, raumMorgen.get(index1));
+                        vertreterMorgen.set(index1 + 1, vertreterMorgen.get(index1));
+                        infoMorgen.set(index1 + 1, infoMorgen.get(index1));
+                        ausgewaehltMorgen.set(index1 + 1, ausgewaehltMorgen.get(index1));
+                    } // for
 
-                kursMorgen.set(gefunden, kursMorgen.get(index + 1));
-                fachMorgen.set(gefunden, fachMorgen.get(index + 1));
-                stundeMorgen.set(gefunden, stundeMorgen.get(index + 1));
-                raumMorgen.set(gefunden, raumMorgen.get(index + 1));
-                vertreterMorgen.set(gefunden, vertreterMorgen.get(index + 1));
-                infoMorgen.set(gefunden, infoMorgen.get(index + 1));
-                ausgewaehltMorgen.set(gefunden, 1);
+                    kursMorgen.set(gefunden, kursMorgen.get(index + 1));
+                    fachMorgen.set(gefunden, fachMorgen.get(index + 1));
+                    stundeMorgen.set(gefunden, stundeMorgen.get(index + 1));
+                    raumMorgen.set(gefunden, raumMorgen.get(index + 1));
+                    vertreterMorgen.set(gefunden, vertreterMorgen.get(index + 1));
+                    infoMorgen.set(gefunden, infoMorgen.get(index + 1));
+                    ausgewaehltMorgen.set(gefunden, 1);
 
-                kursMorgen.remove(index + 1);
-                fachMorgen.remove(index + 1);
-                stundeMorgen.remove(index + 1);
-                raumMorgen.remove(index + 1);
-                vertreterMorgen.remove(index + 1);
-                infoMorgen.remove(index + 1);
-                ausgewaehltMorgen.remove(index + 1);
+                    kursMorgen.remove(index + 1);
+                    fachMorgen.remove(index + 1);
+                    stundeMorgen.remove(index + 1);
+                    raumMorgen.remove(index + 1);
+                    vertreterMorgen.remove(index + 1);
+                    infoMorgen.remove(index + 1);
+                    ausgewaehltMorgen.remove(index + 1);
 
-                gefunden++;
-            } // if
-        } // for
+                    gefunden++;
+                } // if
+            } // for
+        } else {
+            for (int index = 0; index < kursMorgen.size(); index++) {
+                if (vertreterMorgen.get(index).contains(gesucht)) {
+                    kursMorgen.add(kursMorgen.get(kursMorgen.size() - 1));
+                    fachMorgen.add(fachMorgen.get(fachMorgen.size() - 1));
+                    stundeMorgen.add(stundeMorgen.get(stundeMorgen.size() - 1));
+                    raumMorgen.add(raumMorgen.get(raumMorgen.size() - 1));
+                    vertreterMorgen.add(vertreterMorgen.get(vertreterMorgen.size() - 1));
+                    infoMorgen.add(infoMorgen.get(infoMorgen.size() - 1));
+                    ausgewaehltMorgen.add(ausgewaehltMorgen.get(ausgewaehltMorgen.size() - 1));
+
+                    for (int index1 = kursMorgen.size() - 2; index1 >= gefunden; index1--) {
+                        kursMorgen.set(index1 + 1, kursMorgen.get(index1));
+                        fachMorgen.set(index1 + 1, fachMorgen.get(index1));
+                        stundeMorgen.set(index1 + 1, stundeMorgen.get(index1));
+                        raumMorgen.set(index1 + 1, raumMorgen.get(index1));
+                        vertreterMorgen.set(index1 + 1, vertreterMorgen.get(index1));
+                        infoMorgen.set(index1 + 1, infoMorgen.get(index1));
+                        ausgewaehltMorgen.set(index1 + 1, ausgewaehltMorgen.get(index1));
+                    } // for
+
+                    kursMorgen.set(gefunden, kursMorgen.get(index + 1));
+                    fachMorgen.set(gefunden, fachMorgen.get(index + 1));
+                    stundeMorgen.set(gefunden, stundeMorgen.get(index + 1));
+                    raumMorgen.set(gefunden, raumMorgen.get(index + 1));
+                    vertreterMorgen.set(gefunden, vertreterMorgen.get(index + 1));
+                    infoMorgen.set(gefunden, infoMorgen.get(index + 1));
+                    ausgewaehltMorgen.set(gefunden, 1);
+
+                    kursMorgen.remove(index + 1);
+                    fachMorgen.remove(index + 1);
+                    stundeMorgen.remove(index + 1);
+                    raumMorgen.remove(index + 1);
+                    vertreterMorgen.remove(index + 1);
+                    infoMorgen.remove(index + 1);
+                    ausgewaehltMorgen.remove(index + 1);
+
+                    gefunden++;
+                } // if
+            } // for
+        }//if
     } // vertretungenSortieren
 
     private void entferne2Klammern() {
@@ -1034,7 +1123,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupViewPager(ViewPager pViewPager) {
-
         TabViewLogin adapter = new TabViewLogin(getSupportFragmentManager());
         // Schueler-Login hinzufügen
         FrLoginSchueler frLoginSchueler = new FrLoginSchueler();
