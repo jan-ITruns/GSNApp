@@ -1,18 +1,19 @@
 package com.developer.workoutpro.itruns.gsnapp;
 
+import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Handler;
 import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -22,7 +23,6 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import android.support.design.widget.FloatingActionButton;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -179,15 +179,6 @@ public class MainActivity extends AppCompatActivity {
         String infoMorgenJson = infoMorgenPref.getString("infoMorgen", "");
         infoMorgen = gson.fromJson(infoMorgenJson, typeString);
 
-        // Ausgewählt
-        SharedPreferences ausgewaehltHeutePref = getSharedPreferences("ausgewaehltHeute", 0);
-        String ausgewaehltHeuteJson = ausgewaehltHeutePref.getString("ausgewaehltHeute", "");
-        ausgewaehltHeute = gson.fromJson(ausgewaehltHeuteJson, typeBoolean);
-
-        SharedPreferences ausgewaehltMorgenPref = getSharedPreferences("ausgewaehltMorgen", 0);
-        String ausgewaehltMorgenJson = ausgewaehltMorgenPref.getString("ausgewaehltMorgen", "");
-        ausgewaehltMorgen = gson.fromJson(ausgewaehltMorgenJson, typeBoolean);
-
         // Benachrichtigungseinstellungen laden
         //Vertretung
         SharedPreferences benachrichtigungVertretungPref = getSharedPreferences("benachrichtigungVertretung", 0);
@@ -242,6 +233,7 @@ public class MainActivity extends AppCompatActivity {
                     });
         } else {
             setContentView(R.layout.activity_main);
+            vertretungenSortieren();
             vertretungsplanOeffnen();
             menueleiste();
         } // if
@@ -368,19 +360,6 @@ public class MainActivity extends AppCompatActivity {
         editorInfoMorgen.putString("infoMorgen", infoMorgenJson);
         editorInfoMorgen.apply();
 
-        // Ausgewählt
-        SharedPreferences ausgewaehltHeutePref = getSharedPreferences("ausgewaehltHeute", 0);
-        SharedPreferences.Editor editorAusgewaehltHeute = infoHeutePref.edit();
-        String ausgewaehltHeuteJson = gson.toJson(ausgewaehltHeute);
-        editorAusgewaehltHeute.putString("ausgewaehltHeute", ausgewaehltHeuteJson);
-        editorAusgewaehltHeute.apply();
-
-        SharedPreferences ausgewaehltMorgenPref = getSharedPreferences("ausgewaehltMorgen", 0);
-        SharedPreferences.Editor editorAusgewaehltMorgen = ausgewaehltMorgenPref.edit();
-        String ausgewaehltMorgenJson = gson.toJson(ausgewaehltMorgen);
-        editorAusgewaehltMorgen.putString("ausgewaehltMorgen", ausgewaehltMorgenJson);
-        editorAusgewaehltMorgen.apply();
-
         //Benachrichtigungseinstellungen speichern
         //Vertretung
         SharedPreferences benachrichtigungVertretungPref = getSharedPreferences("benachrichtigungVertretung", 0);
@@ -429,10 +408,10 @@ public class MainActivity extends AppCompatActivity {
                         mDrawerLayout.closeDrawers();
 
                         switch (menuItem.getItemId()) {
-                            case R.id.vertretungsplan:
+                            case R.id.nav_vertretungsplan:
                                 vertretungsplanOeffnen();
                                 break;
-                            case R.id.einstellungen:
+                            case R.id.nav_einstellungen:
                                 FragmentManager fragmentManager = getSupportFragmentManager();
                                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                                 FrEinstellungenSchueler frEinstellungenSchueler = new FrEinstellungenSchueler();
@@ -703,6 +682,16 @@ public class MainActivity extends AppCompatActivity {
         } else {
             gesucht = "0" + Integer.toString(jahrgangsstufe);
         } // if
+
+        ausgewaehltHeute = new ArrayList<>();
+        ausgewaehltMorgen = new ArrayList<>();
+
+        for (int index = 0; index < kursHeute.size(); index++) {
+            ausgewaehltHeute.add(false);
+        } // for
+        for (int index = 0; index < kursMorgen.size(); index++) {
+            ausgewaehltMorgen.add(false);
+        } // for
 
         for (int index = 0; index < kursHeute.size(); index++) {
             if (kursHeute.get(index).contains(gesucht)) {
