@@ -85,14 +85,24 @@ public class FrVertretungsplan extends Fragment {
                 switch (item.getItemId()) {
                     case R.id.vertretungsplanAktualisieren:
                         mainActivity.vertretungsplanAktualisieren(view);
-                        final SwipeRefreshLayout swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
-                        swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent, R.color.colorPrimary);
-                        swipeRefreshLayout.setRefreshing(true);
-                        Handler handler = new Handler();
-                        handler.postDelayed(new Runnable() {
+                        final SwipeRefreshLayout swipeRefreshLayout1 = view.findViewById(R.id.swipeRefreshLayout1);
+                        swipeRefreshLayout1.setColorSchemeResources(R.color.colorAccent, R.color.colorPrimary);
+                        swipeRefreshLayout1.setRefreshing(true);
+                        Handler handler1 = new Handler();
+                        handler1.postDelayed(new Runnable() {
                             @Override
                             public void run() {
-                                swipeRefreshLayout.setRefreshing(false);
+                                swipeRefreshLayout1.setRefreshing(false);
+                            }
+                        }, 10000);
+                        final SwipeRefreshLayout swipeRefreshLayout2 = view.findViewById(R.id.swipeRefreshLayout2);
+                        swipeRefreshLayout2.setColorSchemeResources(R.color.colorAccent, R.color.colorPrimary);
+                        swipeRefreshLayout2.setRefreshing(true);
+                        Handler handler2 = new Handler();
+                        handler2.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                swipeRefreshLayout2.setRefreshing(false);
                             }
                         }, 10000);
                         return true;
@@ -112,14 +122,24 @@ public class FrVertretungsplan extends Fragment {
             @Override
             public void onClick(View v) {
                 mainActivity.vertretungsplanAktualisieren(view);
-                final SwipeRefreshLayout swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
-                swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent, R.color.colorPrimary);
-                swipeRefreshLayout.setRefreshing(true);
-                Handler handler = new Handler();
-                handler.postDelayed(new Runnable() {
+                final SwipeRefreshLayout swipeRefreshLayout1 = view.findViewById(R.id.swipeRefreshLayout1);
+                swipeRefreshLayout1.setColorSchemeResources(R.color.colorAccent, R.color.colorPrimary);
+                swipeRefreshLayout1.setRefreshing(true);
+                Handler handler1 = new Handler();
+                handler1.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        swipeRefreshLayout.setRefreshing(false);
+                        swipeRefreshLayout1.setRefreshing(false);
+                    }
+                }, 10000);
+                final SwipeRefreshLayout swipeRefreshLayout2 = view.findViewById(R.id.swipeRefreshLayout2);
+                swipeRefreshLayout2.setColorSchemeResources(R.color.colorAccent, R.color.colorPrimary);
+                swipeRefreshLayout2.setRefreshing(true);
+                Handler handler2 = new Handler();
+                handler2.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        swipeRefreshLayout2.setRefreshing(false);
                     }
                 }, 10000);
             }

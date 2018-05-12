@@ -58,7 +58,7 @@ public class FrVertretungsplanMorgen extends Fragment {
     } // Methode recyclerViewVorbereiten
 
     private void swipeToRefresh() {
-        swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
+        swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout2);
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
