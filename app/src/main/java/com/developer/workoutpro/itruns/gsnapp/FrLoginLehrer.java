@@ -23,7 +23,6 @@ public class FrLoginLehrer extends Fragment {
 
         // Deklaration der Views
         final Button btnAnmelden = view.findViewById(R.id.btnAnmelden);
-        final EditText etLehrerKuerzel = view.findViewById(R.id.etLehrerkuerzel);
 
         btnAnmelden.setOnClickListener(new View.OnClickListener() {
             @Override

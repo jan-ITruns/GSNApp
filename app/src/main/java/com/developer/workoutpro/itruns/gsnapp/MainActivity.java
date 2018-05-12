@@ -14,6 +14,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputFilter;
 import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
@@ -154,6 +155,9 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences jahrgangsstufePref = getSharedPreferences("jahrgangsstufe", 0);
         jahrgangsstufe = jahrgangsstufePref.getInt("jahrgangsstufe", 0);
 
+        SharedPreferences lehrerKuerzelPref = getSharedPreferences("lehrerKuerzel", 0);
+        lehrerKuerzel = lehrerKuerzelPref.getString("lehrerKuerzel", "");
+
         // Vertretungselemente laden
         Gson gson = new Gson();
         Type typeString = new TypeToken<ArrayList<String>>() {}.getType();
@@ -275,6 +279,11 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences.Editor editorJahrgangsstufe = jahrgangsstufePref.edit();
         editorJahrgangsstufe.putInt("jahrgangsstufe", jahrgangsstufe);
         editorJahrgangsstufe.apply();
+
+        SharedPreferences lehrerKuerzelPref = getSharedPreferences("lehrerKuerzel", 0);
+        SharedPreferences.Editor editorLehrerKuerzel = lehrerKuerzelPref.edit();
+        editorLehrerKuerzel.putString("lehrerKuerzel", lehrerKuerzel);
+        editorLehrerKuerzel.apply();
 
         // Vertretungselemente speichern
         Gson gson = new Gson();
@@ -440,13 +449,23 @@ public class MainActivity extends AppCompatActivity {
                                 fragmentTransaction.commit();
                                 break;
                             case R.id.nav_einstellungen:
-                                fragmentManager = getSupportFragmentManager();
-                                fragmentTransaction = fragmentManager.beginTransaction();
-                                FrEinstellungenSchueler frEinstellungenSchueler = new FrEinstellungenSchueler();
-                                fragmentTransaction.replace(R.id.bereich_fragments, frEinstellungenSchueler, "einstellungen");
-                                fragmentTransaction.addToBackStack(null);
-                                fragmentManager.executePendingTransactions();
-                                fragmentTransaction.commit();
+                                if(lehrerKuerzel.isEmpty()){
+                                    fragmentManager = getSupportFragmentManager();
+                                    fragmentTransaction = fragmentManager.beginTransaction();
+                                    FrEinstellungenSchueler frEinstellungenSchueler = new FrEinstellungenSchueler();
+                                    fragmentTransaction.replace(R.id.bereich_fragments, frEinstellungenSchueler, "einstellungen");
+                                    fragmentTransaction.addToBackStack(null);
+                                    fragmentManager.executePendingTransactions();
+                                    fragmentTransaction.commit();
+                                } else {
+                                    fragmentManager = getSupportFragmentManager();
+                                    fragmentTransaction = fragmentManager.beginTransaction();
+                                    FrEinstellungenLehrer frEinstellungenLehrer = new FrEinstellungenLehrer();
+                                    fragmentTransaction.replace(R.id.bereich_fragments, frEinstellungenLehrer, "einstellungen");
+                                    fragmentTransaction.addToBackStack(null);
+                                    fragmentManager.executePendingTransactions();
+                                    fragmentTransaction.commit();
+                                }//if
                                 break;
                         } // switch
 
@@ -460,6 +479,7 @@ public class MainActivity extends AppCompatActivity {
         final EditText etBenutzername = findViewById(R.id.etBenutzernameLehrer);
         final EditText etPasswort = findViewById(R.id.etPasswortLehrer);
         final EditText etLehrerkuerzel = findViewById(R.id.etLehrerkuerzel);
+        etLehrerkuerzel.setFilters(new InputFilter[]{new InputFilter.AllCaps()});
         final ProgressBar progressBarLehrer = findViewById(R.id.progressBarLehrer);
         final Button btnAnmelden = findViewById(R.id.btnAnmelden);
 
@@ -478,6 +498,7 @@ public class MainActivity extends AppCompatActivity {
             benutzername = etBenutzername.getText().toString();
             passwort = etPasswort.getText().toString();
             lehrerKuerzel = etLehrerkuerzel.getText().toString();
+            jahrgangsstufe = 0;
 
             website = new Website(benutzername, passwort);
             website.execute();
@@ -558,6 +579,7 @@ public class MainActivity extends AppCompatActivity {
             btnAnmelden.setClickable(false);
             benutzername = etBenutzername.getText().toString();
             passwort = etPasswort.getText().toString();
+            lehrerKuerzel = "";
 
             website = new Website(benutzername, passwort);
             website.execute();
@@ -670,6 +692,7 @@ public class MainActivity extends AppCompatActivity {
         benutzername = "";
         passwort = "";
         jahrgangsstufe = 0;
+        lehrerKuerzel = "";
         erstesLogin = true;
         loginOeffnen();
     }
@@ -1134,7 +1157,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupViewPager(ViewPager pViewPager) {
+
         TabViewLogin adapter = new TabViewLogin(getSupportFragmentManager());
+
         // Schueler-Login hinzufügen
         FrLoginSchueler frLoginSchueler = new FrLoginSchueler();
         adapter.addFragment(frLoginSchueler, "Schüler");

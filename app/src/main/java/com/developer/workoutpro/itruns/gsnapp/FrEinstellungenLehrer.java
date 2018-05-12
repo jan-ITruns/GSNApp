@@ -51,7 +51,7 @@ public class FrEinstellungenLehrer extends Fragment {
 
         tvAktuellerBenutzer.setText(mainActivity.benutzername);
         tvAktuellesPasswort.setText(mainActivity.passwort);
-        tvAktuellesKuerzel.setText("JB");
+        tvAktuellesKuerzel.setText(mainActivity.lehrerKuerzel);
     } // Methode aktuelleDaten
 
     private void benachrichtigungen(){
