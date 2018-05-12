@@ -33,7 +33,7 @@ public class FrVertretungsplan extends Fragment {
     private ArrayList<String> fachHeute;
     private ArrayList<String> raumHeute;
     private ArrayList<String> infoHeute;
-    private ArrayList<Boolean> ausgewaehltHeute;
+    private ArrayList<Integer> ausgewaehltHeute;
 
     // Attribute für den Vertretungsplan Morgen
     private String datumMorgen;
@@ -43,7 +43,7 @@ public class FrVertretungsplan extends Fragment {
     private ArrayList<String> fachMorgen;
     private ArrayList<String> raumMorgen;
     private ArrayList<String> infoMorgen;
-    private ArrayList<Boolean> ausgewaehltMorgen;
+    private ArrayList<Integer> ausgewaehltMorgen;
 
     @Nullable
     @Override
@@ -146,7 +146,7 @@ public class FrVertretungsplan extends Fragment {
         });
     } // Methode toolbarEinrichten
 
-    public void setVertretungsElemente(int tag, String datum, ArrayList<String> kurs, ArrayList<String> stunde, ArrayList<String> vertreter, ArrayList<String> fach, ArrayList<String> raum, ArrayList<String> info, ArrayList<Boolean> ausgewaehlt) {
+    public void setVertretungsElemente(int tag, String datum, ArrayList<String> kurs, ArrayList<String> stunde, ArrayList<String> vertreter, ArrayList<String> fach, ArrayList<String> raum, ArrayList<String> info, ArrayList<Integer> ausgewaehlt) {
         switch (tag) {
             case 0:
                 datumHeute = datum;

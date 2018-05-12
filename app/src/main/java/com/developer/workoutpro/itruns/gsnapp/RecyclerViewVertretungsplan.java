@@ -19,9 +19,9 @@ public class RecyclerViewVertretungsplan extends RecyclerView.Adapter<RecyclerVi
     private ArrayList<String> fach;
     private ArrayList<String> raum;
     private ArrayList<String> info;
-    private ArrayList<Boolean> ausgewaehlt;
+    private ArrayList<Integer> ausgewaehlt;
 
-    public RecyclerViewVertretungsplan(Context context, int tag, ArrayList<String> kurs, ArrayList<String> stunde, ArrayList<String> vertreter, ArrayList<String> fach, ArrayList<String> raum, ArrayList<String> info, ArrayList<Boolean> ausgewaehlt) {
+    public RecyclerViewVertretungsplan(Context context, int tag, ArrayList<String> kurs, ArrayList<String> stunde, ArrayList<String> vertreter, ArrayList<String> fach, ArrayList<String> raum, ArrayList<String> info, ArrayList<Integer> ausgewaehlt) {
         mainActivity = (MainActivity) context;
         this.tag = tag;
         this.kurs = kurs;
@@ -54,7 +54,7 @@ public class RecyclerViewVertretungsplan extends RecyclerView.Adapter<RecyclerVi
                 mainActivity.oeffneVertretungInfos(tag, i);
             }
         });
-        if (ausgewaehlt.get(i)) {
+        if (ausgewaehlt.get(i) == 1) {
             viewHolder.clVertretungsplanRow.setBackgroundResource(R.color.orangeTransparent);
         } else {
             viewHolder.clVertretungsplanRow.setBackgroundResource(R.color.transparent);

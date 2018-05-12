@@ -1,5 +1,6 @@
 package com.developer.workoutpro.itruns.gsnapp;
 
+import android.content.Intent;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.content.SharedPreferences;
@@ -61,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<String> fachHeute;
     private ArrayList<String> raumHeute;
     private ArrayList<String> infoHeute;
-    private ArrayList<Boolean> ausgewaehltHeute;
+    private ArrayList<Integer> ausgewaehltHeute;
 
     // Attribute für den Vertretungsplan Morgen
     private String htmlTextMorgen;
@@ -72,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<String> fachMorgen;
     private ArrayList<String> raumMorgen;
     private ArrayList<String> infoMorgen;
-    private ArrayList<Boolean> ausgewaehltMorgen;
+    private ArrayList<Integer> ausgewaehltMorgen;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,6 +86,35 @@ public class MainActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
     } // Methode onBackPressed
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Intent intent = new Intent(MainActivity.this, Benachrichtigungen.class);
+
+        intent.putExtra("kursHeute", kursHeute);
+        intent.putExtra("stundeHeute", stundeHeute);
+        intent.putExtra("vertreterHeute", vertreterHeute);
+        intent.putExtra("fachHeute", fachHeute);
+        intent.putExtra("raumHeute", raumHeute);
+        intent.putExtra("infoHeute", infoHeute);
+        intent.putExtra("ausgewaehltHeute", ausgewaehltHeute);
+
+        intent.putExtra("kursMorgen", kursMorgen);
+        intent.putExtra("stundeMorgen", stundeMorgen);
+        intent.putExtra("vertreterMorgen", vertreterMorgen);
+        intent.putExtra("fachMorgen", fachMorgen);
+        intent.putExtra("raumMorgen", raumMorgen);
+        intent.putExtra("infoMorgen", infoMorgen);
+        intent.putExtra("ausgewaehltMorgen", ausgewaehltMorgen);
+
+        intent.putExtra("benutzername", benutzername);
+        intent.putExtra("passwort", passwort);
+        intent.putExtra("jahrgangsstufe", jahrgangsstufe);
+
+        startService(intent);
+        finish();
+    } // Methode onStop
 
     @Override
     protected void onPause() {
@@ -714,7 +744,7 @@ public class MainActivity extends AppCompatActivity {
                                         falscheVertretungsstunde = true;
                                     } else {
                                         kursHeute.add(element[0]);
-                                        ausgewaehltHeute.add(false);
+                                        ausgewaehltHeute.add(0);
 
                                         if (kursHeute.get(kursHeute.size() - 1).contains("EF")) {
                                             kursHeute.set(kursHeute.size() - 1, "EF");
@@ -772,7 +802,7 @@ public class MainActivity extends AppCompatActivity {
                                             falscheVertretungsstunde = true;
                                         } else {
                                             kursMorgen.add(element[0]);
-                                            ausgewaehltMorgen.add(false);
+                                            ausgewaehltMorgen.add(0);
 
                                             if (kursMorgen.get(kursMorgen.size() - 1).contains("EF")) {
                                                 kursMorgen.set(kursMorgen.size() - 1, "EF");
@@ -851,10 +881,10 @@ public class MainActivity extends AppCompatActivity {
         ausgewaehltMorgen = new ArrayList<>();
 
         for (int index = 0; index < kursHeute.size(); index++) {
-            ausgewaehltHeute.add(false);
+            ausgewaehltHeute.add(0);
         } // for
         for (int index = 0; index < kursMorgen.size(); index++) {
-            ausgewaehltMorgen.add(false);
+            ausgewaehltMorgen.add(0);
         } // for
 
         for (int index = 0; index < kursHeute.size(); index++) {
@@ -883,7 +913,7 @@ public class MainActivity extends AppCompatActivity {
                 raumHeute.set(gefunden, raumHeute.get(index + 1));
                 vertreterHeute.set(gefunden, vertreterHeute.get(index + 1));
                 infoHeute.set(gefunden, infoHeute.get(index + 1));
-                ausgewaehltHeute.set(gefunden, true);
+                ausgewaehltHeute.set(gefunden, 1);
 
                 kursHeute.remove(index + 1);
                 fachHeute.remove(index + 1);
@@ -924,7 +954,7 @@ public class MainActivity extends AppCompatActivity {
                 raumMorgen.set(gefunden, raumMorgen.get(index + 1));
                 vertreterMorgen.set(gefunden, vertreterMorgen.get(index + 1));
                 infoMorgen.set(gefunden, infoMorgen.get(index + 1));
-                ausgewaehltMorgen.set(gefunden, true);
+                ausgewaehltMorgen.set(gefunden, 1);
 
                 kursMorgen.remove(index + 1);
                 fachMorgen.remove(index + 1);

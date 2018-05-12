@@ -24,7 +24,7 @@ public class FrVertretungsplanMorgen extends Fragment {
     private ArrayList<String> fach;
     private ArrayList<String> raum;
     private ArrayList<String> info;
-    private ArrayList<Boolean> ausgewaehlt;
+    private ArrayList<Integer> ausgewaehlt;
 
     @Nullable
     @Override
@@ -38,7 +38,7 @@ public class FrVertretungsplanMorgen extends Fragment {
         return view;
     } // Methode onCreateView
 
-    public void setVertretungsElemente(ArrayList<String> kurs, ArrayList<String> stunde, ArrayList<String> vertreter, ArrayList<String> fach, ArrayList<String> raum, ArrayList<String> info, ArrayList<Boolean> ausgewaehlt) {
+    public void setVertretungsElemente(ArrayList<String> kurs, ArrayList<String> stunde, ArrayList<String> vertreter, ArrayList<String> fach, ArrayList<String> raum, ArrayList<String> info, ArrayList<Integer> ausgewaehlt) {
         this.kurs = kurs;
         this.stunde = stunde;
         this.vertreter = vertreter;
