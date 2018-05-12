@@ -34,6 +34,15 @@ public class FrHomepage extends Fragment {
         webView.getSettings().setJavaScriptEnabled(true);
         webView.loadUrl("http://gymnasium-schloss-neuhaus.de/");
 
+        webView.setWebViewClient(new WebViewClient(){
+
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url){
+                view.loadUrl(url);
+                return true;
+            }
+        });
+
         return view;
     } // Methode onCreateView
 

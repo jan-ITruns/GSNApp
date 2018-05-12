@@ -16,6 +16,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -90,7 +91,17 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+        // Testen, ob man bei der Webview, sofern geöffnet, zurück kann
+        WebView webView = findViewById(R.id.webView);
+        if (webView != null) {
+            if (webView.canGoBack()) {
+                webView.goBack();
+            } else {
+                super.onBackPressed();
+            } // if
+        } else {
+            super.onBackPressed();
+        } // if
     } // Methode onBackPressed
 
     @Override
