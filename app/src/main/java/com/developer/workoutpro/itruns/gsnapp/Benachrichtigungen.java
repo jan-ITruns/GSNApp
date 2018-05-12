@@ -8,8 +8,6 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
-import android.util.Log;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Timer;
@@ -17,8 +15,8 @@ import java.util.TimerTask;
 
 public class Benachrichtigungen extends Service {
 
-    // Attribute für die Website
-    private Website website;
+    // Attribute für die WebsiteVertretungsplan
+    private WebsiteVertretungsplan websiteVertretungsplan;
     private String benutzername;
     private String passwort;
     private int jahrgangsstufe;
@@ -472,14 +470,14 @@ public class Benachrichtigungen extends Service {
     private int test = 0;
 
     private void vertretungsplanAktualisieren() {
-        website = new Website(benutzername, passwort);
-        website.execute();
+        websiteVertretungsplan = new WebsiteVertretungsplan(benutzername, passwort);
+        websiteVertretungsplan.execute();
         Handler handler1 = new Handler();
         handler1.postDelayed(new Runnable() {
             @Override
             public void run() {
-                htmlTextHeute = website.getVertretungHeute();
-                htmlTextMorgen = website.getVertretungMorgen();
+                htmlTextHeute = websiteVertretungsplan.getVertretungHeute();
+                htmlTextMorgen = websiteVertretungsplan.getVertretungMorgen();
 
                 ArrayList<String> kursHeuteKopie, stundeHeuteKopie, vertreterHeuteKopie, fachHeuteKopie, raumHeuteKopie, infoHeuteKopie;
                 ArrayList<String> kursMorgenKopie, stundeMorgenKopie, vertreterMorgenKopie, fachMorgenKopie, raumMorgenKopie, infoMorgenKopie;

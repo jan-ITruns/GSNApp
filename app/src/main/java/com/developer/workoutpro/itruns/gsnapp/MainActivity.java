@@ -1,9 +1,7 @@
 package com.developer.workoutpro.itruns.gsnapp;
 
-import android.app.PendingIntent;
 import android.content.Intent;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.content.SharedPreferences;
@@ -50,8 +48,8 @@ public class MainActivity extends AppCompatActivity {
     public String lehrerKuerzel="";
     public int jahrgangsstufe=0;
 
-    // Attribute für die Website
-    private Website website;
+    // Attribute für die WebsiteVertretungsplan
+    private WebsiteVertretungsplan websiteVertretungsplan;
 
     // Attribute für den Vertretungsplan
     private boolean aktualisierungLaeuft = false;
@@ -439,6 +437,15 @@ public class MainActivity extends AppCompatActivity {
                             case R.id.nav_vertretungsplan:
                                 vertretungsplanOeffnen();
                                 break;
+                            case R.id.nav_lehrerliste:
+                                fragmentManager = getSupportFragmentManager();
+                                fragmentTransaction = fragmentManager.beginTransaction();
+                                FrLehrerliste frLehrerliste = new FrLehrerliste();
+                                fragmentTransaction.replace(R.id.bereich_fragments, frLehrerliste, "lehrerliste");
+                                fragmentTransaction.addToBackStack(null);
+                                fragmentManager.executePendingTransactions();
+                                fragmentTransaction.commit();
+                                break;
                             case R.id.nav_homepage:
                                 fragmentManager = getSupportFragmentManager();
                                 fragmentTransaction = fragmentManager.beginTransaction();
@@ -500,8 +507,8 @@ public class MainActivity extends AppCompatActivity {
             lehrerKuerzel = etLehrerkuerzel.getText().toString();
             jahrgangsstufe = 0;
 
-            website = new Website(benutzername, passwort);
-            website.execute();
+            websiteVertretungsplan = new WebsiteVertretungsplan(benutzername, passwort);
+            websiteVertretungsplan.execute();
 
             progressBarLehrer.setVisibility(View.VISIBLE);
 
@@ -509,8 +516,8 @@ public class MainActivity extends AppCompatActivity {
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    htmlTextHeute = website.getVertretungHeute();
-                    htmlTextMorgen = website.getVertretungMorgen();
+                    htmlTextHeute = websiteVertretungsplan.getVertretungHeute();
+                    htmlTextMorgen = websiteVertretungsplan.getVertretungMorgen();
 
                     if (htmlTextHeute.contains("falschen Benutzernamen oder ein falsches Passwort")) {
                         progressBarLehrer.setVisibility(View.INVISIBLE);
@@ -581,8 +588,8 @@ public class MainActivity extends AppCompatActivity {
             passwort = etPasswort.getText().toString();
             lehrerKuerzel = "";
 
-            website = new Website(benutzername, passwort);
-            website.execute();
+            websiteVertretungsplan = new WebsiteVertretungsplan(benutzername, passwort);
+            websiteVertretungsplan.execute();
 
             progressBarSchueler.setVisibility(View.VISIBLE);
 
@@ -590,8 +597,8 @@ public class MainActivity extends AppCompatActivity {
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    htmlTextHeute = website.getVertretungHeute();
-                    htmlTextMorgen = website.getVertretungMorgen();
+                    htmlTextHeute = websiteVertretungsplan.getVertretungHeute();
+                    htmlTextMorgen = websiteVertretungsplan.getVertretungMorgen();
 
                     if (htmlTextHeute.contains("falschen Benutzernamen oder ein falsches Passwort")) {
                         progressBarSchueler.setVisibility(View.INVISIBLE);
@@ -1190,14 +1197,14 @@ public class MainActivity extends AppCompatActivity {
     public void vertretungsplanAktualisieren(View v) {
         if (! aktualisierungLaeuft) {
             aktualisierungLaeuft = true;
-            website = new Website(benutzername, passwort);
-            website.execute();
+            websiteVertretungsplan = new WebsiteVertretungsplan(benutzername, passwort);
+            websiteVertretungsplan.execute();
             Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    htmlTextHeute = website.getVertretungHeute();
-                    htmlTextMorgen = website.getVertretungMorgen();
+                    htmlTextHeute = websiteVertretungsplan.getVertretungHeute();
+                    htmlTextMorgen = websiteVertretungsplan.getVertretungMorgen();
 
                     if (!htmlTextHeute.contains("mon_title")) {
                         Toast.makeText(MainActivity.this, "Ein unerwarteter Fehler ist aufgetreten.", Toast.LENGTH_LONG).show();

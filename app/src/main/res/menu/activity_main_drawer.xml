@@ -5,10 +5,14 @@
 
     <group android:checkableBehavior="single"
         android:id="@+id/group1">
-                <item
+            <item
                 android:id="@+id/nav_vertretungsplan"
                 android:icon="@drawable/ic_apps_blau_24dp"
                 android:title="Vertretungsplan" />
+            <item
+            android:id="@+id/nav_lehrerliste"
+            android:icon="@drawable/ic_format_list_bulleted_blue_24dp"
+            android:title="Lehrerliste" />
             <item
                 android:id="@+id/nav_homepage"
                 android:icon="@drawable/ic_laptop_blau_24dp"

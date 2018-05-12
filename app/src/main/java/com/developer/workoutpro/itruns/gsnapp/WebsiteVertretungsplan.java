@@ -6,7 +6,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import java.io.IOException;
 
-public class Website extends AsyncTask<Void, Void, String>  {
+public class WebsiteVertretungsplan extends AsyncTask<Void, Void, String>  {
 
     // Attribute für die Daten
     private String benutzername;
@@ -20,10 +20,10 @@ public class Website extends AsyncTask<Void, Void, String>  {
     private String htmlTextMorgen;
     private Document doc;
 
-    public Website(String benutzername, String passwort) {
+    public WebsiteVertretungsplan(String benutzername, String passwort) {
         this.benutzername = benutzername;
         this.passwort = passwort;
-    } // Konstruktor Website
+    } // Konstruktor WebsiteVertretungsplan
 
     @Override
     protected void onPreExecute() {
@@ -80,4 +80,4 @@ public class Website extends AsyncTask<Void, Void, String>  {
         return htmlTextMorgen;
     } // Methode getVertretungMorgen
 
-} // Klasse Website
+} // Klasse WebsiteVertretungsplan
