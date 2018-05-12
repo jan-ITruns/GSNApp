@@ -52,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
     private String teil2 [];
     private String element [];
     private String vertretungen;
+    public String stand;
 
     // Attribute für den Vertretungsplan Heute
     private String htmlTextHeute;
@@ -72,7 +73,6 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<String> fachMorgen;
     private ArrayList<String> raumMorgen;
     private ArrayList<String> infoMorgen;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,6 +114,10 @@ public class MainActivity extends AppCompatActivity {
 
         SharedPreferences datumMorgenPref = getSharedPreferences("datumMorgen", 0);
         datumMorgen = datumMorgenPref.getString("datumMorgen", "");
+
+        // Stand
+        SharedPreferences standPref = getSharedPreferences("stand", 0);
+        stand = standPref.getString("stand", "");
 
         // Kurs
         SharedPreferences kursHeutePref = getSharedPreferences("kursHeute", 0);
@@ -239,6 +243,12 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences.Editor editorDatumMorgen = datumMorgenPref.edit();
         editorDatumMorgen.putString("datumMorgen", datumMorgen);
         editorDatumMorgen.apply();
+
+        // Stand
+        SharedPreferences standPref = getSharedPreferences("stand", 0);
+        SharedPreferences.Editor editorStand = standPref.edit();
+        editorStand.putString("stand", stand);
+        editorStand.apply();
 
         // Kurs
         SharedPreferences kursHeutePref = getSharedPreferences("kursHeute", 0);
@@ -450,6 +460,7 @@ public class MainActivity extends AppCompatActivity {
                             return;
                         } // if
 
+                        getStand();
                         getDatum(0);
                         getDatum(1);
                         getVertretungsstunde(0);
@@ -476,6 +487,19 @@ public class MainActivity extends AppCompatActivity {
         erstesLogin = true;
         setContentView(R.layout.activity_login);
     }
+
+    private void getStand() {
+        teil1 = htmlTextHeute.split("Stand:");
+
+        // Alle Leerstellen vor der ersten Ziffer entfernen
+        while (!((int) teil1[1].charAt(0) > 47 && (int) teil1[1].charAt(0) < 58)) {
+            teil1[1] = teil1[1].substring(1);
+        } // while
+
+        teil2 = teil1[1].split("</p>");
+
+        stand = "Stand: " + teil2[0];
+    } // Methode getStand
 
     private void getDatum(int tag) {
         String hilfsDatum;
@@ -678,6 +702,7 @@ public class MainActivity extends AppCompatActivity {
                 raumMorgenKopie = raumMorgen;
                 infoMorgenKopie = infoMorgen;
 
+                getStand();
                 getDatum(0);
                 getDatum(1);
                 getVertretungsstunde(0);

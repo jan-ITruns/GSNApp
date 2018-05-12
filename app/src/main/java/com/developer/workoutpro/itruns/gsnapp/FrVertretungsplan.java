@@ -11,6 +11,8 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -81,6 +83,7 @@ public class FrVertretungsplan extends Fragment {
                         return true;
 
                     case R.id.vertretungsplanInformation:
+                        Toast.makeText(getActivity(), mainActivity.stand, Toast.LENGTH_LONG).show();
                         return true;
 
                     default:
