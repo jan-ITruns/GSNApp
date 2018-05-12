@@ -32,6 +32,9 @@ dependencies {
     // Recycler View
     implementation 'com.android.support:recyclerview-v7:27.1.1'
 
+    // Swipe to refresh
+    implementation 'com.android.support:support-v4:27.1.1'
+
     // Jsoup
     implementation 'org.jsoup:jsoup:1.11.3'
 

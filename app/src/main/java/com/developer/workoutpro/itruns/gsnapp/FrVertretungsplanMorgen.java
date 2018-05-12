@@ -1,8 +1,10 @@
 package com.developer.workoutpro.itruns.gsnapp;
 
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,6 +16,8 @@ import java.util.ArrayList;
 public class FrVertretungsplanMorgen extends Fragment {
 
     private View view;
+    public SwipeRefreshLayout swipeRefreshLayout;
+    private MainActivity mainActivity;
 
     private ArrayList<String> kurs;
     private ArrayList<String> stunde;
@@ -26,8 +30,10 @@ public class FrVertretungsplanMorgen extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fr_vertretungsplan_morgen, container, false);
+        mainActivity = (MainActivity) getActivity();
 
         recyclerViewVorbereiten();
+        swipeToRefresh();
 
         return view;
     } // Methode onCreateView
@@ -48,5 +54,27 @@ public class FrVertretungsplanMorgen extends Fragment {
         RecyclerViewVertretungsplan adapter = new RecyclerViewVertretungsplan(getActivity(), kurs, stunde, vertreter, fach, raum, info);
         recyclerView.setAdapter(adapter);
     } // Methode recyclerViewVorbereiten
+
+    private void swipeToRefresh() {
+        swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mainActivity.vertretungsplanAktualisieren(view);
+
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        swipeRefreshLayout.setRefreshing(false);
+                    }
+                }, 10000);
+            }
+
+        });
+
+        swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent, R.color.colorPrimary);
+    } // Methode swipeToRefresh
 
 } // Klasse FrVertretungsplanMorgen
