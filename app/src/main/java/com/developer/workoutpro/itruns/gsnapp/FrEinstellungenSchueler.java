@@ -9,17 +9,30 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Switch;
 
 public class FrEinstellungenSchueler extends Fragment {
 
     private View view;
+    private MainActivity mainActivity;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fr_einstellungen_schueler, container, false);
-
+        mainActivity = (MainActivity)getActivity();
         toolbarEinrichten();
+
+        //Benachrichtigungseinstellugen prüfen
+        Switch switchVertretung = view.findViewById(R.id.switchBenachrichtigungenVertretung);
+        Switch switchAktuelles = view.findViewById(R.id.switchBenachrichtigungAktuelles);
+        Switch switchTermine = view.findViewById(R.id.switchBenachrichtigungTermine);
+        Switch switchBewertung = view.findViewById(R.id.switchBenachrichtigungBewertung);
+
+        switchVertretung.setChecked(mainActivity.benachrichtigungVertretung);
+        switchAktuelles.setChecked(mainActivity.benachrichtigungAktuelles);
+        switchTermine.setChecked(mainActivity.benachrichtigungTermine);
+        switchBewertung.setChecked(mainActivity.benachrichtigungBewertung);
 
         return view;
     } // Methode onCreateView

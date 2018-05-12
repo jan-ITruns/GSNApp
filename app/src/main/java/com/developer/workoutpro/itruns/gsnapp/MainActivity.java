@@ -486,9 +486,11 @@ public class MainActivity extends AppCompatActivity {
         switchVertretung.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
+                    benachrichtigungVertretung=true;
                     Toast.makeText(MainActivity.this, "Benachrichtigungen über Vertretungen erhalten.", Toast.LENGTH_LONG).show();
                 }
                 else{
+                    benachrichtigungVertretung=false;
                     Toast.makeText(MainActivity.this, "Keine Benachrichtigungen über Vertretungen erhalten.", Toast.LENGTH_LONG).show();
                 }
             }
@@ -497,9 +499,11 @@ public class MainActivity extends AppCompatActivity {
         switchAktuelles.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
+                    benachrichtigungAktuelles=true;
                     Toast.makeText(MainActivity.this, "Benachrichtigungen über Aktuelles erhalten.", Toast.LENGTH_LONG).show();
                 }
                 else{
+                    benachrichtigungAktuelles=false;
                     Toast.makeText(MainActivity.this, "Keine Benachrichtigungen über Aktuelles erhalten.", Toast.LENGTH_LONG).show();
                 }
             }
@@ -508,9 +512,11 @@ public class MainActivity extends AppCompatActivity {
         switchTermine.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
+                    benachrichtigungTermine=true;
                     Toast.makeText(MainActivity.this, "Benachrichtigungen über Termine erhalten.", Toast.LENGTH_LONG).show();
                 }
                 else{
+                    benachrichtigungTermine=false;
                     Toast.makeText(MainActivity.this, "Keine Benachrichtigungen über Termine erhalten.", Toast.LENGTH_LONG).show();
                 }
             }
@@ -519,9 +525,11 @@ public class MainActivity extends AppCompatActivity {
         switchBewertung.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
+                    benachrichtigungBewertung=true;
                     Toast.makeText(MainActivity.this, "Benachrichtigungen über Bewertungen erhalten.", Toast.LENGTH_LONG).show();
                 }
                 else{
+                    benachrichtigungBewertung=false;
                     Toast.makeText(MainActivity.this, "Keine Benachrichtigungen über Bewertungen erhalten.", Toast.LENGTH_LONG).show();
                 }
             }
