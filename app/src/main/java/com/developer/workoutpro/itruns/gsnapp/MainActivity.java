@@ -597,11 +597,41 @@ public class MainActivity extends AppCompatActivity {
                                         } // if
                                     } // if
                                     break;
-                                case 1: stundeHeute.add(element[0]); break;
-                                case 2: vertreterHeute.add(element[0]); break;
-                                case 3: fachHeute.add(element[0]); break;
-                                case 4: raumHeute.add(element[0]); break;
-                                case 5: infoHeute.add(element[0]); break;
+                                case 1:
+                                    if (element[0].equals("")) {
+                                        stundeHeute.add("---");
+                                    } else {
+                                        stundeHeute.add(element[0]);
+                                    } // if
+                                    break;
+                                case 2:
+                                    if (element[0].equals("")) {
+                                        vertreterHeute.add("---");
+                                    } else {
+                                        vertreterHeute.add(element[0]);
+                                    } // if
+                                    break;
+                                case 3:
+                                    if (element[0].equals("")) {
+                                        fachHeute.add("---");
+                                    } else {
+                                        fachHeute.add(element[0]);
+                                    } // if
+                                    break;
+                                case 4:
+                                    if (element[0].equals("")) {
+                                        raumHeute.add("---");
+                                    } else {
+                                        raumHeute.add(element[0]);
+                                    } // if
+                                    break;
+                                case 5:
+                                    if (element[0].equals("")) {
+                                        infoHeute.add("---");
+                                    } else {
+                                        infoHeute.add(element[0]);
+                                    } // if
+                                    break;
                             } // switch
                         } else {
                                 switch (index) {
@@ -625,11 +655,41 @@ public class MainActivity extends AppCompatActivity {
                                             } // if
                                         } // if
                                         break;
-                                    case 1: stundeMorgen.add(element[0]); break;
-                                    case 2: vertreterMorgen.add(element[0]); break;
-                                    case 3: fachMorgen.add(element[0]); break;
-                                    case 4: raumMorgen.add(element[0]); break;
-                                    case 5: infoMorgen.add(element[0]); break;
+                                    case 1:
+                                        if (element[0].equals("")) {
+                                            stundeMorgen.add("---");
+                                        } else {
+                                            stundeMorgen.add(element[0]);
+                                        } // if
+                                        break;
+                                    case 2:
+                                        if (element[0].equals("")) {
+                                            vertreterMorgen.add("---");
+                                        } else {
+                                            vertreterMorgen.add(element[0]);
+                                        } // if
+                                        break;
+                                    case 3:
+                                        if (element[0].equals("")) {
+                                            fachMorgen.add("---");
+                                        } else {
+                                            fachMorgen.add(element[0]);
+                                        } // if
+                                        break;
+                                    case 4:
+                                        if (element[0].equals("")) {
+                                            raumMorgen.add("---");
+                                        } else {
+                                            raumMorgen.add(element[0]);
+                                        } // if
+                                        break;
+                                    case 5:
+                                        if (element[0].equals("")) {
+                                            infoMorgen.add("---");
+                                        } else {
+                                            infoMorgen.add(element[0]);
+                                        } // if
+                                        break;
                                 } // switch
                         } // if
                     } // if
