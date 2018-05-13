@@ -162,7 +162,6 @@ public class MainActivity extends AppCompatActivity {
         // Vertretungselemente laden
         Gson gson = new Gson();
         Type typeString = new TypeToken<ArrayList<String>>() {}.getType();
-        Type typeBoolean = new TypeToken<ArrayList<Boolean>>() {}.getType();
 
         // Datum
         SharedPreferences datumHeutePref = getSharedPreferences("datumHeute", 0);

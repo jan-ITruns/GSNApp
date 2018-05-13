@@ -18,7 +18,6 @@ public class FrVertretungsplanHeute extends Fragment {
 
     private View view;
     private MainActivity mainActivity;
-    private FrVertretungsplan frVertretungsplan;
 
     private ArrayList<String> kurs;
     private ArrayList<String> stunde;
