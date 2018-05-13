@@ -36,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
 
     // Attribute für die Einstellungen
     public boolean erstesLogin;
-    private View view;
     private ViewPager viewPager;
 
     //Attribute für die Benachrichtigungseinstellungen
@@ -85,12 +84,12 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<Integer> ausgewaehltMorgen;
 
     // Attribute für die Lehrer
-    private ArrayList<String> kuerzel;
-    private ArrayList<String> nachname;
-    private ArrayList<String> vorname;
-    private ArrayList<String> fach1;
-    private ArrayList<String> fach2;
-    private ArrayList<String> fach3;
+    private static ArrayList<String> kuerzel;
+    private static ArrayList<String> nachname;
+    private static ArrayList<String> vorname;
+    private static ArrayList<String> fach1;
+    private static ArrayList<String> fach2;
+    private static ArrayList<String> fach3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -235,6 +234,37 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences infoMorgenPref = getSharedPreferences("infoMorgen", 0);
         String infoMorgenJson = infoMorgenPref.getString("infoMorgen", "");
         infoMorgen = gson.fromJson(infoMorgenJson, typeString);
+
+        // Lehrer Attribute laden
+        // Kürzel
+        SharedPreferences kuerzelPref = getSharedPreferences("kuerzel", 0);
+        String kuerzelJson = kuerzelPref.getString("kuerzel", "");
+        kuerzel = gson.fromJson(kuerzelJson, typeString);
+
+        // Nachname
+        SharedPreferences nachnamePref = getSharedPreferences("nachname", 0);
+        String nachnameJson = nachnamePref.getString("nachname", "");
+        nachname = gson.fromJson(nachnameJson, typeString);
+
+        // Vorname
+        SharedPreferences vornamePref = getSharedPreferences("vorname", 0);
+        String vornameJson = vornamePref.getString("vorname", "");
+        vorname = gson.fromJson(vornameJson, typeString);
+
+        // Fach1
+        SharedPreferences fach1Pref = getSharedPreferences("fach1", 0);
+        String fach1Json = fach1Pref.getString("fach1", "");
+        fach1 = gson.fromJson(fach1Json, typeString);
+
+        // Fach2
+        SharedPreferences fach2Pref = getSharedPreferences("fach2", 0);
+        String fach2Json = fach2Pref.getString("fach2", "");
+        fach2 = gson.fromJson(fach2Json, typeString);
+
+        // Fach3
+        SharedPreferences fach3Pref = getSharedPreferences("fach3", 0);
+        String fach3Json = fach3Pref.getString("fach3", "");
+        fach3 = gson.fromJson(fach3Json, typeString);
 
         // Benachrichtigungseinstellungen laden
         //Vertretung
@@ -390,6 +420,49 @@ public class MainActivity extends AppCompatActivity {
         String infoMorgenJson = gson.toJson(infoMorgen);
         editorInfoMorgen.putString("infoMorgen", infoMorgenJson);
         editorInfoMorgen.apply();
+
+        // Lehrer Attribute speichern
+        // Kürzel
+        SharedPreferences kuerzelPref = getSharedPreferences("kuerzel", 0);
+        SharedPreferences.Editor editorKuerzel = kuerzelPref.edit();
+        String kuerzelJson = gson.toJson(kuerzel);
+        editorKuerzel.putString("kuerzel", kuerzelJson);
+        editorKuerzel.apply();
+
+        // Nachname
+        SharedPreferences nachnamePref = getSharedPreferences("nachname", 0);
+        SharedPreferences.Editor editorNachname = nachnamePref.edit();
+        String nachnameJson = gson.toJson(nachname);
+        editorNachname.putString("nachname", nachnameJson);
+        editorNachname.apply();
+
+        // Vorname
+        SharedPreferences vornamePref = getSharedPreferences("vorname", 0);
+        SharedPreferences.Editor editorVorname = vornamePref.edit();
+        String vornameJson = gson.toJson(vorname);
+        editorVorname.putString("vorname", vornameJson);
+        editorVorname.apply();
+
+        // Fach1
+        SharedPreferences fach1Pref = getSharedPreferences("fach1", 0);
+        SharedPreferences.Editor editorFach1 = fach1Pref.edit();
+        String fach1Json = gson.toJson(fach1);
+        editorFach1.putString("fach1", fach1Json);
+        editorFach1.apply();
+
+        // Fach2
+        SharedPreferences fach2Pref = getSharedPreferences("fach2", 0);
+        SharedPreferences.Editor editorFach2 = fach2Pref.edit();
+        String fach2Json = gson.toJson(fach2);
+        editorFach2.putString("fach2", fach2Json);
+        editorFach2.apply();
+
+        // Fach3
+        SharedPreferences fach3Pref = getSharedPreferences("fach3", 0);
+        SharedPreferences.Editor editorFach3 = fach3Pref.edit();
+        String fach3Json = gson.toJson(fach3);
+        editorFach3.putString("fach3", fach3Json);
+        editorFach3.apply();
 
         //Benachrichtigungseinstellungen speichern
         //Vertretung
@@ -1166,6 +1239,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void loginOeffnen(){
         //Fragment Login erzeugen
+        lehrerAttributeBestimmen();
 
         setContentView(R.layout.activity_login);
 
@@ -1286,19 +1360,26 @@ public class MainActivity extends AppCompatActivity {
             case 1: frVertretungInfos.setzeVertretungsInformationen(kursMorgen.get(index), stundeMorgen.get(index), vertreterMorgen.get(index), fachMorgen.get(index), raumMorgen.get(index), infoMorgen.get(index)); break;
         } // switch
 
+        frVertretungInfos.setLehrerAttribute(kuerzel, nachname, vorname, fach1, fach2, fach3);
+
         fragmentTransaction.replace(R.id.bereich_fragments, frVertretungInfos, "vertretungInfos");
         fragmentTransaction.addToBackStack(null);
         fragmentManager.executePendingTransactions();
         fragmentTransaction.commit();
     } // Methode oeffneVertretungInfos
 
-    public void setLehrerAttribute(ArrayList<String> kuerzel, ArrayList<String> nachname, ArrayList<String> vorname, ArrayList<String> fach1, ArrayList<String> fach2, ArrayList<String> fach3) {
-        this.kuerzel = kuerzel;
-        this.nachname = nachname;
-        this.vorname = vorname;
-        this.fach1 = fach1;
-        this.fach2 = fach2;
-        this.fach3 = fach3;
+    private void lehrerAttributeBestimmen() {
+        FrLehrerliste frLehrerliste = new FrLehrerliste();
+        frLehrerliste.lehrerlisteUpdaten(1);
+    } // Methode lehrerAttributeBestimmen
+
+    public static void setLehrerAttribute(ArrayList<String> pKuerzel, ArrayList<String> pNachname, ArrayList<String> pVorname, ArrayList<String> pFach1, ArrayList<String> pFach2, ArrayList<String> pFach3) {
+        kuerzel = pKuerzel;
+        nachname = pNachname;
+        vorname = pVorname;
+        fach1 = pFach1;
+        fach2 = pFach2;
+        fach3 = pFach3;
     } // Methode setLehrerAttribute
 
 } // Klasse MainActivity

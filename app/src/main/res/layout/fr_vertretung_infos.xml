@@ -103,10 +103,10 @@
                     android:id="@+id/tvKurs"
                     android:layout_width="125dp"
                     android:layout_height="20dp"
-                    android:layout_marginEnd="50dp"
+                    android:layout_marginStart="25dp"
                     android:text="10IFG3"
                     android:textSize="14sp"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/tvKursLabel"
                     app:layout_constraintTop_toTopOf="@+id/tvKursLabel" />
 
                 <TextView
@@ -203,7 +203,7 @@
 
                 <TextView
                     android:id="@+id/tvVertreterNameLabel"
-                    android:layout_width="wrap_content"
+                    android:layout_width="70dp"
                     android:layout_height="20dp"
                     android:layout_marginStart="50dp"
                     android:layout_marginTop="5dp"
@@ -215,7 +215,7 @@
 
                 <TextView
                     android:id="@+id/tvVertreterKuerzelLabel"
-                    android:layout_width="wrap_content"
+                    android:layout_width="70dp"
                     android:layout_height="20dp"
                     android:layout_marginStart="50dp"
                     android:layout_marginTop="50dp"
@@ -227,7 +227,7 @@
 
                 <TextView
                     android:id="@+id/tvVertreterFaecherLabel"
-                    android:layout_width="wrap_content"
+                    android:layout_width="70dp"
                     android:layout_height="20dp"
                     android:layout_marginStart="50dp"
                     android:layout_marginTop="5dp"
@@ -239,34 +239,34 @@
 
                 <TextView
                     android:id="@+id/tvVertreter"
-                    android:layout_width="125dp"
+                    android:layout_width="160dp"
                     android:layout_height="20dp"
-                    android:layout_marginEnd="50dp"
+                    android:layout_marginStart="25dp"
                     android:text="TA"
                     android:textSize="14sp"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/tvVertreterKuerzelLabel"
                     app:layout_constraintTop_toTopOf="@+id/tvVertreterKuerzelLabel" />
 
                 <TextView
                     android:id="@+id/tvVertreterName"
-                    android:layout_width="125dp"
+                    android:layout_width="160dp"
                     android:layout_height="20dp"
-                    android:layout_marginEnd="50dp"
+                    android:layout_marginStart="25dp"
                     android:text="Gerhard Taake"
                     android:textSize="14sp"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/tvVertreterNameLabel"
                     app:layout_constraintTop_toTopOf="@+id/tvVertreterNameLabel" />
 
                 <TextView
                     android:id="@+id/tvVertreterFaecher"
-                    android:layout_width="125dp"
+                    android:layout_width="160dp"
                     android:layout_height="20dp"
                     android:layout_marginBottom="15dp"
-                    android:layout_marginEnd="50dp"
+                    android:layout_marginStart="25dp"
                     android:text="MA | PH | IF"
                     android:textSize="14sp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/tvVertreterFaecherLabel"
                     app:layout_constraintTop_toTopOf="@+id/tvVertreterFaecherLabel" />
             </android.support.constraint.ConstraintLayout>
 

@@ -1,5 +1,6 @@
 package com.developer.workoutpro.itruns.gsnapp;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
@@ -27,7 +28,6 @@ import java.util.ArrayList;
 public class FrLehrerliste extends Fragment {
 
     private View view;
-    private MainActivity mainActivity;
     private boolean erstesOeffnen;
     private boolean aktualisierungLaeuft = false;
 
@@ -51,7 +51,6 @@ public class FrLehrerliste extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fr_lehrerliste, container, false);
-        mainActivity = (MainActivity) getActivity();
 
         NavigationView navigation = getActivity().findViewById(R.id.nav_view);
         Menu drawer_menu = navigation.getMenu();
@@ -63,21 +62,8 @@ public class FrLehrerliste extends Fragment {
 
         lehrerlisteLaden();
         toolbarEinrichten();
-        if (!erstesOeffnen) {
-            recyclerViewVorbereiten();
-        } else {
-            final SwipeRefreshLayout swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
-            swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent, R.color.colorPrimary);
-            swipeRefreshLayout.setRefreshing(true);
-            Handler handler1 = new Handler();
-            handler1.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    swipeRefreshLayout.setRefreshing(false);
-                }
-            }, 10000);
-            lehrerlisteUpdaten();
-        } // if
+
+        recyclerViewVorbereiten();
 
         swipeToRefresh();
 
@@ -107,7 +93,7 @@ public class FrLehrerliste extends Fragment {
                 switch (item.getItemId()) {
                     case R.id.lehrerlisteAktualisieren:
                         if (!aktualisierungLaeuft) {
-                            lehrerlisteUpdaten();
+                            lehrerlisteUpdaten(0);
                             final SwipeRefreshLayout swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
                             swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent, R.color.colorPrimary);
                             swipeRefreshLayout.setRefreshing(true);
@@ -138,7 +124,10 @@ public class FrLehrerliste extends Fragment {
         erstesOeffnen = false;
     } // Methode recyclerViewVorbereiten
 
-    private void lehrerlisteUpdaten() {
+    public void lehrerlisteUpdaten(final int tag) {
+        if (tag == 0) {
+            aktualisierungLaeuft = false;
+        } // if
         if (!aktualisierungLaeuft) {
             aktualisierungLaeuft = true;
             websiteLehrerliste = new WebsiteLehrerliste();
@@ -200,9 +189,10 @@ public class FrLehrerliste extends Fragment {
                             loescheKlammern(2);
                         } // if
                     } // while
-                    recyclerViewVorbereiten();
-
-                    lehrerlisteSpeichern();
+                    if (tag == 0) {
+                        recyclerViewVorbereiten();
+                        lehrerlisteSpeichern();
+                    } // if
 
                     setLehrerAttribute();
                 }
@@ -217,7 +207,7 @@ public class FrLehrerliste extends Fragment {
             @Override
             public void onRefresh() {
                 if (!aktualisierungLaeuft) {
-                    lehrerlisteUpdaten();
+                    lehrerlisteUpdaten(0);
                     Handler handler = new Handler();
                     handler.postDelayed(new Runnable() {
                         @Override
@@ -356,7 +346,7 @@ public class FrLehrerliste extends Fragment {
     } // Methode lehrerlisteSpeichern
 
     private void setLehrerAttribute() {
-        mainActivity.setLehrerAttribute(kuerzel, nachname, vorname, fach1, fach2, fach3);
+        MainActivity.setLehrerAttribute(kuerzel, nachname, vorname, fach1, fach2, fach3);
     } // Methode setLehrerAttribute
 
 } // Klasse FrLehrerliste

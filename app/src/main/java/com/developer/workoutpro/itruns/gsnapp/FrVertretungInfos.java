@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 public class FrVertretungInfos extends Fragment {
 
     private View view;
@@ -24,6 +26,22 @@ public class FrVertretungInfos extends Fragment {
     private String fach;
     private String raum;
     private String info;
+
+    // Attribute für die Lehrer
+    private ArrayList<String> kuerzel;
+    private ArrayList<String> nachname;
+    private ArrayList<String> vorname;
+    private ArrayList<String> fach1;
+    private ArrayList<String> fach2;
+    private ArrayList<String> fach3;
+
+    private String kuerzelStr;
+    private String nachnameStr;
+    private String vornameStr;
+    private String fach1Str;
+    private String fach2Str;
+    private String fach3Str;
+
 
     @Nullable
     @Override
@@ -45,6 +63,30 @@ public class FrVertretungInfos extends Fragment {
         this.raum = raum;
         this.info = info;
     } // Methode setzeVertretungsInformationen
+
+    public void setLehrerAttribute(ArrayList<String> kuerzel, ArrayList<String> nachname, ArrayList<String> vorname, ArrayList<String> fach1, ArrayList<String> fach2, ArrayList<String> fach3) {
+        this.kuerzel = kuerzel;
+        this.nachname = nachname;
+        this.vorname = vorname;
+        this.fach1 = fach1;
+        this.fach2 = fach2;
+        this.fach3 = fach3;
+        findeRichtigenLehrer();
+    } // Methode setLehrerAttribute
+
+    public void findeRichtigenLehrer() {
+        for (int index = 0; index < kuerzel.size(); index++) {
+            if (vertreter.equals(kuerzel.get(index))) {
+                kuerzelStr = kuerzel.get(index);
+                nachnameStr = nachname.get(index);
+                vornameStr = vorname.get(index);
+                fach1Str = fach1.get(index);
+                fach2Str = fach2.get(index);
+                fach3Str = fach3.get(index);
+                return;
+            } // if
+        } // for
+    } // Methode findeRichtigenLehrer
 
     private void toolbarEinrichten() {
         // Deklaration der Views
@@ -70,6 +112,8 @@ public class FrVertretungInfos extends Fragment {
         TextView tvStunde = view.findViewById(R.id.tvStunde);
         TextView tvRaum = view.findViewById(R.id.tvRaum);
         TextView tvVertreter = view.findViewById(R.id.tvVertreter);
+        TextView tvVertreterName = view.findViewById(R.id.tvVertreterName);
+        TextView tvVertreterFaecher = view.findViewById(R.id.tvVertreterFaecher);
         TextView tvInfo = view.findViewById(R.id.tvInfo);
 
         tvKurs.setText(kurs);
@@ -77,6 +121,8 @@ public class FrVertretungInfos extends Fragment {
         tvStunde.setText(stunde);
         tvRaum.setText(raum);
         tvVertreter.setText(vertreter);
+        tvVertreterName.setText(vornameStr + " " + nachnameStr);
+        tvVertreterFaecher.setText(fach1Str + " | " + fach2Str + " | " + fach3Str);
         tvInfo.setText(info);
     } // Methode informationenEinrichten
 
