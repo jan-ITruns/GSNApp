@@ -43,7 +43,7 @@
                 app:layout_constraintTop_toTopOf="@+id/scrollView">
 
                 <TextView
-                    android:id="@+id/tvBenutzer"
+                    android:id="@+id/tvWorkoutPro"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"
@@ -55,7 +55,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/tvPasswort"
+                    android:id="@+id/tvText1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="15dp"
@@ -65,10 +65,10 @@
                     android:textSize="14sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvBenutzer" />
+                    app:layout_constraintTop_toBottomOf="@+id/tvWorkoutPro" />
 
                 <TextView
-                    android:id="@+id/tvLehrerEinstellungen"
+                    android:id="@+id/tvWeitereApps"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"
@@ -80,7 +80,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/tvKuerzel"
+                    android:id="@+id/tvText2"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="15dp"
@@ -89,7 +89,7 @@
                     android:text="Dieser Workout Timer hilft dir dabei, dich fit zu halten und dein Training zu optimieren. So kannst du das bestmögliche aus dir und deinem Workout herausholen!"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvPasswort" />
+                    app:layout_constraintTop_toBottomOf="@+id/tvText1" />
 
                 <android.support.constraint.Guideline
                     android:id="@+id/guideline"
@@ -99,6 +99,7 @@
                     app:layout_constraintGuide_percent="0.5" />
 
                 <android.support.constraint.ConstraintLayout
+                    android:id="@+id/constraintLayout5"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
                     android:layout_marginBottom="15dp"
@@ -109,7 +110,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvKuerzel">
+                    app:layout_constraintTop_toBottomOf="@+id/tvText2">
 
                     <TextView
                         android:id="@+id/textView"
