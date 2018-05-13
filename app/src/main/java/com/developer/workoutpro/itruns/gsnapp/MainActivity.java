@@ -537,6 +537,7 @@ public class MainActivity extends AppCompatActivity {
                                 fragmentManager = getSupportFragmentManager();
                                 fragmentTransaction = fragmentManager.beginTransaction();
                                 FrLehrerliste frLehrerliste = new FrLehrerliste();
+                                frLehrerliste.setLehrerAttribute(kuerzel, nachname, vorname, fach1, fach2, fach3);
                                 fragmentTransaction.replace(R.id.bereich_fragments, frLehrerliste, "lehrerliste");
                                 fragmentTransaction.addToBackStack(null);
                                 fragmentManager.executePendingTransactions();
@@ -1370,6 +1371,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void lehrerAttributeBestimmen() {
         FrLehrerliste frLehrerliste = new FrLehrerliste();
+
         frLehrerliste.lehrerlisteUpdaten(1);
     } // Methode lehrerAttributeBestimmen
 

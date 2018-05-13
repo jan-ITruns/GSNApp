@@ -1,10 +1,7 @@
 package com.developer.workoutpro.itruns.gsnapp;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
-import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
@@ -14,21 +11,16 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class FrLehrerliste extends Fragment {
 
     private View view;
-    private boolean erstesOeffnen;
     private boolean aktualisierungLaeuft = false;
 
     // Attribute für die Website
@@ -60,7 +52,6 @@ public class FrLehrerliste extends Fragment {
             menuItem.setChecked(true);
         } // if
 
-        lehrerlisteLaden();
         toolbarEinrichten();
 
         recyclerViewVorbereiten();
@@ -114,6 +105,15 @@ public class FrLehrerliste extends Fragment {
         });
     } // Methode toolbarEinrichten
 
+    public void setLehrerAttribute(ArrayList<String> kuerzel, ArrayList<String> nachname, ArrayList<String> vorname, ArrayList<String> fach1, ArrayList<String> fach2, ArrayList<String> fach3) {
+        this.kuerzel = kuerzel;
+        this.nachname = nachname;
+        this.vorname = vorname;
+        this.fach1 = fach1;
+        this.fach2 = fach2;
+        this.fach3 = fach3;
+    } // Methode setLehrerAttribute
+
     private void recyclerViewVorbereiten() {
         RecyclerView recyclerView = view.findViewById(R.id.rvLehrerliste);
         recyclerView.setHasFixedSize(true);
@@ -121,7 +121,6 @@ public class FrLehrerliste extends Fragment {
         RecyclerViewLehrerliste adapter = new RecyclerViewLehrerliste(getActivity(), kuerzel, nachname, vorname, fach1, fach2, fach3);
         recyclerView.setAdapter(adapter);
         aktualisierungLaeuft = false;
-        erstesOeffnen = false;
     } // Methode recyclerViewVorbereiten
 
     public void lehrerlisteUpdaten(final int tag) {
@@ -191,7 +190,6 @@ public class FrLehrerliste extends Fragment {
                     } // while
                     if (tag == 0) {
                         recyclerViewVorbereiten();
-                        lehrerlisteSpeichern();
                     } // if
 
                     setLehrerAttribute();
@@ -253,97 +251,6 @@ public class FrLehrerliste extends Fragment {
         } // while
         htmlText = htmlText.substring(1);
     } // Methode loesche2KlammernEnde
-
-    private void lehrerlisteLaden() {
-        // Erstes Öffnen
-        SharedPreferences erstesOeffnenPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        erstesOeffnen = erstesOeffnenPref.getBoolean("erstesOeffnen", true);
-
-        Gson gson = new Gson();
-        Type typeString = new TypeToken<ArrayList<String>>() {}.getType();
-
-        // Kürzel
-        SharedPreferences kuerzelPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        String kuerzelJson = kuerzelPref.getString("kuerzel", "");
-        kuerzel = gson.fromJson(kuerzelJson, typeString);
-
-        // Nachname
-        SharedPreferences nachnamePref = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        String nachnameJson = nachnamePref.getString("nachname", "");
-        nachname = gson.fromJson(nachnameJson, typeString);
-
-        // Vorname
-        SharedPreferences vornamePref = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        String vornameJson = vornamePref.getString("vorname", "");
-        vorname = gson.fromJson(vornameJson, typeString);
-
-        // Fach1
-        SharedPreferences fach1Pref = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        String fach1Json = fach1Pref.getString("fach1", "");
-        fach1 = gson.fromJson(fach1Json, typeString);
-
-        // Fach2
-        SharedPreferences fach2Pref = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        String fach2Json = fach2Pref.getString("fach2", "");
-        fach2 = gson.fromJson(fach2Json, typeString);
-
-        // Fach3
-        SharedPreferences fach3Pref = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        String fach3Json = fach3Pref.getString("fach3", "");
-        fach3 = gson.fromJson(fach3Json, typeString);
-    } // Methode lehrerlisteLaden
-
-    private void lehrerlisteSpeichern() {
-        // Erstes Öffnen
-        SharedPreferences erstesOeffnenPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        SharedPreferences.Editor editorErstesOeffnen = erstesOeffnenPref.edit();
-        editorErstesOeffnen.putBoolean("erstesOeffnen", erstesOeffnen);
-        editorErstesOeffnen.apply();
-
-        Gson gson = new Gson();
-
-        // Kürzel
-        SharedPreferences kuerzelPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        SharedPreferences.Editor editorKuerzel = kuerzelPref.edit();
-        String kuerzelJson = gson.toJson(kuerzel);
-        editorKuerzel.putString("kuerzel", kuerzelJson);
-        editorKuerzel.apply();
-
-        // Nachname
-        SharedPreferences nachnamePref = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        SharedPreferences.Editor editorNachname = nachnamePref.edit();
-        String NachnameJson = gson.toJson(nachname);
-        editorNachname.putString("nachname", NachnameJson);
-        editorNachname.apply();
-
-        // Vorname
-        SharedPreferences vornamePref = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        SharedPreferences.Editor editorVorname = vornamePref.edit();
-        String vornameJson = gson.toJson(vorname);
-        editorVorname.putString("vorname", vornameJson);
-        editorVorname.apply();
-
-        // Fach1
-        SharedPreferences fach1Pref = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        SharedPreferences.Editor editorFach1 = fach1Pref.edit();
-        String fach1Json = gson.toJson(fach1);
-        editorFach1.putString("fach1", fach1Json);
-        editorFach1.apply();
-
-        // Fach2
-        SharedPreferences fach2Pref = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        SharedPreferences.Editor editorFach2 = fach2Pref.edit();
-        String fach2Json = gson.toJson(fach2);
-        editorFach2.putString("fach2", fach2Json);
-        editorFach2.apply();
-
-        // Fach3
-        SharedPreferences fach3Pref = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        SharedPreferences.Editor editorFach3 = fach3Pref.edit();
-        String fach3Json = gson.toJson(fach3);
-        editorFach3.putString("fach3", fach3Json);
-        editorFach3.apply();
-    } // Methode lehrerlisteSpeichern
 
     private void setLehrerAttribute() {
         MainActivity.setLehrerAttribute(kuerzel, nachname, vorname, fach1, fach2, fach3);

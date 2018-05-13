@@ -86,6 +86,11 @@ public class FrVertretungInfos extends Fragment {
                 return;
             } // if
         } // for
+        nachnameStr = "---";
+        vornameStr = "---";
+        fach1Str = "---";
+        fach2Str = "---";
+        fach3Str = "---";
     } // Methode findeRichtigenLehrer
 
     private void toolbarEinrichten() {
@@ -121,8 +126,20 @@ public class FrVertretungInfos extends Fragment {
         tvStunde.setText(stunde);
         tvRaum.setText(raum);
         tvVertreter.setText(vertreter);
-        tvVertreterName.setText(vornameStr + " " + nachnameStr);
-        tvVertreterFaecher.setText(fach1Str + " | " + fach2Str + " | " + fach3Str);
+        if (vornameStr.equals("---")) {
+            tvVertreterName.setText(nachnameStr);
+        } else if (nachnameStr.equals("---")) {
+            tvVertreterName.setText(vornameStr);
+        } else {
+            tvVertreterName.setText(vornameStr + " " + nachnameStr);
+        } // if
+        if (fach2Str.equals("---") && fach3Str.equals("---")) {
+            tvVertreterFaecher.setText(fach1Str);
+        } else if (fach3Str.equals("---")) {
+            tvVertreterFaecher.setText(fach1Str + " | " + fach2Str);
+        } else {
+            tvVertreterFaecher.setText(fach1Str + " | " + fach2Str + " | " + fach3Str);
+        } // if
         tvInfo.setText(info);
     } // Methode informationenEinrichten
 
