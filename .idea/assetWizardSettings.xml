@@ -35,7 +35,7 @@
                                     <map>
                                       <entry key="backgroundAssetType" value="COLOR" />
                                       <entry key="backgroundColor" value="ffffff" />
-                                      <entry key="foregroundImage" value="C:\Users\Jonas Brand\AndroidStudioProjects\GSNApp\app\src\main\res\drawable\AppIcon.png" />
+                                      <entry key="foregroundImage" value="C:\Users\Jonas Brand\AndroidStudioProjects\GSNApp\app\src\main\res\drawable\app_logo.png" />
                                     </map>
                                   </option>
                                 </PersistentState>
