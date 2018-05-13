@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:background="@color/hintergrundDunkel">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:fitsSystemWindows="true"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/collapsingToolbarLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
+            app:contentScrim="?attr/colorPrimary"
+            app:expandedTitleMarginStart="10dp"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+            <ImageView
+                android:id="@+id/imgvHeader"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/gsn_klein"
+                android:fitsSystemWindows="true"
+                android:scaleType="centerCrop"
+                app:layout_collapseMode="parallax" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_gravity="bottom"
+                android:background="@drawable/text_hintergrund" />
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbarVertretungsplanInfo"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/scrollViewVertretungsplanInfo"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:background="@color/hintergrundDunkel"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/constraintLayout1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/constraintLayout2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"
+                android:background="@color/weiss"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/tvUebersichtLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginTop="15dp"
+                    android:text="Übersicht"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvKursLabel"
+                    android:layout_width="70dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginTop="50dp"
+                    android:text="Name:"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvLehrerName"
+                    android:layout_width="125dp"
+                    android:layout_height="20dp"
+                    android:layout_marginEnd="50dp"
+                    android:text="Nina Arens"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/tvKursLabel" />
+
+                <TextView
+                    android:id="@+id/tvLehrerKuerzelLabeLabel"
+                    android:layout_width="70dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginTop="5dp"
+                    android:text="Kürzel"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvKursLabel" />
+
+                <TextView
+                    android:id="@+id/tvLehrerKuerzel"
+                    android:layout_width="125dp"
+                    android:layout_height="20dp"
+                    android:text="AS"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="@+id/tvLehrerName"
+                    app:layout_constraintTop_toTopOf="@+id/tvLehrerKuerzelLabeLabel" />
+
+                <TextView
+                    android:id="@+id/tvLehrerEmailAdresseLabel"
+                    android:layout_width="70dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginTop="5dp"
+                    android:text="E-Mail:"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvLehrerKuerzelLabeLabel" />
+
+                <TextView
+                    android:id="@+id/tvLehrerEmailAdresse"
+                    android:layout_width="125dp"
+                    android:layout_height="20dp"
+                    android:text="narens1@lspb.de"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="@+id/tvLehrerKuerzel"
+                    app:layout_constraintTop_toTopOf="@+id/tvLehrerEmailAdresseLabel" />
+
+                <TextView
+                    android:id="@+id/tvLehrerFaecherLabel"
+                    android:layout_width="70dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginTop="5dp"
+                    android:text="Fächer:"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvLehrerEmailAdresseLabel" />
+
+                <TextView
+                    android:id="@+id/tvLehrerFaecher1"
+                    android:layout_width="125dp"
+                    android:layout_height="20dp"
+                    android:text="Deutsch"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="@+id/tvLehrerEmailAdresse"
+                    app:layout_constraintTop_toTopOf="@+id/tvLehrerFaecherLabel" />
+
+                <TextView
+                    android:id="@+id/tvLehrerFaecher2"
+                    android:layout_width="125dp"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="5dp"
+                    android:text="Geschichte"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="@+id/tvLehrerFaecher1"
+                    app:layout_constraintTop_toBottomOf="@+id/tvLehrerFaecher1" />
+
+                <TextView
+                    android:id="@+id/tvLehrerFaecher3"
+                    android:layout_width="125dp"
+                    android:layout_height="20dp"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginTop="5dp"
+                    android:text=" ---"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/tvLehrerFaecher2"
+                    app:layout_constraintTop_toBottomOf="@+id/tvLehrerFaecher2" />
+
+            </android.support.constraint.ConstraintLayout>
+
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_margin="15dp"
+        android:clickable="true"
+        android:src="@drawable/ic_menu_share"
+        android:tint="@color/weiss"
+        app:backgroundTint="#279AF1"
+        app:fabSize="normal"
+        app:layout_anchor="@+id/appBarLayout"
+        app:layout_anchorGravity="bottom|right|end" />
+
+</android.support.design.widget.CoordinatorLayout>

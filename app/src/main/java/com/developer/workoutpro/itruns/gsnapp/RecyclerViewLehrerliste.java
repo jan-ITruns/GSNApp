@@ -13,6 +13,7 @@ import java.util.ArrayList;
 public class RecyclerViewLehrerliste extends RecyclerView.Adapter<RecyclerViewLehrerliste.ViewHolder>  {
 
     private MainActivity mainActivity;
+    private int tag;
     private ArrayList<String> kuerzel;
     private ArrayList<String> nachname;
     private ArrayList<String> vorname;
@@ -43,6 +44,12 @@ public class RecyclerViewLehrerliste extends RecyclerView.Adapter<RecyclerViewLe
         viewHolder.tvNachname.setText(nachname.get(i));
         viewHolder.tvVorname.setText(vorname.get(i));
         viewHolder.tvFaecher.setText(fach1.get(i) + "\n" + fach2.get(i) + "\n" + fach3.get(i));
+        viewHolder.clLehrerlisteRow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mainActivity.oeffneLehrerInfos(tag, i);
+            }
+        });
     } // Methode onBindViewHolder
 
     @Override

@@ -84,9 +84,11 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<Integer> ausgewaehltMorgen;
 
     // Attribute für die Lehrer
+
     private static ArrayList<String> kuerzel;
     private static ArrayList<String> nachname;
     private static ArrayList<String> vorname;
+    private static ArrayList<String> email;
     private static ArrayList<String> fach1;
     private static ArrayList<String> fach2;
     private static ArrayList<String> fach3;
@@ -1369,6 +1371,7 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.commit();
     } // Methode oeffneVertretungInfos
 
+
     private void lehrerAttributeBestimmen() {
         FrLehrerliste frLehrerliste = new FrLehrerliste();
 
@@ -1382,6 +1385,20 @@ public class MainActivity extends AppCompatActivity {
         fach1 = pFach1;
         fach2 = pFach2;
         fach3 = pFach3;
-    } // Methode setLehrerAttribute
+    }//methode setLehrerAttribute
+
+    public void oeffneLehrerInfos(int tag, int index){
+        // Fragment Vertretungsplan erzeugen
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        FrLehrerInfos frLehrerInfos = new FrLehrerInfos();
+
+        frLehrerInfos.setzeLehrerInformationen(vorname.get(index), nachname.get(index), kuerzel.get(index), fach1.get(index), fach2.get(index), fach3.get(index));
+
+        fragmentTransaction.replace(R.id.bereich_fragments, frLehrerInfos, "lehrerInfos");
+        fragmentTransaction.addToBackStack(null);
+        fragmentManager.executePendingTransactions();
+        fragmentTransaction.commit();
+    } // Methode oeffneLehrerInfos
 
 } // Klasse MainActivity
