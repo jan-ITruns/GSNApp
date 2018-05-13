@@ -7,7 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 
 public class Ladebildschirm extends AppCompatActivity {
 
-    private static int Ladedauer = 3000;
+    private static int Ladedauer = 6000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

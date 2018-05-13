@@ -1,9 +1,13 @@
 package com.developer.workoutpro.itruns.gsnapp;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -30,6 +34,8 @@ public class FrHomepage extends Fragment {
             menuItem.setChecked(true);
         } // if
 
+        toolbarEinrichten();
+
         webView = view.findViewById(R.id.webView);
         webView.getSettings().setJavaScriptEnabled(true);
         webView.loadUrl("http://gymnasium-schloss-neuhaus.de/");
@@ -45,5 +51,21 @@ public class FrHomepage extends Fragment {
 
         return view;
     } // Methode onCreateView
+
+    private void toolbarEinrichten() {
+        Toolbar toolbar = view.findViewById(R.id.toolbarHomepage);
+
+        toolbar.setNavigationIcon(R.drawable.ic_menu_white_24dp);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity.mDrawerLayout.openDrawer(GravityCompat.START);
+            }
+        });
+
+        toolbar.setTitle("Homepage");
+        toolbar.setTitleTextColor(getResources().getColor(R.color.weiss));
+    } // Methode toolbarEinrichten
 
 } // Klasse FrHomepage

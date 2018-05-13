@@ -581,6 +581,7 @@ public class MainActivity extends AppCompatActivity {
     } // Methode menueLeiste
 
     public void loginLehrer() {
+        lehrerAttributeBestimmen();
         // Deklaration der Views
         final EditText etBenutzername = findViewById(R.id.etBenutzernameLehrer);
         final EditText etPasswort = findViewById(R.id.etPasswortLehrer);
@@ -665,6 +666,7 @@ public class MainActivity extends AppCompatActivity {
     } // Methode login
 
     public void loginSchueler() {
+        lehrerAttributeBestimmen();
         // Deklaration der Views
         final EditText etBenutzername = findViewById(R.id.etBenutzernameSchueler);
         final EditText etPasswort = findViewById(R.id.etPasswortSchueler);
@@ -1242,7 +1244,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void loginOeffnen(){
         //Fragment Login erzeugen
-        lehrerAttributeBestimmen();
 
         setContentView(R.layout.activity_login);
 
