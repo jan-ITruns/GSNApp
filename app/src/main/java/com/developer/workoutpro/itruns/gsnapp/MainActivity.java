@@ -47,8 +47,9 @@ public class MainActivity extends AppCompatActivity {
     // Attribute für die Anmeldedaten
     public String benutzername;
     public String passwort;
-    public String lehrerKuerzel="";
-    public int jahrgangsstufe=0;
+    public String lehrerKuerzel = "";
+    public int jahrgangsstufe = 0;
+    public String lehrerEmail = "lehrer@lspb.de";
 
     // Attribute für die WebsiteVertretungsplan
     private WebsiteVertretungsplan websiteVertretungsplan;
@@ -88,7 +89,6 @@ public class MainActivity extends AppCompatActivity {
     private static ArrayList<String> kuerzel;
     private static ArrayList<String> nachname;
     private static ArrayList<String> vorname;
-    private static ArrayList<String> email;
     private static ArrayList<String> fach1;
     private static ArrayList<String> fach2;
     private static ArrayList<String> fach3;
@@ -1371,6 +1371,20 @@ public class MainActivity extends AppCompatActivity {
         fragmentManager.executePendingTransactions();
         fragmentTransaction.commit();
     } // Methode oeffneVertretungInfos
+
+    public void lehrerlisteOeffnen() {
+        // Fragment Vertretungsplan erzeugen
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        FrLehrerliste frLehrerliste = new FrLehrerliste();
+
+        frLehrerliste.setLehrerAttribute(kuerzel, nachname, vorname, fach1, fach2, fach3);
+
+        fragmentTransaction.replace(R.id.bereich_fragments, frLehrerliste, "lehrerliste");
+
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+    } // Methode lehrerlisteAusgeben
 
 
     private void lehrerAttributeBestimmen() {

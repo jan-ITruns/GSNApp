@@ -59,7 +59,7 @@ public class FrLehrerInfos extends Fragment{
         toolbarVertretungsplanInfo.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mainActivity.vertretungsplanOeffnen();
+                mainActivity.lehrerlisteOeffnen();
             }
         });
 
@@ -75,10 +75,11 @@ public class FrLehrerInfos extends Fragment{
 
         tvLehrerName.setText(vorname + " " + nachname);
         tvKuerzel.setText(kuerzel);
-        tvEmail.setText(email);
+        tvEmail.setText(mainActivity.lehrerEmail);
         tvFach1.setText(fach1);
         tvFach2.setText(fach2);
         tvFach3.setText(fach3);
     } // Methode informationenEinrichten
+
 
 } // Klasse FrLehrerInfos
