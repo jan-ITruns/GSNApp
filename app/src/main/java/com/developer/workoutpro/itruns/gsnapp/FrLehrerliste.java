@@ -27,6 +27,7 @@ import java.util.ArrayList;
 public class FrLehrerliste extends Fragment {
 
     private View view;
+    private MainActivity mainActivity;
     private boolean erstesOeffnen;
     private boolean aktualisierungLaeuft = false;
 
@@ -50,6 +51,7 @@ public class FrLehrerliste extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fr_lehrerliste, container, false);
+        mainActivity = (MainActivity) getActivity();
 
         NavigationView navigation = getActivity().findViewById(R.id.nav_view);
         Menu drawer_menu = navigation.getMenu();
@@ -201,6 +203,8 @@ public class FrLehrerliste extends Fragment {
                     recyclerViewVorbereiten();
 
                     lehrerlisteSpeichern();
+
+                    setLehrerAttribute();
                 }
             }, 10000);
         } // if
@@ -350,5 +354,9 @@ public class FrLehrerliste extends Fragment {
         editorFach3.putString("fach3", fach3Json);
         editorFach3.apply();
     } // Methode lehrerlisteSpeichern
+
+    private void setLehrerAttribute() {
+        mainActivity.setLehrerAttribute(kuerzel, nachname, vorname, fach1, fach2, fach3);
+    } // Methode setLehrerAttribute
 
 } // Klasse FrLehrerliste

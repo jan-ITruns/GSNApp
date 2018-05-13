@@ -84,6 +84,14 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<String> infoMorgen;
     private ArrayList<Integer> ausgewaehltMorgen;
 
+    // Attribute für die Lehrer
+    private ArrayList<String> kuerzel;
+    private ArrayList<String> nachname;
+    private ArrayList<String> vorname;
+    private ArrayList<String> fach1;
+    private ArrayList<String> fach2;
+    private ArrayList<String> fach3;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -1283,5 +1291,14 @@ public class MainActivity extends AppCompatActivity {
         fragmentManager.executePendingTransactions();
         fragmentTransaction.commit();
     } // Methode oeffneVertretungInfos
+
+    public void setLehrerAttribute(ArrayList<String> kuerzel, ArrayList<String> nachname, ArrayList<String> vorname, ArrayList<String> fach1, ArrayList<String> fach2, ArrayList<String> fach3) {
+        this.kuerzel = kuerzel;
+        this.nachname = nachname;
+        this.vorname = vorname;
+        this.fach1 = fach1;
+        this.fach2 = fach2;
+        this.fach3 = fach3;
+    } // Methode setLehrerAttribute
 
 } // Klasse MainActivity
