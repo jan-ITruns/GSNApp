@@ -36,6 +36,16 @@
                 android:backgroundTint="@android:color/white"
                 app:layout_constraintTop_toTopOf="@+id/scrollView">
 
+                <ImageButton
+                    android:id="@+id/imgbtnPasswortZeigen"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@color/transparent"
+                    android:tint="@color/colorPrimary"
+                    app:layout_constraintStart_toEndOf="@+id/tvAktuellesPasswort"
+                    app:layout_constraintTop_toTopOf="@+id/tvAktuellesPasswort"
+                    app:srcCompat="@drawable/ic_remove_red_eye_weiss_24dp" />
+
                 <TextView
                     android:id="@+id/tvBenutzer"
                     android:layout_width="150dp"
