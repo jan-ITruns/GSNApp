@@ -4,8 +4,8 @@
 
     <scale
         android:duration="6000"
-        android:fromXScale="0.0"
-        android:fromYScale="0.0"
+        android:fromXScale="0.05"
+        android:fromYScale="0.05"
         android:toXScale="1.0"
         android:toYScale="1.0"
         android:interpolator="@android:anim/linear_interpolator"
