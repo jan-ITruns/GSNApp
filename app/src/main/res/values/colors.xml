@@ -11,4 +11,5 @@
     <color name="hintergrundDunkel">#cecece</color>
     <color name="transparent">#00ffffff</color>
     <color name="orangeTransparent">#64ff9e37</color>
+    <color name="ladebalken">#636363</color>
 </resources>
