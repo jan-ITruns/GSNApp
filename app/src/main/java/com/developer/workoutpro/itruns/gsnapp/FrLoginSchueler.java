@@ -1,19 +1,27 @@
 package com.developer.workoutpro.itruns.gsnapp;
 
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.InputType;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 
 public class FrLoginSchueler extends Fragment{
 
     private View view;
     private MainActivity mainActivity;
+    private boolean passwortAngezeigt = true;
 
     @Nullable
     @Override
@@ -31,6 +39,8 @@ public class FrLoginSchueler extends Fragment{
         final Button btnJgst10 = view.findViewById(R.id.btnJgs10);
         final Button btnJgst11 = view.findViewById(R.id.btnJgs11);
         final Button btnJgst12 = view.findViewById(R.id.btnJgs12);
+        final ImageButton imgbtnPasswortZeigen = view.findViewById(R.id.imgbtnPasswortZeigen);
+        final EditText etPasswortSchueler = view.findViewById(R.id.etPasswortSchueler);
 
         btnJgst5.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,6 +119,20 @@ public class FrLoginSchueler extends Fragment{
             public void onClick(View v) {
                 mainActivity.loginSchueler();
                 btnAnmelden.setFocusable(false);
+            }
+        });
+
+        imgbtnPasswortZeigen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (passwortAngezeigt) {
+                    etPasswortSchueler.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                    passwortAngezeigt = false;
+                } else {
+                    etPasswortSchueler.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                    passwortAngezeigt = true;
+                } // if
+                etPasswortSchueler.setSelection(etPasswortSchueler.getText().length());
             }
         });
 

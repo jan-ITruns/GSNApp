@@ -12,7 +12,7 @@ import android.widget.ImageView;
 
 public class Ladebildschirm extends AppCompatActivity {
 
-    private static int Ladedauer = 6000;
+    private static int Ladedauer = 5000;
     private ImageView imgvLadebalken;
 
     @Override

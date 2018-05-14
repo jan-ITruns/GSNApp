@@ -3,7 +3,7 @@
     android:fillAfter="true">
 
     <scale
-        android:duration="6000"
+        android:duration="5000"
         android:fromXScale="0.05"
         android:fromYScale="0.05"
         android:toXScale="1.0"

@@ -10,17 +10,15 @@
         android:id="@+id/etBenutzernameLehrer"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="300dp"
-        android:layout_marginTop="130dp"
+        android:layout_marginTop="70dp"
         android:background="@color/schwarzTransparent"
-        android:hint="Benutzername"
+        android:hint="Lernstatt-Benutzername"
         android:inputType="textPersonName"
         android:singleLine="true"
         android:textAlignment="center"
         android:textColor="@color/weiss"
         android:textColorHint="@color/weissTransparent"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -31,7 +29,7 @@
         android:layout_height="50dp"
         android:layout_marginTop="15dp"
         android:background="@color/schwarzTransparent"
-        android:hint="Passwort"
+        android:hint="Lernstatt-Passwort"
         android:inputType="textPassword"
         android:singleLine="true"
         android:textAlignment="center"
@@ -61,8 +59,8 @@
         style="?android:attr/progressBarStyle"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginBottom="20dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginBottom="50dp"
+        android:layout_marginTop="10dp"
         android:indeterminateBehavior="repeat"
         android:indeterminateTint="@color/schwarz"
         android:visibility="invisible"
@@ -70,26 +68,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnAnmelden" />
-
-    <ImageButton
-        android:id="@+id/imgbtnLehrerversion"
-        android:layout_width="100dp"
-        android:layout_height="75dp"
-        android:layout_marginBottom="15dp"
-        app:layout_constraintBottom_toTopOf="@+id/etBenutzernameLehrer"
-        app:layout_constraintEnd_toEndOf="@+id/etBenutzernameLehrer"
-        app:layout_constraintStart_toStartOf="@+id/etBenutzernameLehrer"
-        app:srcCompat="@drawable/ic_teacher_24dp" />
-
-    <TextView
-        android:id="@+id/tvLehrerversion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:text="Lehrer-Version"
-        app:layout_constraintBottom_toTopOf="@+id/imgbtnLehrerversion"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/tvLehrerkuerzel"
@@ -115,5 +93,18 @@
         app:layout_constraintEnd_toEndOf="@+id/tvLehrerkuerzel"
         app:layout_constraintStart_toStartOf="@+id/tvLehrerkuerzel"
         app:layout_constraintTop_toBottomOf="@+id/tvLehrerkuerzel" />
+
+    <ImageButton
+        android:id="@+id/imgbtnPasswortZeigen"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/transparent"
+        app:layout_constraintBottom_toBottomOf="@+id/etPasswortLehrer"
+        app:layout_constraintEnd_toEndOf="@+id/etPasswortLehrer"
+        app:layout_constraintTop_toTopOf="@+id/etPasswortLehrer"
+        app:srcCompat="@drawable/ic_remove_red_eye_weiss_24dp" />
 
 </android.support.constraint.ConstraintLayout>
