@@ -143,7 +143,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        Intent intent = new Intent(MainActivity.this, Benachrichtigungen.class);
+        // Benachrichtigungen
+        /*Intent intent = new Intent(MainActivity.this, Benachrichtigungen.class);
 
         intent.putExtra("kursHeute", kursHeute);
         intent.putExtra("stundeHeute", stundeHeute);
@@ -166,7 +167,7 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("jahrgangsstufe", jahrgangsstufe);
 
         startService(intent);
-        finish();
+        finish();*/
     } // Methode onStop
 
     @Override
