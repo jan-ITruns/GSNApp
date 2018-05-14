@@ -205,9 +205,10 @@
         android:layout_height="56dp"
         android:layout_margin="15dp"
         android:clickable="true"
-        android:src="@drawable/ic_menu_share"
+        android:src="@drawable/ic_info_seite"
         android:tint="@color/weiss"
         app:backgroundTint="#279AF1"
+        app:elevation="0dp"
         app:fabSize="normal"
         app:layout_anchor="@+id/appBarLayout"
         app:layout_anchorGravity="bottom|right|end" />

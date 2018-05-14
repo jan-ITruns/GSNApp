@@ -31,6 +31,10 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
+    // Attribute für back pressed
+    private boolean beenden = false;
+    private boolean loggedOut = false;
+
     // Attribute für das Layout
     public static DrawerLayout mDrawerLayout;
 
@@ -104,14 +108,35 @@ public class MainActivity extends AppCompatActivity {
     public void onBackPressed() {
         // Testen, ob man bei der Webview, sofern geöffnet, zurück kann
         WebView webView = findViewById(R.id.webView);
-        if (webView != null) {
-            if (webView.canGoBack()) {
-                webView.goBack();
-            } else {
-                super.onBackPressed();
-            } // if
+        if (erstesLogin) {
+            finish();
         } else {
-            super.onBackPressed();
+            if (webView != null) {
+                if (webView.canGoBack()) {
+                    webView.goBack();
+                } else {
+                    super.onBackPressed();
+                } // if
+            } else {
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                if (fragmentManager.getBackStackEntryCount() == 1) {
+                    if (beenden) {
+                        finish();
+                    } else {
+                        Toast.makeText(this, "Zum beenden nochmal drücken.", Toast.LENGTH_SHORT).show();
+                        beenden = true;
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                beenden = false;
+                            }
+
+                        }, 3000);
+                    }
+                } else {
+                    super.onBackPressed();
+                } // if
+            } // if
         } // if
     } // Methode onBackPressed
 

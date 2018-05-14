@@ -138,6 +138,7 @@
         android:src="@drawable/ic_refresh_blue_40dp"
         android:tint="@color/weiss"
         app:backgroundTint="@color/colorAccent"
+        app:elevation="5dp"
         app:layout_anchor="@+id/container"
         app:layout_anchorGravity="right|bottom" />
 

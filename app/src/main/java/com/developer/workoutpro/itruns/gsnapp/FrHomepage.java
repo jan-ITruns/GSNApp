@@ -1,5 +1,6 @@
 package com.developer.workoutpro.itruns.gsnapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -48,6 +49,17 @@ public class FrHomepage extends Fragment {
                 return true;
             }
         });
+
+
+        webView.setVisibility(View.INVISIBLE);
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                webView.setVisibility(View.VISIBLE);
+            }
+
+        }, 3000);
 
         return view;
     } // Methode onCreateView
