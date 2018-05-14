@@ -3,28 +3,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <group android:checkableBehavior="single"
-        android:id="@+id/group1">
+    <group  android:checkableBehavior="single"
+            android:id="@+id/group1">
             <item
                 android:id="@+id/nav_vertretungsplan"
                 android:icon="@drawable/ic_apps_blau_24dp"
                 android:title="Vertretungsplan" />
             <item
-            android:id="@+id/nav_lehrerliste"
-            android:icon="@drawable/ic_format_list_bulleted_blue_24dp"
-            android:title="Lehrerliste" />
+                android:id="@+id/nav_lehrerliste"
+                android:icon="@drawable/ic_format_list_bulleted_blue_24dp"
+                android:title="Lehrerliste" />
             <item
                 android:id="@+id/nav_homepage"
                 android:icon="@drawable/ic_laptop_blau_24dp"
                 android:title="Homepage" />
     </group>
-    <group
-        android:id="@+id/group2"
-        android:checkableBehavior="single">
-                <item
-                    android:id="@+id/nav_einstellungen"
-                    android:icon="@drawable/ic_settings_blau_24dp"
-                    android:title="Einstellungen" />
+    <group  android:id="@+id/group2"
+            android:checkableBehavior="single">
+            <item
+                android:id="@+id/nav_ueber_uns"
+                android:icon="@drawable/ic_info_outline_black_24dp"
+                android:title="Über uns" />
+            <item
+                android:id="@+id/nav_einstellungen"
+                android:icon="@drawable/ic_settings_blau_24dp"
+                android:title="Einstellungen" />
     </group>
-
 </menu>

@@ -598,6 +598,15 @@ public class MainActivity extends AppCompatActivity {
                                     fragmentTransaction.commit();
                                 }//if
                                 break;
+                            case R.id.nav_ueber_uns:
+                                fragmentManager = getSupportFragmentManager();
+                                fragmentTransaction = fragmentManager.beginTransaction();
+                                FrUeberUns frUeberUns = new FrUeberUns();
+                                fragmentTransaction.replace(R.id.bereich_fragments, frUeberUns, "ueberUns");
+                                fragmentTransaction.addToBackStack(null);
+                                fragmentManager.executePendingTransactions();
+                                fragmentTransaction.commit();
+                                break;
                         } // switch
 
                         return true;
