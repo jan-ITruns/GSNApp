@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true">
+    android:fitsSystemWindows="true"
+    android:background="@color/hintergrundDunkel">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbarEinstellungen"
@@ -29,9 +30,9 @@
                 android:id="@+id/constraintLayout1"
                 android:layout_width="match_parent"
                 android:layout_height="224dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="15dp"
                 android:background="@color/weiss"
                 android:backgroundTint="@android:color/white"
                 app:layout_constraintTop_toTopOf="@+id/scrollView">
@@ -40,9 +41,10 @@
                     android:id="@+id/imgbtnPasswortZeigen"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
+                    android:layout_marginEnd="15dp"
                     android:background="@color/transparent"
                     android:tint="@color/colorPrimary"
-                    app:layout_constraintStart_toEndOf="@+id/tvAktuellesPasswort"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/tvAktuellesPasswort"
                     app:srcCompat="@drawable/ic_remove_red_eye_weiss_24dp" />
 
@@ -147,9 +149,9 @@
                 android:id="@+id/constraintLayout2"
                 android:layout_width="match_parent"
                 android:layout_height="217dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="15dp"
                 android:background="@color/weiss"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
